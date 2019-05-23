@@ -1,0 +1,23 @@
+name: binance
+version: 0.1.0
+
+authors:
+  - mwlang <mwlang@cybrains.net>
+
+crystal: 0.28.0
+
+license: MIT
+
+# dependencies:
+#   cossack:
+#     github: crystal-community/cossack
+#     version: ~> 0.1
+
+development_dependencies:
+  # webmock:
+  #   github: manastech/webmock.cr
+  #   branch: master
+
+  spec2:
+    github: waterlink/spec2.cr
+    version: ~> 0.9
