@@ -1,23 +1,21 @@
 require "../../spec_helper"
 
-describe Binance::Responses::MinNotionalFilter do
-  let(json) do
-    <<-JSON 
-    {
-      "filterType":"MIN_NOTIONAL",
-      "minNotional":"0.00100000",
-      "applyToMarket":true,
-      "avgPriceMins":5
-    }
-    JSON
-  end
+json = <<-JSON 
+  {
+    "filterType":"MIN_NOTIONAL",
+    "minNotional":"0.00100000",
+    "applyToMarket":true,
+    "avgPriceMins":5
+  }
+JSON
 
-  let(filter) { described_class.from_json(json) }
+describe Binance::Responses::MinNotionalFilter do
 
   it "parses" do
-    expect(filter.min_notional).to eq 0.001
-    expect(filter.apply_to_market).to eq true
-    expect(filter.avg_price_mins).to eq 5
+    filter = Binance::Responses::MinNotionalFilter.from_json(json)
+    filter.min_notional.should eq 0.001
+    filter.apply_to_market.should eq true
+    filter.avg_price_mins.should eq 5
   end
 end
 

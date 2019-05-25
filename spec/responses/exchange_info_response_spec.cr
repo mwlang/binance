@@ -1,8 +1,6 @@
 require "../spec_helper"
 
-describe Binance::Responses::ExchangeInfoResponse do
-  let(json) do
-    <<-JSON 
+json = <<-JSON
     {
       "timezone": "UTC",
       "serverTime": 1508631584636,
@@ -30,17 +28,17 @@ describe Binance::Responses::ExchangeInfoResponse do
         ]
       }]
     }  
-    JSON
-  end
+JSON
 
-  let(filter) { described_class.from_json(json) }
+describe Binance::Responses::ExchangeInfoResponse do
 
   it "parses" do
-    expect(filter.timezone).to eq "UTC"
-    expect(filter.server_time.to_s).to eq "2017-10-22 00:19:44 UTC"
-    # expect(filter.rate_limits.size).to eq 1
-    # expect(filter.symbols.size).to eq 1
-    # expect(filter.symbols[0].symbol).to eq "ETHBTC"
+    filter = Binance::Responses::ExchangeInfoResponse.from_json(json)
+    filter.timezone.should eq "UTC"
+    filter.server_time.to_s.should eq "2017-10-22 00:19:44 UTC"
+    filter.rate_limits.size.should eq 1
+    filter.symbols.size.should eq 1
+    filter.symbols[0].symbol.should eq "ETHBTC"
   end
 end
 

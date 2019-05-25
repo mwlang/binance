@@ -1,23 +1,21 @@
 require "../../spec_helper"
 
-describe Binance::Responses::LotSizeFilter do
-  let(json) do
-    <<-JSON 
-      {
-        "filterType":"MARKET_LOT_SIZE",
-        "minQty":"0.00000000",
-        "maxQty":"63100.00000000",
-        "stepSize":"0.00000000"
-      }
-    JSON
-  end
+json = <<-JSON
+  {
+    "filterType":"MARKET_LOT_SIZE",
+    "minQty":"0.00000000",
+    "maxQty":"63100.00000000",
+    "stepSize":"0.00000000"
+  }
+JSON
 
-  let(filter) { described_class.from_json(json) }
+describe Binance::Responses::LotSizeFilter do
 
   it "parses price filter" do
-    expect(filter.min_quantity).to eq 0.0
-    expect(filter.max_quantity).to eq 63100.0
-    expect(filter.step_size).to eq 0.0
+    filter = Binance::Responses::LotSizeFilter.from_json(json)
+    filter.min_quantity.should eq 0.0
+    filter.max_quantity.should eq 63100.0
+    filter.step_size.should eq 0.0
   end
 end
 

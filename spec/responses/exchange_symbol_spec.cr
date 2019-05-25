@@ -1,8 +1,6 @@
 require "../../spec_helper"
 
-describe Binance::Responses::ExchangeSymbol do
-  let(json) do
-    <<-JSON 
+json = <<-JSON
       {
         "symbol":"ETHBTC",
         "status":"TRADING",
@@ -60,25 +58,25 @@ describe Binance::Responses::ExchangeSymbol do
             "maxNumAlgoOrders":5
           }
       ]}
-    JSON
-  end
+JSON
 
-  let(filter) { described_class.from_json(json) }
-
+describe Binance::Responses::ExchangeSymbol do
   it "parses" do
-    expect(filter.symbol).to eq "ETHBTC"
-    expect(filter.status).to eq "TRADING"
-    expect(filter.base_asset).to eq "ETH"
-    expect(filter.base_asset_precision).to eq 8
-    expect(filter.quote_asset).to eq "BTC"
-    expect(filter.quote_asset_precision).to eq 8
-    expect(filter.order_types).to eq ["LIMIT", "LIMIT_MAKER", "MARKET", "STOP_LOSS_LIMIT", "TAKE_PROFIT_LIMIT"]
+    filter = Binance::Responses::ExchangeSymbol.from_json(json)
+    filter.symbol.should eq "ETHBTC"
+    filter.status.should eq "TRADING"
+    filter.base_asset.should eq "ETH"
+    filter.base_asset_precision.should eq 8
+    filter.quote_asset.should eq "BTC"
+    filter.quote_asset_precision.should eq 8
+    filter.order_types.should eq ["LIMIT", "LIMIT_MAKER", "MARKET", "STOP_LOSS_LIMIT", "TAKE_PROFIT_LIMIT"]
   end
 
   it "detects order types" do
-    expect(filter.limit_orders?).to eq true
-    expect(filter.limit_maker_orders?).to eq true
-    expect(filter.take_profit_orders?).to eq false
+    filter = Binance::Responses::ExchangeSymbol.from_json(json)
+    filter.limit_orders?.should eq true
+    filter.limit_maker_orders?.should eq true
+    filter.take_profit_orders?.should eq false
   end
 end
 

@@ -1,19 +1,17 @@
 require "../../spec_helper"
 
-describe Binance::Responses::IcebergPartsFilter do
-  let(json) do
-    <<-JSON 
-      {
-        "filterType":"ICEBERG_PARTS",
-        "limit":10
-      }
-    JSON
-  end
+json = <<-JSON
+    {
+      "filterType":"ICEBERG_PARTS",
+      "limit":10
+    }
+JSON
 
-  let(filter) { described_class.from_json(json) }
+describe Binance::Responses::IcebergPartsFilter do
 
   it "parses price filter" do
-    expect(filter.limit).to eq 10
+    filter = Binance::Responses::IcebergPartsFilter.from_json(json)
+    filter.limit.should eq 10
   end
 end
 
