@@ -17,6 +17,10 @@ module Binance::Methods
   def exchange_info
     fetch :public, :exchange_info, ExchangeInfoResponse
   end
+
+  def depth(symbol : String, limit : Int32 = 5)
+    fetch :public, :depth, DepthResponse, {symbol: symbol.upcase, limit: limit}
+  end
 end
 # module Binance
 #   class REST

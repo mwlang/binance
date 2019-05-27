@@ -9,6 +9,9 @@ module Binance::Responses
     property error : String?
 
     @[JSON::Field(ignore: true)]
+    property error_code : String?
+
+    @[JSON::Field(ignore: true)]
     property response : Cossack::Response?
 
     def initialize
@@ -27,8 +30,14 @@ module Binance::Responses
     def self.from_error(response)
       self.new.tap do |r|
         r.success = false
-        r.error = response.body
-        r.response = response
+        begin
+          json = JSON.parse response.body
+          r.error = json["msg"].to_s
+          r.error_code = json["code"].to_s
+        rescue
+          r.error = response.body
+          r.response = response
+        end
       end
     end
 

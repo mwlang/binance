@@ -1,31 +1,47 @@
 require "./spec_helper"
 
 client = Binance::REST.new
-client_time = client.time
-client_exchange_info = client.exchange_info
 
 describe Binance do
 
-  # let(client) { Binance::REST.new }
-  # let(time) { client.time }
-  # let(exchange_info) { client.exchange_info }
-
-  it "can ping" do
+  it "#ping" do
     client.ping.pong.should be_truthy
   end
 
-  it "gets time" do
-    client_time.should be_a Binance::Responses::TimeResponse
-    client_time.server_time.year.should be >= Time.now.year
-    client_time.body.should match /serverTime/
+  it "#time" do
+    response = client.time
+    response.should be_a Binance::Responses::TimeResponse
+    response.server_time.year.should be >= Time.now.year
+    response.body.should match /serverTime/
   end
 
-  it "exchange info" do
-    client_exchange_info.should be_a Binance::Responses::ExchangeInfoResponse
-    client_exchange_info.timezone.should eq "UTC"
-    client_exchange_info.server_time.year.should be >= Time.now.year
-    client_exchange_info.rate_limits.should be_a Array(Binance::Responses::RateLimit)
-    client_exchange_info.exchange_filters.should be_a Array(Binance::Responses::ExchangeFilter)
+  it "#exchange_info" do
+    response = client.exchange_info
+    response.should be_a Binance::Responses::ExchangeInfoResponse
+    response.timezone.should eq "UTC"
+    response.server_time.year.should be >= Time.now.year
+    response.rate_limits.should be_a Array(Binance::Responses::RateLimit)
+    response.exchange_filters.should be_a Array(Binance::Responses::ExchangeFilter)
   end
 
+  it "#depth(\"BNBUSDT\", 5)" do
+    response = client.depth("BNBUSDT", 5)
+    response.should be_a Binance::Responses::DepthResponse
+    response.bids.size.should eq 5
+  end
+
+  it "#depth(\"BNBUSDT\", 10)" do
+    response = client.depth("BNBUSDT", 10)
+    response.should be_a Binance::Responses::DepthResponse
+    response.bids.size.should eq 10
+  end
+
+  it "#depth(\"BNBUSDT\", 2)" do
+    response = client.depth("BNBUSDT", 2)
+    response.should be_a Binance::Responses::DepthResponse
+    response.success.should eq false
+    response.bids.size.should eq 0
+    response.error.should eq "Illegal characters found in parameter 'limit'; legal range is '5, 10, 20, 50, 100, 500, 1000'."
+    response.error_code.should eq "-1100"
+  end
 end

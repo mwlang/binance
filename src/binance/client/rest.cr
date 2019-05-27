@@ -6,19 +6,25 @@ require "./rest/methods"
 require "./rest/responses/*"
 
 module Binance
+
   class REST
     include Binance::Endpoints
     include Binance::Methods
 
     BASE_URL = "https://api.binance.com/api"
 
+    def to_query(params)
+      params.map{ |k, v| "#{k.to_s}=#{v.to_s}" }.join("&")
+    end      
+
     def public_fetch(url, params)
-      puts "*" * 80, url.inspect, "*" * 80
       connection = Cossack::Client.new(BASE_URL) do |client|
         client.headers["Content-Type"] = "application/json"
         client.headers["Accept"] = "application/json"
       end
-      connection.get(url)
+      url_with_params = "#{url}?#{to_query(params)}"
+      puts "*" * 80, url_with_params.inspect, "*" * 80
+      connection.get url_with_params
     end
 
     macro fetch(client, endpoint, response_klass, args)
