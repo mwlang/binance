@@ -1,0 +1,9 @@
+---
+request:
+  method: get
+  uri: https://api.binance.com/api/v1/time
+  body: ""
+response:
+  status: 200
+  body:
+    "{\"serverTime\": 1499827319559 }"

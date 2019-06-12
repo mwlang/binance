@@ -23,7 +23,7 @@ module Binance
         client.headers["Accept"] = "application/json"
       end
       url_with_params = "#{url}?#{to_query(params)}"
-      puts "*" * 80, url_with_params.inspect, "*" * 80
+      # puts "*" * 80, url_with_params.inspect, "*" * 80
       connection.get url_with_params
     end
 

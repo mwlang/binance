@@ -13,7 +13,7 @@ dependencies:
     github: crystal-community/cossack
     version: ~> 0.1
 
-# development_dependencies:
-  # webmock:
-  #   github: manastech/webmock.cr
-  #   branch: master
+development_dependencies:
+  webmock:
+    github: manastech/webmock.cr
+    branch: master

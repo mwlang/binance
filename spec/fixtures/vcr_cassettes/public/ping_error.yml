@@ -1,0 +1,9 @@
+---
+request:
+  method: get
+  uri: https://api.binance.com/api/v1/ping
+  body: ""
+response:
+  status: 400
+  body:
+    "{\"code\": -3121, \"msg\": \"Strange Error.\"}"
