@@ -1,0 +1,18 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v1/klines
+  body: ""
+  query_params: symbol=BOGUS&limit=2&interval=1h
+  headers:
+    User-Agent:
+    - Cossack v0.1.4
+    Content-Type:
+    - application/json
+    Accept:
+    - application/json
+    Host:
+    - api.binance.com
+response:
+  status: 400
+  body: '{"code":-1121,"msg":"Invalid symbol."}'

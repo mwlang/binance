@@ -1,0 +1,18 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v1/aggTrades
+  body: ""
+  query_params: symbol=BNBUSDT&limit=5
+  headers:
+    User-Agent:
+    - Cossack v0.1.4
+    Content-Type:
+    - application/json
+    Accept:
+    - application/json
+    Host:
+    - api.binance.com
+response:
+  status: 200
+  body: '[{"a":28434199,"p":"36.06870000","q":"1.16000000","f":32462204,"l":32462204,"T":1561506850143,"m":true,"M":true},{"a":28434200,"p":"36.05530000","q":"1.81000000","f":32462205,"l":32462205,"T":1561506850143,"m":true,"M":true},{"a":28434201,"p":"36.05030000","q":"1.76000000","f":32462206,"l":32462206,"T":1561506850143,"m":true,"M":true},{"a":28434202,"p":"36.09650000","q":"1.49000000","f":32462207,"l":32462207,"T":1561506850958,"m":false,"M":true},{"a":28434203,"p":"36.05000000","q":"0.84000000","f":32462208,"l":32462208,"T":1561506854461,"m":true,"M":true}]'
