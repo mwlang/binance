@@ -7,12 +7,7 @@ module Binance::Responses
   #       "tickSize":"0.00000100"
   #     }
   class DepthEntry
-    # include JSON::Serializable
-
-    # @[JSON::Field(key: "price", converter: Binance::Converters::ToFloat)]
     getter price : Float64 = 0.0
-
-    # @[JSON::Field(key: "quantity", converter: Binance::Converters::ToFloat)]
     getter quantity : Float64 = 0.0
 
     def initialize(pull : JSON::PullParser)
@@ -21,12 +16,5 @@ module Binance::Responses
       @quantity = pull.read_string.to_f
       pull.read_end_array
     end
-
-    # def self.from_json(price : String)
-    #   #(@price = "", @quantity = "")
-    #   # @price = price
-    #   # @quantity = pull.read_string
-    # end
-
   end
 end

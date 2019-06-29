@@ -11,6 +11,7 @@ module Binance::Endpoints
     klines:            "v1/klines",
     twenty_four_hour:  "v1/ticker/24hr",
     price:             "v3/ticker/price",
+    avg_price:         "v3/avgPrice",
     book_ticker:       "v3/ticker/bookTicker",
 
     # Account API Endpoints
