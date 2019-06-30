@@ -1,0 +1,18 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v1/ticker/24hr
+  body: ""
+  query_params: symbol=BNBUSDT
+  headers:
+    User-Agent:
+    - Cossack v0.1.4
+    Content-Type:
+    - application/json
+    Accept:
+    - application/json
+    Host:
+    - api.binance.com
+response:
+  status: 200
+  body: '{"symbol":"BNBUSDT","priceChange":"-0.90210000","priceChangePercent":"-2.635","weightedAvgPrice":"34.91515566","prevClosePrice":"34.23720000","lastPrice":"33.33480000","lastQty":"0.36000000","bidPrice":"33.33510000","bidQty":"0.59000000","askPrice":"33.35620000","askQty":"0.56000000","openPrice":"34.23690000","highPrice":"35.80000000","lowPrice":"32.87190000","volume":"2938817.50000000","quoteVolume":"102609270.48045600","openTime":1561823099541,"closeTime":1561909499541,"firstId":32971532,"lastId":33078367,"count":106836}'

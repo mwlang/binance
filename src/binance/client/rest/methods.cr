@@ -28,6 +28,14 @@ module Binance::Methods
     fetch :public, :avg_price, AvgPriceResponse, {symbol: symbol.upcase}
   end
 
+  def twenty_four_hour(symbol : String)
+    fetch :public, :twenty_four_hour, TwentyFourHourResponse, {symbol: symbol.upcase}
+  end
+
+  def twenty_four_hour
+    fetch :public, :twenty_four_hour, TwentyFourHourResponse
+  end
+
   def historical_trades(symbol : String, limit : Int32 = 500)
     fetch :public, :historical_trades, TradesResponse, {symbol: symbol.upcase, limit: limit}
   end
