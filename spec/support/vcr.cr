@@ -9,12 +9,17 @@ end
 def with_vcr_cassette(name : String)
   WebMock.wrap do
     if cassette_exists? name
-      playback_cassette name
+      ts = playback_cassette name
+      Timecop.freeze(ts)
+      yield
+      Timecop.return
     else
+      Timecop.freeze(Time.now)
       record_cassette name
+      yield
+      Timecop.return
     end
 
-    yield
   end
 end
 
@@ -32,6 +37,7 @@ def playback_cassette(name : String)
   body = cassette["response"]["body"].as_s
 
   WebMock.stub(method, full_uri).to_return(body: body, status: status)
+  cassette["request"]["timestamp"]? ? Time.unix_ms(cassette["request"]["timestamp"].as_i64) : Time.now
 end
 
 def record_cassette(name : String)
@@ -45,6 +51,7 @@ def record_cassette(name : String)
           body: request.body.to_s,
           query_params: request.query_params.to_s,
           headers: request.headers,
+          timestamp: Time.now.to_unix_ms
         },
         response: {
           status: response.status_code,

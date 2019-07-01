@@ -17,7 +17,7 @@ module Binance
       params.map{ |k, v| "#{k.to_s}=#{v.to_s}" }.join("&")
     end      
 
-    def public_fetch(url, params)
+    def public_fetch(url, params : HTTP::Params)
       connection = Cossack::Client.new(BASE_URL) do |client|
         client.headers["Content-Type"] = "application/json"
         client.headers["Accept"] = "application/json"
@@ -26,13 +26,45 @@ module Binance
       connection.get url_with_params
     end
 
-    def verified_fetch(url, params)
+    def public_fetch(url, params : NamedTuple)
+      http_params = HTTP::Params.new
+      params.each{|k,v| http_params[k.to_s] = v.to_s}
+      public_fetch(url, http_params)
+    end
+
+    def verified_fetch(url, params : NamedTuple)
+      http_params = HTTP::Params.new
+      params.each{|k,v| http_params[k.to_s] = v.to_s}
+      verified_fetch(url, http_params)
+    end
+
+    def verified_fetch(url, params : HTTP::Params)
       raise "No API KEY assigned" if api_key.to_s.blank?
       connection = Cossack::Client.new(BASE_URL) do |client|
         client.headers["Content-Type"] = "application/json"
         client.headers["Accept"] = "application/json"
         client.headers["X-MBX-APIKEY"] = api_key
       end
+      url_with_params = "#{url}?#{to_query(params)}"
+      connection.get url_with_params
+    end
+
+    def signed_fetch(url, params : NamedTuple)
+      http_params = HTTP::Params.new
+      params.each{|k,v| http_params[k.to_s] = v.to_s}
+      signed_fetch(url, http_params)
+    end
+
+    def signed_fetch(url, params : HTTP::Params)
+      raise "No API KEY assigned" if api_key.to_s.blank?
+      raise "No API SECRET assigned" if api_secret.to_s.blank?
+      connection = Cossack::Client.new(BASE_URL) do |client|
+        client.headers["Content-Type"] = "application/json"
+        client.headers["Accept"] = "application/json"
+        client.headers["X-MBX-APIKEY"] = api_key
+      end
+      params["timestamp"] = Time.now.to_unix_ms.to_s
+      params["signature"] = hmac to_query(params)
       url_with_params = "#{url}?#{to_query(params)}"
       connection.get url_with_params
     end
@@ -61,7 +93,7 @@ module Binance
     end
 
     macro fetch(client, endpoint, response_klass)
-      fetch({{client}}, {{endpoint}}, {{response_klass}}, NamedTuple.new)
+      fetch({{client}}, {{endpoint}}, {{response_klass}}, HTTP::Params.new)
     end
 
     property api_key : String

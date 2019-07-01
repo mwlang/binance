@@ -17,33 +17,34 @@ Coming Soon!
     * Pass procs or lambdas to event handlers
     * Single and multiple streams supported
 
-## COMPLETED
+## COMPLETED REST Endpoints
   
-  * PUBLIC
-    * ping
-    * time
-    * exchangeInfo
-    * depth (order book)
+### PUBLIC (NONE)
+  * ping
+  * time
+  * exchangeInfo
+  * depth (order book)
+  * trades
+  * aggTrades
+  * klines
+  * avgPrice
+  * ticker/24hr
+  * ticker/price
+  * ticker/bookTicker
+### MARKET_DATA (API_KEY required)
+  * historicalTrades
 
-## TODO
-  * PUBLIC
-    * trades
-    * historicalTrades
-    * aggTrades
-    * klines
-    * avgPrice
-    * ticker/24hr
-    * ticker/price
-    * ticker/bookTicker
-  * ACCOUNT
-    * POST order (new order)
-    * POST order/test (test new order)
-    * GET order (query)
-    * DELETE order (cancel order)
-    * GET openOrders
-    * GET allOrders
-    * account
-    * myTrades
+## TODO REST Endpoints
+
+### SIGNED (API_KEY and signed with SECRET_KEY required)
+  * POST order (new order)
+  * POST order/test (test new order)
+  * GET order (query)
+  * DELETE order (cancel order)
+  * GET openOrders
+  * GET allOrders
+  * account
+  * myTrades
 
 ## Installation
 

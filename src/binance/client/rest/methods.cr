@@ -56,32 +56,33 @@ module Binance::Methods
     fetch :verified, :historical_trades, TradesResponse, {symbol: symbol.upcase, limit: limit}
   end
 
-  # Name        Type    Mandatory   Description
-  # symbol      STRING  YES 
-  # fromId      LONG    NO          ID to get aggregate trades from INCLUSIVE.
-  # startTime   LONG    NO          Timestamp in ms to get aggregate trades from INCLUSIVE.
-  # endTime     LONG    NO          Timestamp in ms to get aggregate trades until INCLUSIVE.
-  # limit       INT     NO          Default 500; max 1000.
+  # Name       | Type   | Mandatory  | Description
+  # -----------|--------|------------|------------
+  # symbol     | STRING | YES        |
+  # fromId     | LONG   | NO         | ID to get aggregate trades from INCLUSIVE.
+  # startTime  | LONG   | NO         | Timestamp in ms to get aggregate trades from INCLUSIVE.
+  # endTime    | LONG   | NO         | Timestamp in ms to get aggregate trades until INCLUSIVE.
+  # limit      | INT    | NO         | Default 500; max 1000.
   #
   #   * If both startTime and endTime are sent, time between startTime and endTime must be less than 1 hour.
   #   * If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
   def agg_trades(
-      symbol : String, 
-      limit : Int32 = 500,
-      from_id : Int32 = 0, 
-      start_time : Time? = nil, 
-      end_time : Time? = nil
+      symbol : String,           # The market symbol to query
+      limit : Int32 = 500,       # Number of entries to return. Default 500; max 1000.
+      from_id : Int32 = 0,       # ID to get aggregate trades from INCLUSIVE.
+      start_time : Time? = nil,  # Timestamp in ms to get aggregate trades from INCLUSIVE.
+      end_time : Time? = nil     # Timestamp in ms to get aggregate trades until INCLUSIVE.
     )
 
-    params = {} of Symbol => String | Int32 | Time
-    params[:symbol] = symbol
-    params[:limit] = limit
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
 
-    params[:fromId] = from_id unless from_id.zero?
+    params["fromId"] = from_id.to_s unless from_id.zero?
     ts = start_time
-    params[:startTime] = ts.to_unix_ms unless ts.nil?
+    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
     ts = end_time
-    params[:endTime] = ts.to_unix_ms unless ts.nil?
+    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
 
     fetch :public, :agg_trades, AggTradesResponse, params
   end
@@ -102,17 +103,25 @@ module Binance::Methods
       end_time : Time? = nil
     )
     
-    params = {} of Symbol => String | Int32 | Time
+    params = HTTP::Params.new
 
-    params[:symbol] = symbol
-    params[:limit] = limit
-    params[:interval] = interval
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
+    params["interval"] = interval
 
     ts = start_time
-    params[:startTime] = ts.to_unix_ms unless ts.nil?
+    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
     ts = end_time
-    params[:endTime] = ts.to_unix_ms unless ts.nil?
+    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
 
     fetch :public, :klines, KlinesResponse, params
+  end
+
+  def order(symbol : String)
+    fetch :signed, :order, OrderResponse, {symbol: symbol.upcase}
+  end
+
+  def account
+    fetch :signed, :account, AccountResponse
   end
 end
