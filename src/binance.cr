@@ -1,5 +1,7 @@
 require "http"
 require "json"
+require "yaml"
+require "openssl/hmac"
 
 # ## Terminology
 # * `base asset` refers to the asset that is the `quantity` of a symbol.

@@ -1,0 +1,18 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v3/ticker/price
+  body: ""
+  query_params: symbol=BNBUSDT
+  headers:
+    User-Agent:
+    - Cossack v0.1.4
+    Content-Type:
+    - application/json
+    Accept:
+    - application/json
+    Host:
+    - api.binance.com
+response:
+  status: 200
+  body: '{"symbol":"BNBUSDT","price":"32.50010000"}'

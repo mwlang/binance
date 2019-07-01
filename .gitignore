@@ -11,3 +11,4 @@
 
 # Keep signed API calls out of repo!
 /spec/fixtures/vcr_cassettes/signed/
+/spec/test.yml

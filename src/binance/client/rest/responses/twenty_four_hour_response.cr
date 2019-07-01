@@ -1,5 +1,5 @@
 module Binance::Responses
-  # Example Server Response:
+  # Typical Server Response:
   #     [
   #       {
   #         "symbol": "BNBBTC",

@@ -23,8 +23,22 @@ module Binance
         client.headers["Accept"] = "application/json"
       end
       url_with_params = "#{url}?#{to_query(params)}"
-      # puts "*" * 80, url_with_params.inspect, "*" * 80
       connection.get url_with_params
+    end
+
+    def verified_fetch(url, params)
+      raise "No API KEY assigned" if api_key.to_s.blank?
+      connection = Cossack::Client.new(BASE_URL) do |client|
+        client.headers["Content-Type"] = "application/json"
+        client.headers["Accept"] = "application/json"
+        client.headers["X-MBX-APIKEY"] = api_key
+      end
+      url_with_params = "#{url}?#{to_query(params)}"
+      connection.get url_with_params
+    end
+
+    def hmac(data : String)
+      OpenSSL::HMAC.hexdigest(:sha256, secret_key, data)
     end
 
     macro fetch(client, endpoint, response_klass, args)

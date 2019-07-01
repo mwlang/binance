@@ -36,8 +36,24 @@ module Binance::Methods
     fetch :public, :twenty_four_hour, TwentyFourHourResponse
   end
 
+  def price(symbol : String)
+    fetch :public, :price, PriceResponse, {symbol: symbol.upcase}
+  end
+
+  def price
+    fetch :public, :price, PriceResponse
+  end
+
+  def book_ticker(symbol : String)
+    fetch :public, :book_ticker, BookTickerResponse, {symbol: symbol.upcase}
+  end
+
+  def book_ticker
+    fetch :public, :book_ticker, BookTickerResponse
+  end
+
   def historical_trades(symbol : String, limit : Int32 = 500)
-    fetch :public, :historical_trades, TradesResponse, {symbol: symbol.upcase, limit: limit}
+    fetch :verified, :historical_trades, TradesResponse, {symbol: symbol.upcase, limit: limit}
   end
 
   # Name        Type    Mandatory   Description
