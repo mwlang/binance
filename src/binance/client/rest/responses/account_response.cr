@@ -22,7 +22,7 @@ module Binance::Responses
   #         }
   #       ]
   #     }
-  class PriceResponse < Responses::ServerResponse
+   class AccountResponse < Responses::ServerResponse
     @[JSON::Field(key: "makerCommission")]
     getter maker_commission : Int32 = 0
 
@@ -45,8 +45,12 @@ module Binance::Responses
     getter can_deposit : Bool = false
 
     @[JSON::Field(key: "updateTime", converter:  Binance::Converters::ToTime)]
-    getter updateTime : Time? = nil
+    getter update_time : Time? = nil
 
+    @[JSON::Field(key: "accountType")]
+    getter account_type : String = ""
 
+    @[JSON::Field(key: "balances")]
+    property balances : Array(BalanceEntry) = [] of Binance::Responses::BalanceEntry
   end
 end

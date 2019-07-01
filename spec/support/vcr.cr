@@ -6,26 +6,17 @@ def cassette_exists?(name : String)
   File.exists? cassette_filepath(name)
 end
 
-def with_vcr_cassette(name : String)
+def with_vcr_cassette(name : String, &block)
   WebMock.wrap do
     if cassette_exists? name
       ts = playback_cassette name
-      begin
-        Timecop.freeze(ts)
-        yield
-      ensure
-        Timecop.return
-      end
+      Timecop.freeze(ts) { block.call }
     else
-      begin
-        Timecop.freeze(Time.now)
+      Timecop.freeze(Time.now) do
         record_cassette name
-        yield
-      ensure
-        Timecop.return
+        block.call
       end
     end
-
   end
 end
 

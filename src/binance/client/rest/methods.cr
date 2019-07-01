@@ -28,28 +28,28 @@ module Binance::Methods
     fetch :public, :avg_price, AvgPriceResponse, {symbol: symbol.upcase}
   end
 
-  def twenty_four_hour(symbol : String)
-    fetch :public, :twenty_four_hour, TwentyFourHourResponse, {symbol: symbol.upcase}
+  def twenty_four_hour(symbol : String? = nil)
+    params = HTTP::Params.new
+    symb = symbol
+    params["symbol"] = symb.upcase unless (symb).nil?
+
+    fetch :public, :twenty_four_hour, TwentyFourHourResponse, params
   end
 
-  def twenty_four_hour
-    fetch :public, :twenty_four_hour, TwentyFourHourResponse
+  def price(symbol : String? = nil)
+    params = HTTP::Params.new
+    symb = symbol
+    params["symbol"] = symb.upcase unless (symb).nil?
+
+    fetch :public, :price, PriceResponse, params
   end
 
-  def price(symbol : String)
-    fetch :public, :price, PriceResponse, {symbol: symbol.upcase}
-  end
+  def book_ticker(symbol : String? = nil)
+    params = HTTP::Params.new
+    symb = symbol
+    params["symbol"] = symb.upcase unless (symb).nil?
 
-  def price
-    fetch :public, :price, PriceResponse
-  end
-
-  def book_ticker(symbol : String)
-    fetch :public, :book_ticker, BookTickerResponse, {symbol: symbol.upcase}
-  end
-
-  def book_ticker
-    fetch :public, :book_ticker, BookTickerResponse
+    fetch :public, :book_ticker, BookTickerResponse, params
   end
 
   def historical_trades(symbol : String, limit : Int32 = 500)
@@ -117,8 +117,21 @@ module Binance::Methods
     fetch :public, :klines, KlinesResponse, params
   end
 
-  def order(symbol : String)
-    fetch :signed, :order, OrderResponse, {symbol: symbol.upcase}
+  def order(
+      symbol : String,
+      order_id : Int32? = nil
+    )
+
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+    oid = order_id
+    params["orderId"] = oid.to_s unless oid.nil?
+
+    fetch :signed, :order, OrderResponse, params
+  end
+
+  def open_orders(symbol : String)
+    fetch :signed, :open_orders, OrderResponse, {symbol: symbol.upcase}
   end
 
   def account

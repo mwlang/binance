@@ -13,6 +13,7 @@ request:
     - application/json
     Host:
     - api.binance.com
+  timestamp: 1562017456544
 response:
   status: 200
-  body: '{"symbol":"BNBUSDT","bidPrice":"32.39250000","bidQty":"17.00000000","askPrice":"32.40920000","askQty":"137.71000000"}'
+  body: '{"symbol":"BNBUSDT","bidPrice":"32.97780000","bidQty":"16.79000000","askPrice":"32.99540000","askQty":"0.99000000"}'

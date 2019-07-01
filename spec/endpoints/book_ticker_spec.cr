@@ -10,10 +10,10 @@ describe Binance do
       response.should be_a Binance::Responses::BookTickerResponse
       response.tickers.size.should eq 1
       response.tickers[0].symbol.should eq "BNBUSDT"
-      response.tickers[0].bid_price.should eq 32.3925
-      response.tickers[0].bid_quantity.should eq 17.0
-      response.tickers[0].ask_price.should eq 32.4092
-      response.tickers[0].ask_quantity.should eq 137.71
+      response.tickers[0].bid_price.should eq 32.9778
+      response.tickers[0].bid_quantity.should eq 16.79
+      response.tickers[0].ask_price.should eq 32.9954
+      response.tickers[0].ask_quantity.should eq 0.99
     end
   end
 

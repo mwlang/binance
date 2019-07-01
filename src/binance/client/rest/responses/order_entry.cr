@@ -43,7 +43,7 @@ module Binance::Responses
     getter executed_quantity : Float64 = 0.0
 
     @[JSON::Field(key: "cummulativeQuoteQty", converter: Binance::Converters::ToFloat)]
-    getter cummulative_quote_qty : Float64 = 0.0
+    getter cummulative_quote_quantity : Float64 = 0.0
 
     @[JSON::Field(key: "status")]
     getter status : String = ""
@@ -56,5 +56,10 @@ module Binance::Responses
 
     @[JSON::Field(key: "side")]
     getter side : String = ""
+
+    @[JSON::Field(key: "stopPrice", converter: Binance::Converters::ToFloat)]
+    getter stop_price : Float64 = 0.0
+
+
   end
 end

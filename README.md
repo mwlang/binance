@@ -31,19 +31,22 @@ Coming Soon!
   * ticker/24hr
   * ticker/price
   * ticker/bookTicker
+
 ### MARKET_DATA (API_KEY required)
   * historicalTrades
+
+### SIGNED (API_KEY and signed with SECRET_KEY required)
+  * account
+  * GET order (query)
+  * GET openOrders
 
 ## TODO REST Endpoints
 
 ### SIGNED (API_KEY and signed with SECRET_KEY required)
   * POST order (new order)
   * POST order/test (test new order)
-  * GET order (query)
   * DELETE order (cancel order)
-  * GET openOrders
   * GET allOrders
-  * account
   * myTrades
 
 ## Installation
