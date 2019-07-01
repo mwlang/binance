@@ -10,14 +10,20 @@ def with_vcr_cassette(name : String)
   WebMock.wrap do
     if cassette_exists? name
       ts = playback_cassette name
-      Timecop.freeze(ts)
-      yield
-      Timecop.return
+      begin
+        Timecop.freeze(ts)
+        yield
+      ensure
+        Timecop.return
+      end
     else
-      Timecop.freeze(Time.now)
-      record_cassette name
-      yield
-      Timecop.return
+      begin
+        Timecop.freeze(Time.now)
+        record_cassette name
+        yield
+      ensure
+        Timecop.return
+      end
     end
 
   end
