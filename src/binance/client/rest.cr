@@ -2,14 +2,12 @@
 # require "./client/timestamp_request_middleware"
 # require "./client/clients"
 require "./rest/endpoints"
-require "./rest/methods"
 require "./rest/responses/*"
 
 module Binance
 
   class REST
     include Binance::Endpoints
-    include Binance::Methods
 
     BASE_URL = "https://api.binance.com/api"
 

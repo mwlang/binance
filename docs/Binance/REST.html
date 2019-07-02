@@ -51,11 +51,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mwlang/binance/Binance/Methods" data-name="binance::methods">
-      <a href="../Binance/Methods.html">Methods</a>
-      
-    </li>
-  
   <li class="parent " data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
       <a href="../Binance/Responses.html">Responses</a>
       
@@ -279,8 +274,6 @@
   
     <li class="other-type"><a href="../Binance/Endpoints.html">Binance::Endpoints</a></li>
   
-    <li class="other-type"><a href="../Binance/Methods.html">Binance::Methods</a></li>
-  
   </ul>
 
 
@@ -295,7 +288,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L10" target="_blank">
+      <a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L9" target="_blank">
         binance/client/rest.cr
       </a>
     
@@ -420,99 +413,89 @@
   
     
 
-  <h3>Instance methods inherited from module <code><a href="../Binance/Methods.html">Binance::Methods</a></code></h3>
+  <h3>Instance methods inherited from module <code><a href="../Binance/Endpoints.html">Binance::Endpoints</a></code></h3>
   
   
-    <a href="../Binance/Methods.html#account-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#account-instance-method" class="tooltip">
       <span>account</span>
     account</a>, 
     
   
-    <a href="../Binance/Methods.html#agg_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#agg_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
       <span>agg_trades(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32 = <span class="n">0</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</span>
     agg_trades</a>, 
     
   
-    <a href="../Binance/Methods.html#all_orders%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Climit%3AInt32%3D500%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#all_orders%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Climit%3AInt32%3D500%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
       <span>all_orders(symbol : String, order_id : Int32? = <span class="n">nil</span>, limit : Int32 = <span class="n">500</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</span>
     all_orders</a>, 
     
   
-    <a href="../Binance/Methods.html#avg_price%28symbol%3AString%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#avg_price%28symbol%3AString%29-instance-method" class="tooltip">
       <span>avg_price(symbol : String)</span>
     avg_price</a>, 
     
   
-    <a href="../Binance/Methods.html#book_ticker%28symbol%3AString%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#book_ticker%28symbol%3AString%3F%3Dnil%29-instance-method" class="tooltip">
       <span>book_ticker(symbol : String? = <span class="n">nil</span>)</span>
     book_ticker</a>, 
     
   
-    <a href="../Binance/Methods.html#depth%28symbol%3AString%2Climit%3AInt32%3D5%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#depth%28symbol%3AString%2Climit%3AInt32%3D5%29-instance-method" class="tooltip">
       <span>depth(symbol : String, limit : Int32 = <span class="n">5</span>)</span>
     depth</a>, 
     
   
-    <a href="../Binance/Methods.html#exchange_info-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#exchange_info-instance-method" class="tooltip">
       <span>exchange_info</span>
     exchange_info</a>, 
     
   
-    <a href="../Binance/Methods.html#historical_trades%28symbol%3AString%2Climit%3AInt32%3D500%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#historical_trades%28symbol%3AString%2Climit%3AInt32%3D500%29-instance-method" class="tooltip">
       <span>historical_trades(symbol : String, limit : Int32 = <span class="n">500</span>)</span>
     historical_trades</a>, 
     
   
-    <a href="../Binance/Methods.html#klines%28symbol%3AString%2Cinterval%3AString%2Climit%3AInt32%3D500%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#klines%28symbol%3AString%2Cinterval%3AString%2Climit%3AInt32%3D500%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
       <span>klines(symbol : String, interval : String, limit : Int32 = <span class="n">500</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</span>
     klines</a>, 
     
   
-    <a href="../Binance/Methods.html#open_orders%28symbol%3AString%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#open_orders%28symbol%3AString%29-instance-method" class="tooltip">
       <span>open_orders(symbol : String)</span>
     open_orders</a>, 
     
   
-    <a href="../Binance/Methods.html#order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Coriginal_client_order_id%3AString%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Coriginal_client_order_id%3AString%3F%3Dnil%29-instance-method" class="tooltip">
       <span>order(symbol : String, order_id : Int32? = <span class="n">nil</span>, original_client_order_id : String? = <span class="n">nil</span>)</span>
     order</a>, 
     
   
-    <a href="../Binance/Methods.html#ping-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#ping-instance-method" class="tooltip">
       <span>ping</span>
     ping</a>, 
     
   
-    <a href="../Binance/Methods.html#price%28symbol%3AString%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#price%28symbol%3AString%3F%3Dnil%29-instance-method" class="tooltip">
       <span>price(symbol : String? = <span class="n">nil</span>)</span>
     price</a>, 
     
   
-    <a href="../Binance/Methods.html#time-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#time-instance-method" class="tooltip">
       <span>time</span>
     time</a>, 
     
   
-    <a href="../Binance/Methods.html#trades%28symbol%3AString%2Climit%3AInt32%3D500%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#trades%28symbol%3AString%2Climit%3AInt32%3D500%29-instance-method" class="tooltip">
       <span>trades(symbol : String, limit : Int32 = <span class="n">500</span>)</span>
     trades</a>, 
     
   
-    <a href="../Binance/Methods.html#twenty_four_hour%28symbol%3AString%3F%3Dnil%29-instance-method" class="tooltip">
+    <a href="../Binance/Endpoints.html#twenty_four_hour%28symbol%3AString%3F%3Dnil%29-instance-method" class="tooltip">
       <span>twenty_four_hour(symbol : String? = <span class="n">nil</span>)</span>
     twenty_four_hour</a>
     
   
-
-
-    
-
-
-    
-
-
-  
-    
 
 
     
@@ -568,7 +551,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L99" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -591,7 +574,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L98" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -607,7 +590,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L104" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L102" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -623,7 +606,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -639,7 +622,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -655,7 +638,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -671,7 +654,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L99" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -687,7 +670,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L105" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L103" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -703,7 +686,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -719,7 +702,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -735,7 +718,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -751,7 +734,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -767,7 +750,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L41" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -788,7 +771,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -804,7 +787,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest.cr#L94" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L92" target="_blank">View source</a>]
         
       </div>
     </div>

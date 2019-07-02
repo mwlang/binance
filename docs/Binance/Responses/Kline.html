@@ -51,11 +51,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mwlang/binance/Binance/Methods" data-name="binance::methods">
-      <a href="../../Binance/Methods.html">Methods</a>
-      
-    </li>
-  
   <li class="parent open current" data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
       <a href="../../Binance/Responses.html">Responses</a>
       
@@ -272,7 +267,39 @@
 
   <h2>Overview</h2>
 
-  <p>Typical server response</p>
+  <p>Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.</p>
+
+<p>Weight: 1</p>
+
+<p>Parameters:</p>
+
+<p>&lt;table>
+&lt;thead>
+&lt;tr> &lt;th>Name&lt;/th> &lt;th>Type&lt;/th> &lt;th>Mandatory&lt;/th> &lt;th>Description&lt;/th> &lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr> &lt;td>symbol&lt;/td> &lt;td>STRING&lt;/td> &lt;td>YES&lt;/td> &lt;td>&lt;/td> &lt;/tr>
+&lt;tr> &lt;td>interval&lt;/td> &lt;td>ENUM&lt;/td> &lt;td>YES&lt;/td> &lt;td>&lt;/td> &lt;/tr>
+&lt;tr> &lt;td>startTime&lt;/td> &lt;td>LONG&lt;/td> &lt;td>NO&lt;/td> &lt;td>&lt;/td> &lt;/tr>
+&lt;tr> &lt;td>endTime&lt;/td> &lt;td>LONG&lt;/td> &lt;td>NO&lt;/td> &lt;td>&lt;/td> &lt;/tr>
+&lt;tr> &lt;td>limit&lt;/td> &lt;td>INT&lt;/td> &lt;td>NO&lt;/td> &lt;td>Default 500; max 1000.&lt;/td> &lt;/tr>
+&lt;/tbody>
+&lt;/table>  </p>
+
+<ul><li>If startTime and endTime are not sent, the most recent klines are returned.  </li></ul>
+
+<h2>Example Usage</h2>
+
+<pre><code class="language-crystal">response <span class="o">=</span> client.klines(<span class="s">&quot;BNBUSDT&quot;</span>, <span class="s">&quot;1h&quot;</span>, <span class="n">5</span>)
+response.klines.size <span class="c"># =&gt; 5</span>
+response.klines.map(<span class="o">&amp;</span>.open_price) <span class="c"># =&gt; [34.4949, 34.3671, 34.3842, 34.2751, 34.2592]</span>
+response.klines.map(<span class="o">&amp;</span>.close_price) <span class="c"># =&gt; [34.3887, 34.376, 34.2218, 34.2658, 34.2749]</span>
+response.klines[<span class="n">0</span>].open_time <span class="c"># =&gt; &quot;2019-06-28 17:00:00 UTC&quot;</span>
+response.klines[<span class="n">0</span>].close_time <span class="c"># =&gt; &quot;2019-06-28 17:59:59 UTC&quot;</span>
+response.klines[<span class="n">4</span>].open_time <span class="c"># =&gt; &quot;2019-06-28 21:00:00 UTC&quot;</span>
+response.klines[<span class="n">4</span>].close_time <span class="c"># =&gt; &quot;2019-06-28 21:59:59 UTC&quot;</span></code></pre>
+
+<h2>Typical server response (unparsed JSON)</h2>
 
 <pre><code>[
   <span class="n">1499040000000</span>,      <span class="o">//</span> <span class="t">Open</span> time
@@ -305,7 +332,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L17" target="_blank">
+      <a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L53" target="_blank">
         binance/client/rest/responses/kline.cr
       </a>
     
@@ -315,16 +342,6 @@
 
 
 
-
-  <h2>Constructors</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -336,60 +353,84 @@
       <li class="entry-summary">
         <a href="#base_volume%3AFloat64-instance-method" class="signature"><strong>#base_volume</strong> : Float64</a>
         
+          <div class="summary"><p>Volume expressed in the base asset</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#close_price%3AFloat64-instance-method" class="signature"><strong>#close_price</strong> : Float64</a>
+        
+          <div class="summary"><p>Close Price (this can fluxuate for still open candles!)</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#close_time%3ATime-instance-method" class="signature"><strong>#close_time</strong> : Time</a>
         
+          <div class="summary"><p>Close Time in UTC</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#high_price%3AFloat64-instance-method" class="signature"><strong>#high_price</strong> : Float64</a>
+        
+          <div class="summary"><p>High Price</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#low_price%3AFloat64-instance-method" class="signature"><strong>#low_price</strong> : Float64</a>
         
+          <div class="summary"><p>Low Price</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#open_price%3AFloat64-instance-method" class="signature"><strong>#open_price</strong> : Float64</a>
+        
+          <div class="summary"><p>Open Price</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#open_time%3ATime-instance-method" class="signature"><strong>#open_time</strong> : Time</a>
         
+          <div class="summary"><p>Open Time in UTC</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#quote_volume%3AFloat64-instance-method" class="signature"><strong>#quote_volume</strong> : Float64</a>
+        
+          <div class="summary"><p>Volume expressed in the target (quote) asset</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#reserved%3AFloat64-instance-method" class="signature"><strong>#reserved</strong> : Float64</a>
         
+          <div class="summary"><p>Unknown/undocumented</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#taker_base_volume%3AFloat64-instance-method" class="signature"><strong>#taker_base_volume</strong> : Float64</a>
+        
+          <div class="summary"><p>Volume of taker trades on base asset</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#taker_quote_volume%3AFloat64-instance-method" class="signature"><strong>#taker_quote_volume</strong> : Float64</a>
         
+          <div class="summary"><p>Volume of taker trades expressed in the target (quote) asset</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#trades%3AInt32-instance-method" class="signature"><strong>#trades</strong> : Int32</a>
+        
+          <div class="summary"><p>Number of trades on asset pair in interval</p></div>
         
       </li>
     
@@ -424,25 +465,6 @@
 </div>
 
 
-  <h2>Constructor Detail</h2>
-  
-    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(pull : JSON::PullParser)
-
-        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L37" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
 
 
@@ -457,10 +479,12 @@
         <a class="method-permalink" href="#base_volume%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Volume expressed in the base asset</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -473,10 +497,12 @@
         <a class="method-permalink" href="#close_price%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Close Price (this can fluxuate for still open candles!)</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -489,10 +515,12 @@
         <a class="method-permalink" href="#close_time%3ATime-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Close Time in UTC</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -505,10 +533,12 @@
         <a class="method-permalink" href="#high_price%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>High Price</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -521,10 +551,12 @@
         <a class="method-permalink" href="#low_price%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Low Price</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L66" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -537,10 +569,12 @@
         <a class="method-permalink" href="#open_price%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Open Price</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -553,10 +587,12 @@
         <a class="method-permalink" href="#open_time%3ATime-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Open Time in UTC</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -569,10 +605,12 @@
         <a class="method-permalink" href="#quote_volume%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Volume expressed in the target (quote) asset</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -585,10 +623,12 @@
         <a class="method-permalink" href="#reserved%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Unknown/undocumented</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L90" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -601,10 +641,12 @@
         <a class="method-permalink" href="#taker_base_volume%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Volume of taker trades on base asset</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -617,10 +659,12 @@
         <a class="method-permalink" href="#taker_quote_volume%3AFloat64-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Volume of taker trades expressed in the target (quote) asset</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L87" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -633,10 +677,12 @@
         <a class="method-permalink" href="#trades%3AInt32-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Number of trades on asset pair in interval</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/3ea6a9078dc880b52d7e6444c27bc8f5ae652bff/src/binance/client/rest/responses/kline.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/responses/kline.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>
