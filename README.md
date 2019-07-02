@@ -75,9 +75,18 @@ client = Binance::REST.new
 client = Binance::REST.new api_key: "x", secret_key: "y"
 ```
 
+#### Anatomy of a `Binance::Responses::ServerResponse`
+
+Every API endpoint call results in a ServerResponse that deserializes the JSON data retrieved from the server.
+
+A ServerResponse is either a successful call and loaded with data or in an error state.  Exceptions
+from connection fails or the server returning error codes are captured.  It is up to you to check
+for errors before attempting to access the properties of the ~~~ServerResponses~~~
+
+
 ```crystal
 # Ping the server
-client.ping # => {}
+client.ping.pong? # => true
 
 # Get kline data
 client.klines symbol: 'NEOETH', interval: '1m', limit: 1
