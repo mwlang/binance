@@ -59,19 +59,54 @@ Coming Soon!
 
 ## Getting Started
 
-```crystal
-require "binance"
-```
-
 ### REST client
 
-Create a new instance of the REST client:
-
 ```crystal
-# If you only plan on touching public API endpoints, you can forgo any arguments
+require "binance"
+
 client = Binance::REST.new
 
-# Otherwise provide an api_key and secret_key as keyword arguments
+puts client.ping.pong.inspect => true
+
+client.klines(symbol: "BNBBTC", interval: "5m", limit: 5).klines.each do |kline|
+  puts "#{kline.open_time} O: #{"%0.6f" % kline.open_price} C: #{"%0.6f" % kline.close_price}"
+end
+
+# => 
+# 2019-07-02 15:35:00 UTC O: 0.003031 C: 0.003035
+# 2019-07-02 15:40:00 UTC O: 0.003035 C: 0.003023
+# 2019-07-02 15:45:00 UTC O: 0.003023 C: 0.003031
+# 2019-07-02 15:50:00 UTC O: 0.003033 C: 0.003032
+# 2019-07-02 15:55:00 UTC O: 0.003032 C: 0.003010
+
+api_key = "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"
+api_secret = "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+
+signed_client = Binance::REST.new api_key: api_key, secret_key: api_secret
+signed_client.historical_trades("BTCUSDC", 5).trades.each do |trade|
+  puts "#{trade.time} #{"%0.6f" % trade.price} #{"%0.6f" % trade.quantity}"
+end
+
+# => 
+# 2019-07-02 16:08:07 UTC 10465.560000 0.001689
+# 2019-07-02 16:08:09 UTC 10465.650000 1.000000
+# 2019-07-02 16:08:09 UTC 10465.650000 0.034570
+# 2019-07-02 16:08:09 UTC 10465.650000 0.017813
+# 2019-07-02 16:08:09 UTC 10471.390000 0.049130
+```
+
+Initializing the REST client:
+
+If you only plan on touching public API endpoints, you can forgo any arguments.  
+Any of the public (NONE) api endpoints will work without an API key.
+
+```crystal
+client = Binance::REST.new
+```
+
+Otherwise provide an api_key and secret_key as keyword arguments
+
+```crystal
 client = Binance::REST.new api_key: "x", secret_key: "y"
 ```
 
@@ -81,30 +116,52 @@ Every API endpoint call results in a ServerResponse that deserializes the JSON d
 
 A ServerResponse is either a successful call and loaded with data or in an error state.  Exceptions
 from connection fails or the server returning error codes are captured.  It is up to you to check
-for errors before attempting to access the properties of the ~~~ServerResponses~~~
+for errors before attempting to access the properties of the ServerResponses
 
+When accessing the properties of the JSON responses, Generally speaking: 
+  * camel-cased JSON keys become downcased and underscored.
+  * abbreviations are spelled out (e.g. qty => quantity).
+  * If an API can return one or more, it's always an Array property on the `ServerResponse` object.
 
 ```crystal
-# Ping the server
-client.ping.pong? # => true
+require "../src/binance"
 
-# Get kline data
-client.klines symbol: 'NEOETH', interval: '1m', limit: 1
+client = Binance::REST.new
 
-# => [[1511682480000, "0.08230000", "0.08230000", "0.08230000", "0.08230000", "0.00000000", 
-# 1511682539999, "0.00000000", 0, "0.00000000", "0.00000000", "2885926.46000000"]]
+puts client.ping.inspect
 
-# Create an order
-client.create_order! symbol: 'XRPETH', side: 'BUY', type: 'LIMIT', 
-  time_in_force: 'GTC', quantity: '100.00000000', price: '0.00055000'
-# => {"symbol"=>"XRPETH", "orderId"=>918248, "clientOrderId"=>"kmUU0i6cMWzq1NElE6ZTdu", 
-# "transactTime"=>1511685028420, "price"=>"0.00055000", "origQty"=>"100.00000000", 
-# "executedQty"=>"100.00000000", "status"=>"FILLED", "timeInForce"=>"GTC", "type"=>"LIMIT", 
-# "side"=>"BUY"}
-
-# Get deposit address
-client.deposit_address asset: 'NEO'
-# => {"address"=>"AHXeTWYv8qZQhQ2WNrBza9LHyzdZtFnbaT", "success"=>true, "addressTag"=>"", "asset"=>"NEO"}
+# # <Binance::Responses::PingResponse:0x10d40c280 
+#   @success=true, 
+#   @error_code=nil, 
+#   @error_message=nil, 
+#   @response=#<Cossack::Response:0x10d3fe5a0 @status=200, 
+#     @headers=HTTP::Headers{
+#       "Content-Type" => "application/json;charset=utf-8", 
+#       "Transfer-Encoding" => "chunked", 
+#       "Connection" => "keep-alive", 
+#       "Date" => "Tue, 02 Jul 2019 15:26:47 GMT", 
+#       "Server" => "nginx", 
+#       "Vary" => "Accept-Encoding", 
+#       "X-MBX-USED-WEIGHT" => "3", 
+#       "Strict-Transport-Security" => 
+#       "max-age=31536000; includeSubdomains", 
+#       "X-Frame-Options" => "SAMEORIGIN", 
+#       "X-Xss-Protection" => "1; mode=block",
+#       "X-Content-Type-Options" => "nosniff", 
+#       "Content-Security-Policy" => "default-src 'self'", 
+#       "X-Content-Security-Policy" => "default-src 'self'", 
+#       "X-WebKit-CSP" => "default-src 'self'", 
+#       "Cache-Control" => "no-cache, no-store, must-revalidate", 
+#       "Pragma" => "no-cache", 
+#       "Expires" => "0", 
+#       "Content-Encoding" => "gzip", 
+#       "X-Cache" => "Miss from cloudfront", 
+#       "Via" => "1.1 f5d17f65245ed818b0a01bb46646051c.cloudfront.net (CloudFront)", 
+#       "X-Amz-Cf-Pop" => "ATL50-C1", 
+#       "X-Amz-Cf-Id" => "-lcrDlHfRIAYp7ULZLmEqNzDMCU8U4q5LnS60csCxtYe-SRY3qqqTQ=="
+#       }, 
+#     @body="{}">, 
+#   @exception=nil>
 ```
 
 ## Testing
@@ -115,8 +172,6 @@ was implemented.
 
 However, only PUBLIC API VCR cassettes are committed to the repo.  To test SIGNED/VERIFIED
 API calls, you'll have to setup your private API credentials.
-
-TODO: extend the VCR functionality to obsfucate SIGNED calls to avoid revealing api keys.
 
 ## Development
 
@@ -139,11 +194,18 @@ these fields may be added and parsed without issue.
 
 ## Contributing
 
+Pull Requests welcomed.  Fully spec'd PR's are likely to get merged!
+
 1. Fork it (<https://github.com/mwlang/binance/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## TODO
+
+TODO: extend the VCR functionality to obsfucate SIGNED calls to avoid revealing api keys.
+TODO: build Websocket wrappers
 
 ## Contributors
 

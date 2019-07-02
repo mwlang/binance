@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.28.0">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/mwlang/binance">
+  <title>Binance::Responses::TwentyFourHourEntry - github.com/mwlang/binance</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/mwlang/binance/Binance" data-name="binance">
+      <a href="../../Binance.html">Binance</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Converters" data-name="binance::converters">
+      <a href="../../Binance/Converters.html">Converters</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Endpoints" data-name="binance::endpoints">
+      <a href="../../Binance/Endpoints.html">Endpoints</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Methods" data-name="binance::methods">
+      <a href="../../Binance/Methods.html">Methods</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
+      <a href="../../Binance/Responses.html">Responses</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AccountResponse" data-name="binance::responses::accountresponse">
+      <a href="../../Binance/Responses/AccountResponse.html">AccountResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AggTradeEntry" data-name="binance::responses::aggtradeentry">
+      <a href="../../Binance/Responses/AggTradeEntry.html">AggTradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AggTradesResponse" data-name="binance::responses::aggtradesresponse">
+      <a href="../../Binance/Responses/AggTradesResponse.html">AggTradesResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AvgPriceResponse" data-name="binance::responses::avgpriceresponse">
+      <a href="../../Binance/Responses/AvgPriceResponse.html">AvgPriceResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/BalanceEntry" data-name="binance::responses::balanceentry">
+      <a href="../../Binance/Responses/BalanceEntry.html">BalanceEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/BookTickerEntry" data-name="binance::responses::booktickerentry">
+      <a href="../../Binance/Responses/BookTickerEntry.html">BookTickerEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/BookTickerResponse" data-name="binance::responses::booktickerresponse">
+      <a href="../../Binance/Responses/BookTickerResponse.html">BookTickerResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/DepthEntry" data-name="binance::responses::depthentry">
+      <a href="../../Binance/Responses/DepthEntry.html">DepthEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/DepthResponse" data-name="binance::responses::depthresponse">
+      <a href="../../Binance/Responses/DepthResponse.html">DepthResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeFilter" data-name="binance::responses::exchangefilter">
+      <a href="../../Binance/Responses/ExchangeFilter.html">ExchangeFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeInfoResponse" data-name="binance::responses::exchangeinforesponse">
+      <a href="../../Binance/Responses/ExchangeInfoResponse.html">ExchangeInfoResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeSymbol" data-name="binance::responses::exchangesymbol">
+      <a href="../../Binance/Responses/ExchangeSymbol.html">ExchangeSymbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/IcebergPartsFilter" data-name="binance::responses::icebergpartsfilter">
+      <a href="../../Binance/Responses/IcebergPartsFilter.html">IcebergPartsFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Kline" data-name="binance::responses::kline">
+      <a href="../../Binance/Responses/Kline.html">Kline</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/KlinesResponse" data-name="binance::responses::klinesresponse">
+      <a href="../../Binance/Responses/KlinesResponse.html">KlinesResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/LotSizeFilter" data-name="binance::responses::lotsizefilter">
+      <a href="../../Binance/Responses/LotSizeFilter.html">LotSizeFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MarketLotSizeFilter" data-name="binance::responses::marketlotsizefilter">
+      <a href="../../Binance/Responses/MarketLotSizeFilter.html">MarketLotSizeFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MaxNumAlgoOrdersFilter" data-name="binance::responses::maxnumalgoordersfilter">
+      <a href="../../Binance/Responses/MaxNumAlgoOrdersFilter.html">MaxNumAlgoOrdersFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MinNotionalFilter" data-name="binance::responses::minnotionalfilter">
+      <a href="../../Binance/Responses/MinNotionalFilter.html">MinNotionalFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Order" data-name="binance::responses::order">
+      <a href="../../Binance/Responses/Order.html">Order</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/OrderFill" data-name="binance::responses::orderfill">
+      <a href="../../Binance/Responses/OrderFill.html">OrderFill</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/OrderResponse" data-name="binance::responses::orderresponse">
+      <a href="../../Binance/Responses/OrderResponse.html">OrderResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PercentPriceFilter" data-name="binance::responses::percentpricefilter">
+      <a href="../../Binance/Responses/PercentPriceFilter.html">PercentPriceFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PingResponse" data-name="binance::responses::pingresponse">
+      <a href="../../Binance/Responses/PingResponse.html">PingResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PriceEntry" data-name="binance::responses::priceentry">
+      <a href="../../Binance/Responses/PriceEntry.html">PriceEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PriceFilter" data-name="binance::responses::pricefilter">
+      <a href="../../Binance/Responses/PriceFilter.html">PriceFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PriceResponse" data-name="binance::responses::priceresponse">
+      <a href="../../Binance/Responses/PriceResponse.html">PriceResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/RateLimit" data-name="binance::responses::ratelimit">
+      <a href="../../Binance/Responses/RateLimit.html">RateLimit</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ServerResponse" data-name="binance::responses::serverresponse">
+      <a href="../../Binance/Responses/ServerResponse.html">ServerResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TimeResponse" data-name="binance::responses::timeresponse">
+      <a href="../../Binance/Responses/TimeResponse.html">TimeResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TradeEntry" data-name="binance::responses::tradeentry">
+      <a href="../../Binance/Responses/TradeEntry.html">TradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TradesResponse" data-name="binance::responses::tradesresponse">
+      <a href="../../Binance/Responses/TradesResponse.html">TradesResponse</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mwlang/binance/Binance/Responses/TwentyFourHourEntry" data-name="binance::responses::twentyfourhourentry">
+      <a href="../../Binance/Responses/TwentyFourHourEntry.html">TwentyFourHourEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TwentyFourHourResponse" data-name="binance::responses::twentyfourhourresponse">
+      <a href="../../Binance/Responses/TwentyFourHourResponse.html">TwentyFourHourResponse</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/REST" data-name="binance::rest">
+      <a href="../../Binance/REST.html">REST</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/TimestampRequestMiddleware" data-name="timestamprequestmiddleware">
+      <a href="../../TimestampRequestMiddleware.html">TimestampRequestMiddleware</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Binance::Responses::TwentyFourHourEntry
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/TwentyFourHourEntry.html">Binance::Responses::TwentyFourHourEntry</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Typical server response</p>
+
+<pre><code>{
+  <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;BNBBTC&quot;</span>,
+  <span class="s">&quot;priceChange&quot;</span>: <span class="s">&quot;-94.99999800&quot;</span>,
+  <span class="s">&quot;priceChangePercent&quot;</span>: <span class="s">&quot;-95.960&quot;</span>,
+  <span class="s">&quot;weightedAvgPrice&quot;</span>: <span class="s">&quot;0.29628482&quot;</span>,
+  <span class="s">&quot;prevClosePrice&quot;</span>: <span class="s">&quot;0.10002000&quot;</span>,
+  <span class="s">&quot;lastPrice&quot;</span>: <span class="s">&quot;4.00000200&quot;</span>,
+  <span class="s">&quot;lastQty&quot;</span>: <span class="s">&quot;200.00000000&quot;</span>,
+  <span class="s">&quot;bidPrice&quot;</span>: <span class="s">&quot;4.00000000&quot;</span>,
+  <span class="s">&quot;askPrice&quot;</span>: <span class="s">&quot;4.00000200&quot;</span>,
+  <span class="s">&quot;openPrice&quot;</span>: <span class="s">&quot;99.00000000&quot;</span>,
+  <span class="s">&quot;highPrice&quot;</span>: <span class="s">&quot;100.00000000&quot;</span>,
+  <span class="s">&quot;lowPrice&quot;</span>: <span class="s">&quot;0.10000000&quot;</span>,
+  <span class="s">&quot;volume&quot;</span>: <span class="s">&quot;8913.30000000&quot;</span>,
+  <span class="s">&quot;quoteVolume&quot;</span>: <span class="s">&quot;15.30000000&quot;</span>,
+  <span class="s">&quot;openTime&quot;</span>: <span class="n">1499783499040</span>,
+  <span class="s">&quot;closeTime&quot;</span>: <span class="n">1499869899040</span>,
+  <span class="s">&quot;firstId&quot;</span>: <span class="n">28385</span>,   <span class="o">//</span> <span class="t">First</span> tradeId
+  <span class="s">&quot;lastId&quot;</span>: <span class="n">28460</span>,    <span class="o">//</span> <span class="t">Last</span> tradeId
+  <span class="s">&quot;count&quot;</span>: <span class="n">76</span>         <span class="o">//</span> <span class="t">Trade</span> count
+}</code></pre>
+
+
+
+
+
+  <h2>Included Modules</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type">JSON::Serializable</li>
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L24" target="_blank">
+        binance/client/rest/responses/twenty_four_hour_entry.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#ask_price%3AFloat64-instance-method" class="signature"><strong>#ask_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#base_volume%3AFloat64-instance-method" class="signature"><strong>#base_volume</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#bid_price%3AFloat64-instance-method" class="signature"><strong>#bid_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#close_time%3ATime%3F-instance-method" class="signature"><strong>#close_time</strong> : Time?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#first_id%3AInt32-instance-method" class="signature"><strong>#first_id</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#high_price%3AFloat64-instance-method" class="signature"><strong>#high_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#last_id%3AInt32-instance-method" class="signature"><strong>#last_id</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#last_price%3AFloat64-instance-method" class="signature"><strong>#last_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#last_quantity%3AFloat64-instance-method" class="signature"><strong>#last_quantity</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#low_price%3AFloat64-instance-method" class="signature"><strong>#low_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open_price%3AFloat64-instance-method" class="signature"><strong>#open_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open_time%3ATime%3F-instance-method" class="signature"><strong>#open_time</strong> : Time?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#prev_close_price%3AFloat64-instance-method" class="signature"><strong>#prev_close_price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#price_change%3AFloat64-instance-method" class="signature"><strong>#price_change</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#price_change_percent%3AFloat64-instance-method" class="signature"><strong>#price_change_percent</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#quote_volume%3AFloat64-instance-method" class="signature"><strong>#quote_volume</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#symbol%3AString-instance-method" class="signature"><strong>#symbol</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#trades%3AInt32-instance-method" class="signature"><strong>#trades</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#weighted_average_price%3AFloat64-instance-method" class="signature"><strong>#weighted_average_price</strong> : Float64</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="ask_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>ask_price</strong> : Float64
+
+        <a class="method-permalink" href="#ask_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="base_volume:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>base_volume</strong> : Float64
+
+        <a class="method-permalink" href="#base_volume%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L66" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="bid_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>bid_price</strong> : Float64
+
+        <a class="method-permalink" href="#bid_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="close_time:Time?-instance-method">
+      <div class="signature">
+        
+        def <strong>close_time</strong> : Time?
+
+        <a class="method-permalink" href="#close_time%3ATime%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L75" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="first_id:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>first_id</strong> : Int32
+
+        <a class="method-permalink" href="#first_id%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L78" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="high_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>high_price</strong> : Float64
+
+        <a class="method-permalink" href="#high_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L60" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="last_id:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>last_id</strong> : Int32
+
+        <a class="method-permalink" href="#last_id%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L81" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="last_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>last_price</strong> : Float64
+
+        <a class="method-permalink" href="#last_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L45" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="last_quantity:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>last_quantity</strong> : Float64
+
+        <a class="method-permalink" href="#last_quantity%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="low_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>low_price</strong> : Float64
+
+        <a class="method-permalink" href="#low_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L63" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>open_price</strong> : Float64
+
+        <a class="method-permalink" href="#open_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open_time:Time?-instance-method">
+      <div class="signature">
+        
+        def <strong>open_time</strong> : Time?
+
+        <a class="method-permalink" href="#open_time%3ATime%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L72" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="prev_close_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>prev_close_price</strong> : Float64
+
+        <a class="method-permalink" href="#prev_close_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="price_change:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>price_change</strong> : Float64
+
+        <a class="method-permalink" href="#price_change%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="price_change_percent:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>price_change_percent</strong> : Float64
+
+        <a class="method-permalink" href="#price_change_percent%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="quote_volume:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>quote_volume</strong> : Float64
+
+        <a class="method-permalink" href="#quote_volume%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="symbol:String-instance-method">
+      <div class="signature">
+        
+        def <strong>symbol</strong> : String
+
+        <a class="method-permalink" href="#symbol%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="trades:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>trades</strong> : Int32
+
+        <a class="method-permalink" href="#trades%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L84" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="weighted_average_price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>weighted_average_price</strong> : Float64
+
+        <a class="method-permalink" href="#weighted_average_price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/twenty_four_hour_entry.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

@@ -15,20 +15,26 @@ module Binance::Responses
     include JSON::Serializable
 
     @[JSON::Field(ignore: true)]
+    # TRUE if API endpoint successfully processed, FALSE otherwise
     property success : Bool = true
 
     @[JSON::Field(ignore: true)]
+    # The error code returned by the API endpoint (if any).
     property error_code : Int32?
 
     @[JSON::Field(ignore: true)]
+    # The error message from either the API endpoint or Exception captured (if any).
     property error_message : String?
 
     @[JSON::Field(ignore: true)]
+    # The full HTTP Response object captured (if any).
     property response : Cossack::Response?
 
     @[JSON::Field(ignore: true)]
+    # The exception captured (if any).
     property exception : Exception?
 
+    # :nodoc:
     def initialize
       @response = nil
       @error_code = nil
@@ -36,10 +42,12 @@ module Binance::Responses
       @exception = nil
     end
 
+    # The unparsed body of the HTTP response
     def body
       @response.nil? ? "" : @response.as(Cossack::Response).body
     end
 
+    # :nodoc:
     def self.from_error(response)
       self.new.tap do |r|
         r.success = false
@@ -56,6 +64,7 @@ module Binance::Responses
       end
     end
 
+    # :nodoc:
     def self.from_failure(response)
       self.new.tap do |r|
         r.success = false
@@ -64,6 +73,7 @@ module Binance::Responses
       end
     end
 
+    # :nodoc:
     def self.from_exception(exception)
       self.new.tap do |r|
         r.success = false

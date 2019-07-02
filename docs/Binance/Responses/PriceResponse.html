@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.28.0">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/mwlang/binance">
+  <title>Binance::Responses::PriceResponse - github.com/mwlang/binance</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/mwlang/binance/Binance" data-name="binance">
+      <a href="../../Binance.html">Binance</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Converters" data-name="binance::converters">
+      <a href="../../Binance/Converters.html">Converters</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Endpoints" data-name="binance::endpoints">
+      <a href="../../Binance/Endpoints.html">Endpoints</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Methods" data-name="binance::methods">
+      <a href="../../Binance/Methods.html">Methods</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
+      <a href="../../Binance/Responses.html">Responses</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AccountResponse" data-name="binance::responses::accountresponse">
+      <a href="../../Binance/Responses/AccountResponse.html">AccountResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AggTradeEntry" data-name="binance::responses::aggtradeentry">
+      <a href="../../Binance/Responses/AggTradeEntry.html">AggTradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AggTradesResponse" data-name="binance::responses::aggtradesresponse">
+      <a href="../../Binance/Responses/AggTradesResponse.html">AggTradesResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/AvgPriceResponse" data-name="binance::responses::avgpriceresponse">
+      <a href="../../Binance/Responses/AvgPriceResponse.html">AvgPriceResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/BalanceEntry" data-name="binance::responses::balanceentry">
+      <a href="../../Binance/Responses/BalanceEntry.html">BalanceEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/BookTickerEntry" data-name="binance::responses::booktickerentry">
+      <a href="../../Binance/Responses/BookTickerEntry.html">BookTickerEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/BookTickerResponse" data-name="binance::responses::booktickerresponse">
+      <a href="../../Binance/Responses/BookTickerResponse.html">BookTickerResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/DepthEntry" data-name="binance::responses::depthentry">
+      <a href="../../Binance/Responses/DepthEntry.html">DepthEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/DepthResponse" data-name="binance::responses::depthresponse">
+      <a href="../../Binance/Responses/DepthResponse.html">DepthResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeFilter" data-name="binance::responses::exchangefilter">
+      <a href="../../Binance/Responses/ExchangeFilter.html">ExchangeFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeInfoResponse" data-name="binance::responses::exchangeinforesponse">
+      <a href="../../Binance/Responses/ExchangeInfoResponse.html">ExchangeInfoResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeSymbol" data-name="binance::responses::exchangesymbol">
+      <a href="../../Binance/Responses/ExchangeSymbol.html">ExchangeSymbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/IcebergPartsFilter" data-name="binance::responses::icebergpartsfilter">
+      <a href="../../Binance/Responses/IcebergPartsFilter.html">IcebergPartsFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Kline" data-name="binance::responses::kline">
+      <a href="../../Binance/Responses/Kline.html">Kline</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/KlinesResponse" data-name="binance::responses::klinesresponse">
+      <a href="../../Binance/Responses/KlinesResponse.html">KlinesResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/LotSizeFilter" data-name="binance::responses::lotsizefilter">
+      <a href="../../Binance/Responses/LotSizeFilter.html">LotSizeFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MarketLotSizeFilter" data-name="binance::responses::marketlotsizefilter">
+      <a href="../../Binance/Responses/MarketLotSizeFilter.html">MarketLotSizeFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MaxNumAlgoOrdersFilter" data-name="binance::responses::maxnumalgoordersfilter">
+      <a href="../../Binance/Responses/MaxNumAlgoOrdersFilter.html">MaxNumAlgoOrdersFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MinNotionalFilter" data-name="binance::responses::minnotionalfilter">
+      <a href="../../Binance/Responses/MinNotionalFilter.html">MinNotionalFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Order" data-name="binance::responses::order">
+      <a href="../../Binance/Responses/Order.html">Order</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/OrderFill" data-name="binance::responses::orderfill">
+      <a href="../../Binance/Responses/OrderFill.html">OrderFill</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/OrderResponse" data-name="binance::responses::orderresponse">
+      <a href="../../Binance/Responses/OrderResponse.html">OrderResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PercentPriceFilter" data-name="binance::responses::percentpricefilter">
+      <a href="../../Binance/Responses/PercentPriceFilter.html">PercentPriceFilter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PingResponse" data-name="binance::responses::pingresponse">
+      <a href="../../Binance/Responses/PingResponse.html">PingResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PriceEntry" data-name="binance::responses::priceentry">
+      <a href="../../Binance/Responses/PriceEntry.html">PriceEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/PriceFilter" data-name="binance::responses::pricefilter">
+      <a href="../../Binance/Responses/PriceFilter.html">PriceFilter</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mwlang/binance/Binance/Responses/PriceResponse" data-name="binance::responses::priceresponse">
+      <a href="../../Binance/Responses/PriceResponse.html">PriceResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/RateLimit" data-name="binance::responses::ratelimit">
+      <a href="../../Binance/Responses/RateLimit.html">RateLimit</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ServerResponse" data-name="binance::responses::serverresponse">
+      <a href="../../Binance/Responses/ServerResponse.html">ServerResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TimeResponse" data-name="binance::responses::timeresponse">
+      <a href="../../Binance/Responses/TimeResponse.html">TimeResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TradeEntry" data-name="binance::responses::tradeentry">
+      <a href="../../Binance/Responses/TradeEntry.html">TradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TradesResponse" data-name="binance::responses::tradesresponse">
+      <a href="../../Binance/Responses/TradesResponse.html">TradesResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TwentyFourHourEntry" data-name="binance::responses::twentyfourhourentry">
+      <a href="../../Binance/Responses/TwentyFourHourEntry.html">TwentyFourHourEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/TwentyFourHourResponse" data-name="binance::responses::twentyfourhourresponse">
+      <a href="../../Binance/Responses/TwentyFourHourResponse.html">TwentyFourHourResponse</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/REST" data-name="binance::rest">
+      <a href="../../Binance/REST.html">REST</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/TimestampRequestMiddleware" data-name="timestamprequestmiddleware">
+      <a href="../../TimestampRequestMiddleware.html">TimestampRequestMiddleware</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Binance::Responses::PriceResponse
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/PriceResponse.html">Binance::Responses::PriceResponse</a></li><li class="superclass"><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Typical Server Response:</p>
+
+<pre><code>{
+  <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;LTCBTC&quot;</span>,
+  <span class="s">&quot;price&quot;</span>: <span class="s">&quot;4.00000200&quot;</span>
+}</code></pre>
+
+<p>OR</p>
+
+<pre><code>[
+  {
+    <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;LTCBTC&quot;</span>,
+    <span class="s">&quot;price&quot;</span>: <span class="s">&quot;4.00000200&quot;</span>
+  },
+  {
+    <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;ETHBTC&quot;</span>,
+    <span class="s">&quot;price&quot;</span>: <span class="s">&quot;0.07946600&quot;</span>
+  }
+]</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/price_response.cr#L20" target="_blank">
+        binance/client/rest/responses/price_response.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+          <div class="summary"><p>Typical Server Response:     {       "symbol": "LTCBTC",       "price": "4.00000200"     }</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#from_json%28json%29-class-method" class="signature"><strong>.from_json</strong>(json)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#tickers%3AArray%28PriceEntry%29-instance-method" class="signature"><strong>#tickers</strong> : Array(PriceEntry)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tickers%3D%28tickers%3AArray%28PriceEntry%29%29-instance-method" class="signature"><strong>#tickers=</strong>(tickers : Array(PriceEntry))</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></code></h3>
+  
+  
+    <a href="../../Binance/Responses/ServerResponse.html#body-instance-method" class="tooltip">
+      <span>body</span>
+    body</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#error_code%3AInt32%3F-instance-method" class="tooltip">
+      <span>error_code : Int32?</span>
+    error_code</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#error_code%3D%28error_code%3AInt32%3F%29-instance-method" class="tooltip">
+      <span>error_code=(error_code : Int32?)</span>
+    error_code=</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#error_message%3AString%3F-instance-method" class="tooltip">
+      <span>error_message : String?</span>
+    error_message</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#error_message%3D%28error_message%3AString%3F%29-instance-method" class="tooltip">
+      <span>error_message=(error_message : String?)</span>
+    error_message=</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#exception%3AException%3F-instance-method" class="tooltip">
+      <span>exception : Exception?</span>
+    exception</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#exception%3D%28exception%3AException%3F%29-instance-method" class="tooltip">
+      <span>exception=(exception : Exception?)</span>
+    exception=</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#response%3ACossack%3A%3AResponse%3F-instance-method" class="tooltip">
+      <span>response : Cossack::Response?</span>
+    response</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#response%3D%28response%3ACossack%3A%3AResponse%3F%29-instance-method" class="tooltip">
+      <span>response=(response : Cossack::Response?)</span>
+    response=</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#success%3ABool-instance-method" class="tooltip">
+      <span>success : Bool</span>
+    success</a>, 
+    
+  
+    <a href="../../Binance/Responses/ServerResponse.html#success%3D%28success%3ABool%29-instance-method" class="tooltip">
+      <span>success=(success : Bool)</span>
+    success=</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></code></h3>
+  
+  
+    <a href="../../Binance/Responses/ServerResponse.html#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="tooltip">
+      <span>new(pull : JSON::PullParser)</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Typical Server Response:</p>
+
+<pre><code>{
+  <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;LTCBTC&quot;</span>,
+  <span class="s">&quot;price&quot;</span>: <span class="s">&quot;4.00000200&quot;</span>
+}</code></pre>
+
+<p>OR</p>
+
+<pre><code>[
+  {
+    <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;LTCBTC&quot;</span>,
+    <span class="s">&quot;price&quot;</span>: <span class="s">&quot;4.00000200&quot;</span>
+  },
+  {
+    <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;ETHBTC&quot;</span>,
+    <span class="s">&quot;price&quot;</span>: <span class="s">&quot;0.07946600&quot;</span>
+  }
+]</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/price_response.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="from_json(json)-class-method">
+      <div class="signature">
+        
+        def self.<strong>from_json</strong>(json)
+
+        <a class="method-permalink" href="#from_json%28json%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/price_response.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="tickers:Array(PriceEntry)-instance-method">
+      <div class="signature">
+        
+        def <strong>tickers</strong> : Array(<a href="../../Binance/Responses/PriceEntry.html">PriceEntry</a>)
+
+        <a class="method-permalink" href="#tickers%3AArray%28PriceEntry%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/price_response.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tickers=(tickers:Array(PriceEntry))-instance-method">
+      <div class="signature">
+        
+        def <strong>tickers=</strong>(tickers : Array(<a href="../../Binance/Responses/PriceEntry.html">PriceEntry</a>))
+
+        <a class="method-permalink" href="#tickers%3D%28tickers%3AArray%28PriceEntry%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7c129028d4af73196ac67c251aae830215754baa/src/binance/client/rest/responses/price_response.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

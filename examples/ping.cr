@@ -2,7 +2,7 @@ require "../src/binance"
 
 client = Binance::REST.new
 
-puts client.ping.inspect
+puts client.ping.pong.inspect
 
 # # <Binance::Responses::PingResponse:0x10d40c280 
 #   @success=true, 
