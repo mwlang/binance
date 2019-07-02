@@ -79,7 +79,6 @@ module Binance
           if response.status == 200
             {{response_klass}}.from_json(response.body).tap do |resp| 
               resp.response = response
-              resp.after_serialization
             end
           else
             {{response_klass}}.from_error(response)

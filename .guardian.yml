@@ -6,3 +6,6 @@ run: crystal spec
 ---
 files: ./shard.yml
 run: shards install
+---
+files: ./README.md
+run: crystal docs

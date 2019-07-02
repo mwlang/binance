@@ -40,10 +40,6 @@ module Binance::Responses
       @response.nil? ? "" : @response.as(Cossack::Response).body
     end
 
-    def after_serialization
-      # @success = @error_message.nil? && @error_code.nil?
-    end
-
     def self.from_error(response)
       self.new.tap do |r|
         r.success = false
