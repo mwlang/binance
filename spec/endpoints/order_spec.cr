@@ -18,15 +18,15 @@ describe Binance do
   # To get this VCR cassette passing:
   # * execute an order that fills against BNBUSDC
   # * **change** the bnbusdc_order_id of the spec to match!
-  bnbusdc_order_id = 178365611
-  it "#order(\"BNBUSDC\", order_id: #{bnbusdc_order_id})" do
+  order_id = 178365611
+  it "#order(\"BNBUSDT\", order_id: #{order_id})" do
     with_vcr_cassette "signed/order_bnbusdt_w_order_id" do
-      response = client.order("BNBUSDT", order_id: bnbusdc_order_id)
+      response = client.order("BNBUSDT", order_id: order_id)
       response.should be_a Binance::Responses::OrderResponse
       response.success.should eq true
       response.orders.size.should eq 1
       order = response.orders[0]
-      order.order_id.should eq bnbusdc_order_id
+      order.order_id.should eq order_id
       order.price.zero?.should eq false
       (order.original_quantity > 1.0).should eq true
       order.executed_quantity.should eq 0.0

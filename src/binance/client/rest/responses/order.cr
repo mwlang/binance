@@ -15,14 +15,14 @@ module Binance::Responses
   #       "type": "LIMIT",
   #       "side": "SELL"
   #     }
-  class OrderEntry
+  class Order
     include JSON::Serializable
 
     @[JSON::Field(key: "symbol")]
     getter symbol : String = ""
 
     @[JSON::Field(key: "orderId")]
-    getter order_id : Int32? = nil
+    getter order_id : Int32 = 0
 
     @[JSON::Field(key: "origClientOrderId")]
     getter orig_client_order_id : String = ""
@@ -31,7 +31,7 @@ module Binance::Responses
     getter client_order_id : String = ""
 
     @[JSON::Field(key: "transactTime", converter: Binance::Converters::ToTime)]
-    getter transact_time : Time = Time.now
+    getter transaction_time : Time = Time.now
 
     @[JSON::Field(key: "price", converter: Binance::Converters::ToFloat)]
     getter price : Float64 = 0.0
@@ -46,7 +46,7 @@ module Binance::Responses
     getter cummulative_quote_quantity : Float64 = 0.0
 
     @[JSON::Field(key: "status")]
-    getter status : String = ""
+    getter status : String = "NEW"
 
     @[JSON::Field(key: "timeInForce")]
     getter time_in_force : String = ""
@@ -60,6 +60,7 @@ module Binance::Responses
     @[JSON::Field(key: "stopPrice", converter: Binance::Converters::ToFloat)]
     getter stop_price : Float64 = 0.0
 
-
+    @[JSON::Field(key: "fills")]
+    getter fills : Array(OrderFill) = [] of Binance::Responses::OrderFill
   end
 end

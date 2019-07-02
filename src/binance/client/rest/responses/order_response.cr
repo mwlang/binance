@@ -18,15 +18,15 @@ module Binance::Responses
   #       }
   #     ]
   class OrderResponse < Responses::ServerResponse
-    property orders : Array(OrderEntry) = [] of OrderEntry
+    property orders : Array(Order) = [] of Order
 
     def self.from_json(json)
       pull = JSON::PullParser.new(json)
       OrderResponse.new.tap do |resp|
         if pull.kind == :begin_array
-          resp.orders = Array(OrderEntry).new(pull)
+          resp.orders = Array(Order).new(pull)
         else
-          resp.orders << OrderEntry.new(pull)
+          resp.orders << Order.new(pull)
         end
       end
     end

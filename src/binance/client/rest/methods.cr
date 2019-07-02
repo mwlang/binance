@@ -117,15 +117,70 @@ module Binance::Methods
     fetch :public, :klines, KlinesResponse, params
   end
 
+  # Get all account orders; active, canceled, or filled.
+  #
+  # Name        Type    Mandatory Description
+  # symbol      STRING  YES 
+  # orderId     LONG    NO  
+  # startTime   LONG    NO  
+  # endTime     LONG    NO  
+  # limit       INT     NO        Default 500; max 1000.
+  # recvWindow  LONG    NO  
+  # timestamp   LONG    YES 
+  #
+  # Notes:
+  # * If orderId is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+  # * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
+  def all_orders(
+      symbol : String,
+      order_id : Int32? = nil,
+      limit : Int32 = 500,
+      start_time : Time? = nil, 
+      end_time : Time? = nil
+    )
+    
+    params = HTTP::Params.new
+
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
+
+    oid = order_id
+    params["order_id"] = oid.to_s unless oid.nil?
+
+    ts = start_time
+    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
+    ts = end_time
+    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
+
+    fetch :signed, :all_orders, OrderResponse, params
+  end
+
+  # Check an order's status
+  # 
+  #   Name              Type    Mandatory Description
+  #   symbol            STRING  YES 
+  #   orderId           LONG    NO  
+  #   origClientOrderId STRING  NO  
+  #   recvWindow        LONG    NO  
+  #   timestamp         LONG    YES 
+  #
+  # * Either orderId or origClientOrderId must be sent.
+  # * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
+  #
   def order(
       symbol : String,
-      order_id : Int32? = nil
+      order_id : Int32? = nil,
+      original_client_order_id : String? = nil
     )
 
     params = HTTP::Params.new
     params["symbol"] = symbol.upcase
+
     oid = order_id
     params["orderId"] = oid.to_s unless oid.nil?
+
+    ocoid = original_client_order_id
+    params["origClientOrderId"] = ocoid unless ocoid.nil?
 
     fetch :signed, :order, OrderResponse, params
   end

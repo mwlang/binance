@@ -16,6 +16,15 @@ describe Binance do
       response.can_deposit.should eq true
       response.update_time.to_s.should eq "2019-07-01 21:38:08 UTC"
       response.account_type.should eq "MARGIN"
+    end
+  end
+  
+  it "#account.balances" do
+    with_vcr_cassette "signed/account" do
+      response = client.account
+      response.should be_a Binance::Responses::AccountResponse
+      response.success.should eq true
+
       response.balances.size.should eq 182
       balance = response.balances[0]
       balance.asset.should eq "BTC"
