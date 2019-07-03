@@ -303,7 +303,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L1" target="_blank">
+      <a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L1" target="_blank">
         binance/client/rest/endpoints.cr
       </a>
     
@@ -318,7 +318,7 @@
   <dl>
     
       <dt class="entry-const" id="ENDPOINTS">
-        <strong>ENDPOINTS</strong> = <code>{ping: <span class="s">&quot;v1/ping&quot;</span>, time: <span class="s">&quot;v1/time&quot;</span>, exchange_info: <span class="s">&quot;v1/exchangeInfo&quot;</span>, depth: <span class="s">&quot;v1/depth&quot;</span>, trades: <span class="s">&quot;v1/trades&quot;</span>, historical_trades: <span class="s">&quot;v1/historicalTrades&quot;</span>, agg_trades: <span class="s">&quot;v1/aggTrades&quot;</span>, klines: <span class="s">&quot;v1/klines&quot;</span>, twenty_four_hour: <span class="s">&quot;v1/ticker/24hr&quot;</span>, price: <span class="s">&quot;v3/ticker/price&quot;</span>, avg_price: <span class="s">&quot;v3/avgPrice&quot;</span>, book_ticker: <span class="s">&quot;v3/ticker/bookTicker&quot;</span>, order: <span class="s">&quot;v3/order&quot;</span>, test_order: <span class="s">&quot;v3/order/test&quot;</span>, open_orders: <span class="s">&quot;v3/openOrders&quot;</span>, all_orders: <span class="s">&quot;v3/allOrders&quot;</span>, account: <span class="s">&quot;v3/account&quot;</span>, my_trades: <span class="s">&quot;v3/myTrades&quot;</span>, user_data_stream: <span class="s">&quot;v1/userDataStream&quot;</span>, withdraw: <span class="s">&quot;v3/withdraw.html&quot;</span>, deposit_history: <span class="s">&quot;v3/depositHistory.html&quot;</span>, withdraw_history: <span class="s">&quot;v3/withdrawHistory.html&quot;</span>, deposit_address: <span class="s">&quot;v3/depositAddress.html&quot;</span>, account_status: <span class="s">&quot;v3/accountStatus.html&quot;</span>, system_status: <span class="s">&quot;v3/systemStatus.html&quot;</span>, withdraw_fee: <span class="s">&quot;v3/withdrawFee.html&quot;</span>, dust_log: <span class="s">&quot;v3/userAssetDribbletLog.html&quot;</span>}</code>
+        <strong>ENDPOINTS</strong> = <code>{ping: <span class="s">&quot;v1/ping&quot;</span>, time: <span class="s">&quot;v1/time&quot;</span>, exchange_info: <span class="s">&quot;v1/exchangeInfo&quot;</span>, depth: <span class="s">&quot;v1/depth&quot;</span>, trades: <span class="s">&quot;v1/trades&quot;</span>, historical_trades: <span class="s">&quot;v1/historicalTrades&quot;</span>, agg_trades: <span class="s">&quot;v1/aggTrades&quot;</span>, klines: <span class="s">&quot;v1/klines&quot;</span>, twenty_four_hour: <span class="s">&quot;v1/ticker/24hr&quot;</span>, price: <span class="s">&quot;v3/ticker/price&quot;</span>, avg_price: <span class="s">&quot;v3/avgPrice&quot;</span>, book_ticker: <span class="s">&quot;v3/ticker/bookTicker&quot;</span>, new_order: <span class="s">&quot;v3/order&quot;</span>, get_order: <span class="s">&quot;v3/order&quot;</span>, cancel_order: <span class="s">&quot;v3/order&quot;</span>, new_test_order: <span class="s">&quot;v3/order/test&quot;</span>, open_orders: <span class="s">&quot;v3/openOrders&quot;</span>, all_orders: <span class="s">&quot;v3/allOrders&quot;</span>, account: <span class="s">&quot;v3/account&quot;</span>, my_trades: <span class="s">&quot;v3/myTrades&quot;</span>, user_data_stream: <span class="s">&quot;v1/userDataStream&quot;</span>, withdraw: <span class="s">&quot;v3/withdraw.html&quot;</span>, deposit_history: <span class="s">&quot;v3/depositHistory.html&quot;</span>, withdraw_history: <span class="s">&quot;v3/withdrawHistory.html&quot;</span>, deposit_address: <span class="s">&quot;v3/depositAddress.html&quot;</span>, account_status: <span class="s">&quot;v3/accountStatus.html&quot;</span>, system_status: <span class="s">&quot;v3/systemStatus.html&quot;</span>, withdraw_fee: <span class="s">&quot;v3/withdrawFee.html&quot;</span>, dust_log: <span class="s">&quot;v3/userAssetDribbletLog.html&quot;</span>}</code>
       </dt>
       
     
@@ -363,12 +363,26 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#cancel_order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#cancel_order</strong>(symbol : String, order_id : Int32? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Cancel an active order</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#depth%28symbol%3AString%2Climit%3AInt32%3D5%29-instance-method" class="signature"><strong>#depth</strong>(symbol : String, limit : Int32 = <span class="n">5</span>)</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#exchange_info-instance-method" class="signature"><strong>#exchange_info</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#get_order</strong>(symbol : String, order_id : Int32? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Check an order's status</p></div>
         
       </li>
     
@@ -385,9 +399,21 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="signature"><strong>#my_trades</strong>(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32 = <span class="n">0</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</a>
+        <a href="#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3F%3Dnil%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="signature"><strong>#my_trades</strong>(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32? = <span class="n">nil</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</a>
         
           <div class="summary"><p>Get trades for a specific account and symbol.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new_order%28symbol%3AString%2Cside%3AString%2Corder_type%3AString%2Cquantity%3AFloat64%2Ctime_in_force%3AString%3F%3Dnil%2Cprice%3AFloat64%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%2Cstop_price%3AFloat64%3F%3Dnil%2Ciceberg_quantity%3AFloat64%3F%3Dnil%2Cresponse_type%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#new_order</strong>(symbol : String, side : String, order_type : String, quantity : Float64, time_in_force : String? = <span class="n">nil</span>, price : Float64? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>, stop_price : Float64? = <span class="n">nil</span>, iceberg_quantity : Float64? = <span class="n">nil</span>, response_type : String? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Send in a new order.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new_test_order%28symbol%3AString%2Cside%3AString%2Corder_type%3AString%2Cquantity%3AFloat64%2Ctime_in_force%3AString%3F%3Dnil%2Cprice%3AFloat64%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%2Cstop_price%3AFloat64%3F%3Dnil%2Ciceberg_quantity%3AFloat64%3F%3Dnil%2Cresponse_type%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#new_test_order</strong>(symbol : String, side : String, order_type : String, quantity : Float64, time_in_force : String? = <span class="n">nil</span>, price : Float64? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>, stop_price : Float64? = <span class="n">nil</span>, iceberg_quantity : Float64? = <span class="n">nil</span>, response_type : String? = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -397,9 +423,22 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Coriginal_client_order_id%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#order</strong>(symbol : String, order_id : Int32? = <span class="n">nil</span>, original_client_order_id : String? = <span class="n">nil</span>)</a>
+        <a href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3ATime%29-instance-method" class="signature"><strong>#optional_param</strong>(params : HTTP::Params, key : String, value : Time)</a>
         
-          <div class="summary"><p>Check an order's status</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3AFloat64%7CInt32%29-instance-method" class="signature"><strong>#optional_param</strong>(params : HTTP::Params, key : String, value : Float64 | Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3AString%29-instance-method" class="signature"><strong>#optional_param</strong>(params : HTTP::Params, key : String, value : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3ANil%29-instance-method" class="signature"><strong>#optional_param</strong>(params : HTTP::Params, key : String, value : Nil)</a>
         
       </li>
     
@@ -410,6 +449,11 @@
     
       <li class="entry-summary">
         <a href="#price%28symbol%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#price</strong>(symbol : String? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#symbol_param%28params%3AHTTP%3A%3AParams%2Cvalue%3AString%3F%29-instance-method" class="signature"><strong>#symbol_param</strong>(params : HTTP::Params, value : String?)</a>
         
       </li>
     
@@ -476,7 +520,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L260" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L394" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -502,7 +546,7 @@ limit      | INT    | NO         | Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L134" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L155" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -533,7 +577,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L199" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L218" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -549,7 +593,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L85" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L109" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -565,7 +609,34 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L108" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L130" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cancel_order(symbol:String,order_id:Int32?=nil,client_order_id:String?=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>cancel_order</strong>(symbol : String, order_id : Int32? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#cancel_order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Cancel an active order</p>
+
+<p>Name              Type    Mandatory Description
+  symbol            STRING  YES 
+  orderId           LONG    NO  
+  origClientOrderId STRING  NO  
+  recvWindow        LONG    NO  
+  timestamp         LONG    YES </p>
+
+<ul><li>Either orderId or origClientOrderId must be sent.</li></ul></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L372" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -581,7 +652,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L69" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -597,7 +668,34 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L65" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L89" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_order(symbol:String,order_id:Int32?=nil,client_order_id:String?=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>get_order</strong>(symbol : String, order_id : Int32? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#get_order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Check an order's status</p>
+
+<p>Name              Type    Mandatory Description
+  symbol            STRING  YES 
+  orderId           LONG    NO  
+  origClientOrderId STRING  NO  
+  recvWindow        LONG    NO  
+  timestamp         LONG    YES </p>
+
+<ul><li>Either orderId or origClientOrderId must be sent.</li><li>For some historical orders cummulativeQuoteQty will be &lt; 0, meaning the data is not available at this time.</li></ul></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L346" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -613,7 +711,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L116" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L137" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -638,17 +736,17 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L163" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L184" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="my_trades(symbol:String,limit:Int32=500,from_id:Int32=0,start_time:Time?=nil,end_time:Time?=nil)-instance-method">
+    <div class="entry-detail" id="my_trades(symbol:String,limit:Int32=500,from_id:Int32?=nil,start_time:Time?=nil,end_time:Time?=nil)-instance-method">
       <div class="signature">
         
-        def <strong>my_trades</strong>(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32 = <span class="n">0</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)
+        def <strong>my_trades</strong>(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32? = <span class="n">nil</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method">#</a>
+        <a class="method-permalink" href="#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3F%3Dnil%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Get trades for a specific account and symbol.</p>
@@ -668,7 +766,55 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L278" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L412" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new_order(symbol:String,side:String,order_type:String,quantity:Float64,time_in_force:String?=nil,price:Float64?=nil,client_order_id:String?=nil,stop_price:Float64?=nil,iceberg_quantity:Float64?=nil,response_type:String?=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>new_order</strong>(symbol : String, side : String, order_type : String, quantity : Float64, time_in_force : String? = <span class="n">nil</span>, price : Float64? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>, stop_price : Float64? = <span class="n">nil</span>, iceberg_quantity : Float64? = <span class="n">nil</span>, response_type : String? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new_order%28symbol%3AString%2Cside%3AString%2Corder_type%3AString%2Cquantity%3AFloat64%2Ctime_in_force%3AString%3F%3Dnil%2Cprice%3AFloat64%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%2Cstop_price%3AFloat64%3F%3Dnil%2Ciceberg_quantity%3AFloat64%3F%3Dnil%2Cresponse_type%3AString%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Send in a new order.</p>
+
+<p>Parameters:</p>
+
+<ul><li>Name              Type    Mandatory Description</li><li>symbol            STRING  YES </li><li>side              ENUM    YES </li><li>type              ENUM    YES </li><li>timeInForce       ENUM    NO  </li><li>quantity          DECIMAL YES </li><li>price             DECIMAL NO  </li><li>newClientOrderId  STRING  NO  A unique id for the order. Automatically generated if not sent.</li><li>stopPrice         DECIMAL NO  Used with STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, and TAKE_PROFIT_LIMIT orders.</li><li>icebergQty        DECIMAL NO  Used with LIMIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT to create an iceberg order.</li><li>newOrderRespType  ENUM    NO  Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.</li><li>recvWindow        LONG    NO  </li><li>timestamp         LONG    YES </li></ul>
+
+<p>Additional mandatory parameters based on type:</p>
+
+<ul><li>Type  Additional mandatory parameters</li><li>LIMIT timeInForce, quantity, price</li><li>MARKET  quantity</li><li>STOP_LOSS quantity, stopPrice</li><li>STOP_LOSS_LIMIT timeInForce, quantity, price, stopPrice</li><li>TAKE_PROFIT quantity, stopPrice</li><li>TAKE_PROFIT_LIMIT timeInForce, quantity, price, stopPrice</li><li>LIMIT_MAKER quantity, price</li></ul>
+
+<p>Other info:</p>
+
+<ul><li>LIMIT_MAKER are LIMIT orders that will be rejected if they would immediately match and trade as a taker.</li><li>STOP_LOSS and TAKE_PROFIT will execute a MARKET order when the stopPrice is reached.</li><li>Any LIMIT or LIMIT_MAKER type order can be made an iceberg order by sending an icebergQty.</li><li>Any order with an icebergQty MUST have timeInForce set to GTC.</li><li>Trigger order price rules against market price for both MARKET and LIMIT versions:</li></ul>
+
+<ul><li>Price above market price: STOP_LOSS BUY, TAKE_PROFIT SELL</li><li>Price below market price: STOP_LOSS SELL, TAKE_PROFIT BUY</li></ul></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L278" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new_test_order(symbol:String,side:String,order_type:String,quantity:Float64,time_in_force:String?=nil,price:Float64?=nil,client_order_id:String?=nil,stop_price:Float64?=nil,iceberg_quantity:Float64?=nil,response_type:String?=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>new_test_order</strong>(symbol : String, side : String, order_type : String, quantity : Float64, time_in_force : String? = <span class="n">nil</span>, price : Float64? = <span class="n">nil</span>, client_order_id : String? = <span class="n">nil</span>, stop_price : Float64? = <span class="n">nil</span>, iceberg_quantity : Float64? = <span class="n">nil</span>, response_type : String? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new_test_order%28symbol%3AString%2Cside%3AString%2Corder_type%3AString%2Cquantity%3AFloat64%2Ctime_in_force%3AString%3F%3Dnil%2Cprice%3AFloat64%3F%3Dnil%2Cclient_order_id%3AString%3F%3Dnil%2Cstop_price%3AFloat64%3F%3Dnil%2Ciceberg_quantity%3AFloat64%3F%3Dnil%2Cresponse_type%3AString%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L306" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -684,34 +830,71 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L253" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L387" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="order(symbol:String,order_id:Int32?=nil,original_client_order_id:String?=nil)-instance-method">
+    <div class="entry-detail" id="optional_param(params:HTTP::Params,key:String,value:Time)-instance-method">
       <div class="signature">
         
-        def <strong>order</strong>(symbol : String, order_id : Int32? = <span class="n">nil</span>, original_client_order_id : String? = <span class="n">nil</span>)
+        def <strong>optional_param</strong>(params : HTTP::Params, key : String, value : Time)
 
-        <a class="method-permalink" href="#order%28symbol%3AString%2Corder_id%3AInt32%3F%3Dnil%2Coriginal_client_order_id%3AString%3F%3Dnil%29-instance-method">#</a>
+        <a class="method-permalink" href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3ATime%29-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>Check an order's status</p>
-
-<p>Name              Type    Mandatory Description
-  symbol            STRING  YES 
-  orderId           LONG    NO  
-  origClientOrderId STRING  NO  
-  recvWindow        LONG    NO  
-  timestamp         LONG    YES </p>
-
-<ul><li>Either orderId or origClientOrderId must be sent.</li><li>For some historical orders cummulativeQuoteQty will be &lt; 0, meaning the data is not available at this time.</li></ul></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L235" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="optional_param(params:HTTP::Params,key:String,value:Float64|Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>optional_param</strong>(params : HTTP::Params, key : String, value : Float64 | Int32)
+
+        <a class="method-permalink" href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3AFloat64%7CInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="optional_param(params:HTTP::Params,key:String,value:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>optional_param</strong>(params : HTTP::Params, key : String, value : String)
+
+        <a class="method-permalink" href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="optional_param(params:HTTP::Params,key:String,value:Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>optional_param</strong>(params : HTTP::Params, key : String, value : Nil)
+
+        <a class="method-permalink" href="#optional_param%28params%3AHTTP%3A%3AParams%2Ckey%3AString%2Cvalue%3ANil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -727,7 +910,7 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L57" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -743,7 +926,23 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L123" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="symbol_param(params:HTTP::Params,value:String?)-instance-method">
+      <div class="signature">
+        
+        def <strong>symbol_param</strong>(params : HTTP::Params, value : String?)
+
+        <a class="method-permalink" href="#symbol_param%28params%3AHTTP%3A%3AParams%2Cvalue%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -759,7 +958,7 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L85" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -775,7 +974,7 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -791,7 +990,7 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L92" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L116" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -812,7 +1011,7 @@ Notes:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/618b04de394c96354a2f3c07420ca4fd02e00223/src/binance/client/rest/endpoints.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>

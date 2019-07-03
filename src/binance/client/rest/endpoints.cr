@@ -1,6 +1,28 @@
 module Binance::Endpoints
   include Binance::Responses
 
+  def symbol_param(params : HTTP::Params, value : String | Nil)
+    if (v = value) && !v.nil?
+      params["symbol"] = v.upcase
+    end
+  end
+
+  def optional_param(params : HTTP::Params, key : String, value : Nil)
+    # NOP
+  end
+
+  def optional_param(params : HTTP::Params, key : String, value : String)
+    params[key] = value
+  end
+
+  def optional_param(params : HTTP::Params, key : String, value : Float64 | Int32)
+    params[key] = value.to_s
+  end
+
+  def optional_param(params : HTTP::Params, key : String, value : Time)
+    params[key] = value.to_unix_ms.to_s
+  end
+
   macro fetch(action, client, endpoint, response_klass, params = HTTP::Params.new)
     begin
       if response = {{client.id}}_{{action.id}}(Binance::Endpoints::ENDPOINTS[{{endpoint}}], {{params}})
@@ -35,8 +57,10 @@ module Binance::Endpoints
     book_ticker:       "v3/ticker/bookTicker",
 
     # Account API Endpoints
-    order:            "v3/order",
-    test_order:       "v3/order/test",
+    new_order:        "v3/order",
+    get_order:        "v3/order",
+    cancel_order:     "v3/order",
+    new_test_order:   "v3/order/test",
     open_orders:      "v3/openOrders",
     all_orders:       "v3/allOrders",
     account:          "v3/account",
@@ -68,7 +92,7 @@ module Binance::Endpoints
 
   def depth(symbol : String, limit : Int32 = 5)
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
 
     fetch :get, :public, :depth, DepthResponse, params
@@ -76,7 +100,7 @@ module Binance::Endpoints
 
   def trades(symbol : String, limit : Int32 = 500)
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
 
     fetch :get, :public, :trades, TradesResponse, params
@@ -84,38 +108,35 @@ module Binance::Endpoints
 
   def avg_price(symbol : String)
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
 
     fetch :get, :public, :avg_price, AvgPriceResponse, params
   end
 
   def twenty_four_hour(symbol : String? = nil)
     params = HTTP::Params.new
-    symb = symbol
-    params["symbol"] = symb.upcase unless (symb).nil?
+    symbol_param params, symbol
 
     fetch :get, :public, :twenty_four_hour, TwentyFourHourResponse, params
   end
 
   def price(symbol : String? = nil)
     params = HTTP::Params.new
-    symb = symbol
-    params["symbol"] = symb.upcase unless (symb).nil?
+    symbol_param params, symbol
 
     fetch :get, :public, :price, PriceResponse, params
   end
 
   def book_ticker(symbol : String? = nil)
     params = HTTP::Params.new
-    symb = symbol
-    params["symbol"] = symb.upcase unless (symb).nil?
+    symbol_param params, symbol
 
     fetch :get, :public, :book_ticker, BookTickerResponse, params
   end
 
   def historical_trades(symbol : String, limit : Int32 = 500)
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
 
     fetch :get, :verified, :historical_trades, TradesResponse, params
@@ -140,7 +161,7 @@ module Binance::Endpoints
     )
 
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
 
     params["fromId"] = from_id.to_s unless from_id.zero?
@@ -170,14 +191,12 @@ module Binance::Endpoints
     
     params = HTTP::Params.new
 
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
     params["interval"] = interval
 
-    ts = start_time
-    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
-    ts = end_time
-    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
+    optional_param params, "startTime", start_time
+    optional_param params, "endTime", end_time
 
     fetch :get, :public, :klines, KlinesResponse, params
   end
@@ -206,18 +225,110 @@ module Binance::Endpoints
     
     params = HTTP::Params.new
 
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
 
-    oid = order_id
-    params["order_id"] = oid.to_s unless oid.nil?
-
-    ts = start_time
-    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
-    ts = end_time
-    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
+    optional_param params, "orderId", order_id
+    optional_param params, "startTime", start_time
+    optional_param params, "endTime", end_time
 
     fetch :get, :signed, :all_orders, OrderResponse, params
+  end
+
+  # Send in a new order.
+  #
+  # Parameters:
+  #
+  # * Name              Type    Mandatory Description
+  # * symbol            STRING  YES 
+  # * side              ENUM    YES 
+  # * type              ENUM    YES 
+  # * timeInForce       ENUM    NO  
+  # * quantity          DECIMAL YES 
+  # * price             DECIMAL NO  
+  # * newClientOrderId  STRING  NO  A unique id for the order. Automatically generated if not sent.
+  # * stopPrice         DECIMAL NO  Used with STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, and TAKE_PROFIT_LIMIT orders.
+  # * icebergQty        DECIMAL NO  Used with LIMIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT to create an iceberg order.
+  # * newOrderRespType  ENUM    NO  Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+  # * recvWindow        LONG    NO  
+  # * timestamp         LONG    YES 
+  #
+  # Additional mandatory parameters based on type:
+  #
+  # * Type  Additional mandatory parameters
+  # * LIMIT timeInForce, quantity, price
+  # * MARKET  quantity
+  # * STOP_LOSS quantity, stopPrice
+  # * STOP_LOSS_LIMIT timeInForce, quantity, price, stopPrice
+  # * TAKE_PROFIT quantity, stopPrice
+  # * TAKE_PROFIT_LIMIT timeInForce, quantity, price, stopPrice
+  # * LIMIT_MAKER quantity, price
+  #
+  # Other info:
+  #
+  # * LIMIT_MAKER are LIMIT orders that will be rejected if they would immediately match and trade as a taker.
+  # * STOP_LOSS and TAKE_PROFIT will execute a MARKET order when the stopPrice is reached.
+  # * Any LIMIT or LIMIT_MAKER type order can be made an iceberg order by sending an icebergQty.
+  # * Any order with an icebergQty MUST have timeInForce set to GTC.
+  # * Trigger order price rules against market price for both MARKET and LIMIT versions:
+  #
+  # * Price above market price: STOP_LOSS BUY, TAKE_PROFIT SELL
+  # * Price below market price: STOP_LOSS SELL, TAKE_PROFIT BUY
+  #
+  def new_order(
+      symbol : String,
+      side : String,
+      order_type : String,
+      quantity : Float64,
+      time_in_force : String? = nil,
+      price : Float64? = nil,
+      client_order_id : String? = nil,
+      stop_price : Float64? = nil,
+      iceberg_quantity : Float64? = nil,
+      response_type : String? = nil
+    )
+
+    params = HTTP::Params.new
+    symbol_param params, symbol
+    params["side"] = side.upcase
+    params["type"] = order_type.upcase
+    params["quantity"] = quantity.to_s
+    optional_param params, "timeInForce", time_in_force
+    optional_param params, "price", price
+    optional_param params, "newClientOrderId", client_order_id
+    optional_param params, "stopPrice", stop_price
+    optional_param params, "icebergQty", iceberg_quantity
+    optional_param params, "newOrderRespType", response_type
+
+    fetch :post, :signed, :new_order, OrderResponse, params
+  end
+
+  def new_test_order(
+      symbol : String,
+      side : String,
+      order_type : String,
+      quantity : Float64,
+      time_in_force : String? = nil,
+      price : Float64? = nil,
+      client_order_id : String? = nil,
+      stop_price : Float64? = nil,
+      iceberg_quantity : Float64? = nil,
+      response_type : String? = nil
+    )
+
+    params = HTTP::Params.new
+    symbol_param params, symbol
+    params["side"] = side.upcase
+    params["type"] = order_type.upcase
+    params["quantity"] = quantity.to_s
+    optional_param params, "timeInForce", time_in_force
+    optional_param params, "price", price
+    optional_param params, "newClientOrderId", client_order_id
+    optional_param params, "stopPrice", stop_price
+    optional_param params, "icebergQty", iceberg_quantity
+    optional_param params, "newOrderRespType", response_type
+
+    fetch :post, :signed, :new_test_order, OrderResponse, params
   end
 
   # Check an order's status
@@ -232,27 +343,50 @@ module Binance::Endpoints
   # * Either orderId or origClientOrderId must be sent.
   # * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
   #
-  def order(
+  def get_order(
       symbol : String,
       order_id : Int32? = nil,
-      original_client_order_id : String? = nil
+      client_order_id : String? = nil
     )
 
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
 
-    oid = order_id
-    params["orderId"] = oid.to_s unless oid.nil?
+    optional_param params, "orderId", order_id
+    optional_param params, "origClientOrderId", client_order_id
 
-    ocoid = original_client_order_id
-    params["origClientOrderId"] = ocoid unless ocoid.nil?
+    fetch :get, :signed, :get_order, OrderResponse, params
+  end
 
-    fetch :get, :signed, :order, OrderResponse, params
+  # Cancel an active order
+  # 
+  #   Name              Type    Mandatory Description
+  #   symbol            STRING  YES 
+  #   orderId           LONG    NO  
+  #   origClientOrderId STRING  NO  
+  #   recvWindow        LONG    NO  
+  #   timestamp         LONG    YES 
+  #
+  # * Either orderId or origClientOrderId must be sent.
+  #
+  def cancel_order(
+      symbol : String,
+      order_id : Int32? = nil,
+      client_order_id : String? = nil
+    )
+
+    params = HTTP::Params.new
+    symbol_param params, symbol
+
+    optional_param params, "orderId", order_id
+    optional_param params, "origClientOrderId", client_order_id
+
+    fetch :delete, :signed, :cancel_order, OrderResponse, params
   end
 
   def open_orders(symbol : String)
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
 
     fetch :get, :signed, :open_orders, OrderResponse, params
   end
@@ -278,20 +412,18 @@ module Binance::Endpoints
   def my_trades(
       symbol : String,           # The market symbol to query
       limit : Int32 = 500,       # Number of entries to return. Default 500; max 1000.
-      from_id : Int32 = 0,       # TradeId to fetch from. Default gets most recent trades.
+      from_id : Int32? = nil,    # TradeId to fetch from. Default gets most recent trades.
       start_time : Time? = nil,  # Timestamp in ms to get aggregate trades from INCLUSIVE.
       end_time : Time? = nil     # Timestamp in ms to get aggregate trades until INCLUSIVE.
     )
 
     params = HTTP::Params.new
-    params["symbol"] = symbol.upcase
+    symbol_param params, symbol
     params["limit"] = limit.to_s
 
-    params["fromId"] = from_id.to_s unless from_id.zero?
-    ts = start_time
-    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
-    ts = end_time
-    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
+    optional_param params, "fromId", from_id
+    optional_param params, "startTime", start_time
+    optional_param params, "endTime", end_time
 
     fetch :get, :signed, :my_trades, MyTradesResponse, params
   end
