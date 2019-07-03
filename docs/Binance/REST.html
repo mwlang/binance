@@ -51,6 +51,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/mwlang/binance/Binance/HttpMethods" data-name="binance::httpmethods">
+      <a href="../Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
       <a href="../Binance/Responses.html">Responses</a>
       
@@ -151,6 +156,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradeEntry" data-name="binance::responses::mytradeentry">
+      <a href="../Binance/Responses/MyTradeEntry.html">MyTradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradesResponse" data-name="binance::responses::mytradesresponse">
+      <a href="../Binance/Responses/MyTradesResponse.html">MyTradesResponse</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Order" data-name="binance::responses::order">
       <a href="../Binance/Responses/Order.html">Order</a>
       
@@ -241,11 +256,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mwlang/binance/TimestampRequestMiddleware" data-name="timestamprequestmiddleware">
-      <a href="../TimestampRequestMiddleware.html">TimestampRequestMiddleware</a>
-      
-    </li>
-  
 </ul>
 
   </div>
@@ -274,6 +284,8 @@
   
     <li class="other-type"><a href="../Binance/Endpoints.html">Binance::Endpoints</a></li>
   
+    <li class="other-type"><a href="../Binance/HttpMethods.html">Binance::HttpMethods</a></li>
+  
   </ul>
 
 
@@ -288,7 +300,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L9" target="_blank">
+      <a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L6" target="_blank">
         binance/client/rest.cr
       </a>
     
@@ -296,18 +308,6 @@
   
 
 
-
-  
-    <h2>Constant Summary</h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="BASE_URL">
-        <strong>BASE_URL</strong> = <code><span class="s">&quot;https://api.binance.com/api&quot;</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
 
@@ -344,16 +344,6 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#public_fetch%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="signature"><strong>#public_fetch</strong>(url, params : HTTP::Params)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#public_fetch%28url%2Cparams%3ANamedTuple%29-instance-method" class="signature"><strong>#public_fetch</strong>(url, params : NamedTuple)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#secret_key%3AString-instance-method" class="signature"><strong>#secret_key</strong> : String</a>
         
       </li>
@@ -363,53 +353,92 @@
         
       </li>
     
-      <li class="entry-summary">
-        <a href="#signed_fetch%28url%2Cparams%3ANamedTuple%29-instance-method" class="signature"><strong>#signed_fetch</strong>(url, params : NamedTuple)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#signed_fetch%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="signature"><strong>#signed_fetch</strong>(url, params : HTTP::Params)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#to_query%28params%29-instance-method" class="signature"><strong>#to_query</strong>(params)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#verified_fetch%28url%2Cparams%3ANamedTuple%29-instance-method" class="signature"><strong>#verified_fetch</strong>(url, params : NamedTuple)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#verified_fetch%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="signature"><strong>#verified_fetch</strong>(url, params : HTTP::Params)</a>
-        
-      </li>
-    
   </ul>
 
 
-
-  <h2>Macro Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#fetch%28client%2Cendpoint%2Cresponse_klass%2Cargs%29-macro" class="signature"><strong>fetch</strong>(client, endpoint, response_klass, args)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#fetch%28client%2Cendpoint%2Cresponse_klass%29-macro" class="signature"><strong>fetch</strong>(client, endpoint, response_klass)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
 <div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Binance/HttpMethods.html">Binance::HttpMethods</a></code></h3>
+  
+  
+    <a href="../Binance/HttpMethods.html#http_delete%28connection%2Curl%2Cparams%29-instance-method" class="tooltip">
+      <span>http_delete(connection, url, params)</span>
+    http_delete</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#http_get%28connection%2Curl%2Cparams%29-instance-method" class="tooltip">
+      <span>http_get(connection, url, params)</span>
+    http_get</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#http_post%28connection%2Curl%2Cparams%29-instance-method" class="tooltip">
+      <span>http_post(connection, url, params)</span>
+    http_post</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#public_delete%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>public_delete(url, params : HTTP::Params)</span>
+    public_delete</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#public_get%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>public_get(url, params : HTTP::Params)</span>
+    public_get</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#public_post%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>public_post(url, params : HTTP::Params)</span>
+    public_post</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#signed_delete%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>signed_delete(url, params : HTTP::Params)</span>
+    signed_delete</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#signed_get%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>signed_get(url, params : HTTP::Params)</span>
+    signed_get</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#signed_post%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>signed_post(url, params : HTTP::Params)</span>
+    signed_post</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#to_query%28params%29-instance-method" class="tooltip">
+      <span>to_query(params)</span>
+    to_query</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#verified_delete%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>verified_delete(url, params : HTTP::Params)</span>
+    verified_delete</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#verified_get%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>verified_get(url, params : HTTP::Params)</span>
+    verified_get</a>, 
+    
+  
+    <a href="../Binance/HttpMethods.html#verified_post%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method" class="tooltip">
+      <span>verified_post(url, params : HTTP::Params)</span>
+    verified_post</a>
+    
+  
+
+
+    
+
+
+    
+
+
   
     
 
@@ -459,6 +488,11 @@
     <a href="../Binance/Endpoints.html#klines%28symbol%3AString%2Cinterval%3AString%2Climit%3AInt32%3D500%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
       <span>klines(symbol : String, interval : String, limit : Int32 = <span class="n">500</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</span>
     klines</a>, 
+    
+  
+    <a href="../Binance/Endpoints.html#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="tooltip">
+      <span>my_trades(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32 = <span class="n">0</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</span>
+    my_trades</a>, 
     
   
     <a href="../Binance/Endpoints.html#open_orders%28symbol%3AString%29-instance-method" class="tooltip">
@@ -551,7 +585,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L99" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -574,7 +608,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L98" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -590,7 +624,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L102" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -606,39 +640,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L70" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="public_fetch(url,params:HTTP::Params)-instance-method">
-      <div class="signature">
-        
-        def <strong>public_fetch</strong>(url, params : HTTP::Params)
-
-        <a class="method-permalink" href="#public_fetch%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L18" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="public_fetch(url,params:NamedTuple)-instance-method">
-      <div class="signature">
-        
-        def <strong>public_fetch</strong>(url, params : NamedTuple)
-
-        <a class="method-permalink" href="#public_fetch%28url%2Cparams%3ANamedTuple%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -654,7 +656,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L99" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -670,128 +672,13 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L103" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="signed_fetch(url,params:NamedTuple)-instance-method">
-      <div class="signature">
-        
-        def <strong>signed_fetch</strong>(url, params : NamedTuple)
-
-        <a class="method-permalink" href="#signed_fetch%28url%2Cparams%3ANamedTuple%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L50" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="signed_fetch(url,params:HTTP::Params)-instance-method">
-      <div class="signature">
-        
-        def <strong>signed_fetch</strong>(url, params : HTTP::Params)
-
-        <a class="method-permalink" href="#signed_fetch%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L56" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_query(params)-instance-method">
-      <div class="signature">
-        
-        def <strong>to_query</strong>(params)
-
-        <a class="method-permalink" href="#to_query%28params%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L14" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="verified_fetch(url,params:NamedTuple)-instance-method">
-      <div class="signature">
-        
-        def <strong>verified_fetch</strong>(url, params : NamedTuple)
-
-        <a class="method-permalink" href="#verified_fetch%28url%2Cparams%3ANamedTuple%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L33" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="verified_fetch(url,params:HTTP::Params)-instance-method">
-      <div class="signature">
-        
-        def <strong>verified_fetch</strong>(url, params : HTTP::Params)
-
-        <a class="method-permalink" href="#verified_fetch%28url%2Cparams%3AHTTP%3A%3AParams%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
-
-  <h2>Macro Detail</h2>
-  
-    <div class="entry-detail" id="fetch(client,endpoint,response_klass,args)-macro">
-      <div class="signature">
-        
-        macro <strong>fetch</strong>(client, endpoint, response_klass, args)
-
-        <a class="method-permalink" href="#fetch%28client%2Cendpoint%2Cresponse_klass%2Cargs%29-macro">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L74" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="fetch(client,endpoint,response_klass)-macro">
-      <div class="signature">
-        
-        macro <strong>fetch</strong>(client, endpoint, response_klass)
-
-        <a class="method-permalink" href="#fetch%28client%2Cendpoint%2Cresponse_klass%29-macro">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest.cr#L92" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 </div>

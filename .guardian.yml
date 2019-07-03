@@ -1,8 +1,8 @@
 files: ./spec/**/*.cr
-run: crystal spec %file% --error-trace
+run: crystal spec %file% --error-trace -d
 ---
 files: ./src/**/*.cr
-run: crystal spec
+run: crystal spec --error-trace -d
 ---
 files: ./shard.yml
 run: shards install

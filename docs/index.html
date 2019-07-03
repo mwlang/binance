@@ -51,6 +51,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/mwlang/binance/Binance/HttpMethods" data-name="binance::httpmethods">
+      <a href="Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
       <a href="Binance/Responses.html">Responses</a>
       
@@ -151,6 +156,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradeEntry" data-name="binance::responses::mytradeentry">
+      <a href="Binance/Responses/MyTradeEntry.html">MyTradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradesResponse" data-name="binance::responses::mytradesresponse">
+      <a href="Binance/Responses/MyTradesResponse.html">MyTradesResponse</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Order" data-name="binance::responses::order">
       <a href="Binance/Responses/Order.html">Order</a>
       
@@ -241,11 +256,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mwlang/binance/TimestampRequestMiddleware" data-name="timestamprequestmiddleware">
-      <a href="TimestampRequestMiddleware.html">TimestampRequestMiddleware</a>
-      
-    </li>
-  
 </ul>
 
   </div>
@@ -256,6 +266,8 @@
 <h1>Binance</h1>
 
 <p>This is an unofficial Crystal wrapper for the Binance exchange REST and WebSocket APIs.</p>
+
+<ul><li><a href="https://mwlang.github.io/binance/" target="_blank">Source Documentation</a></li><li><a href="https://github.com/mwlang/binance/tree/master/examples" target="_blank">Examples</a></li><li><a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md" target="_blank">Official Binance API Documentation</a></li></ul>
 
 <h2>Features</h2>
 
@@ -279,19 +291,15 @@
 
 <h3>SIGNED (API_KEY and signed with SECRET_KEY required)</h3>
 
-<ul><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-information-user_data" target="_blank">account</a> Get current account information.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#query-order-user_data" target="_blank">GET order (query)</a> Check an order's status.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#current-open-orders-user_data" target="_blank">GET openOrders</a> Get all open orders on a symbol.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#all-orders-user_data" target="_blank">GET allOrders</a> Get all account orders; active, canceled, or filled.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#new-order--trade" target="_blank">POST order (new order)</a> Send in a new order.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-new-order-trade" target="_blank">POST order/test (test new order)</a> Creates and validates a new order but does not send it into the matching engine.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#cancel-order-trade" target="_blank">DELETE order (cancel order)</a> Cancel an active order.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data" target="_blank">myTrades</a> Get trades for a specific account and symbol.</li></ul>
+<ul><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-information-user_data" target="_blank">account</a> Get current account information.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#query-order-user_data" target="_blank">GET order (query)</a> Check an order's status.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#current-open-orders-user_data" target="_blank">GET openOrders</a> Get all open orders on a symbol.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#all-orders-user_data" target="_blank">GET allOrders</a> Get all account orders; active, canceled, or filled.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#new-order--trade" target="_blank">POST order (new order)</a> Send in a new order.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-new-order-trade" target="_blank">POST order/test (test new order)</a> Creates and validates a new order but does not send it into the matching engine.</li><li>[ ] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#cancel-order-trade" target="_blank">DELETE order (cancel order)</a> Cancel an active order.</li><li>[x] <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data" target="_blank">myTrades</a> Get trades for a specific account and symbol.</li></ul>
 
 <h2>Installation</h2>
 
 <ol><li>Add the dependency to your <code>shard.yml</code>:</li></ol>
 
-<p><code></code>`yaml
-   dependencies:</p>
-
-<pre><code> binance:
-   github: mwlang<span class="s">/binance</code></pre>
-
-<p><code></code>`</p>
+<pre><code class="language-yaml">dependencies:
+  binance:
+    github: mwlang/binance</code></pre>
 
 <ol><li>Run <code>shards install</code></li></ol>
 
@@ -354,13 +362,13 @@ for errors before attempting to access the properties of the ServerResponses</p>
 
 <ul><li>camel-cased JSON keys become downcased and underscored.</li><li>abbreviations are spelled out (e.g. qty => quantity).</li><li>If an API can return one or more, it's always an Array property on the <code>ServerResponse</code> object.</li></ul></ul>
 
-<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;../src/binance&quot;</span>
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;binance&quot;</span>
 
 client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">REST</span>.<span class="k">new</span>
 
 puts client.ping.inspect
 
-<span class="c"># # &lt;Binance::Responses::PingResponse:0x10d40c280 </span>
+<span class="c"># =&gt; #&lt;Binance::Responses::PingResponse:0x10d40c280 </span>
 <span class="c">#   @success=true, </span>
 <span class="c">#   @error_code=nil, </span>
 <span class="c">#   @error_message=nil, </span>
@@ -392,6 +400,17 @@ puts client.ping.inspect
 <span class="c">#       }, </span>
 <span class="c">#     @body=&quot;{}&quot;&gt;, </span>
 <span class="c">#   @exception=nil&gt;</span></code></pre>
+
+<p>Each endpoint has it's own Response object derived from the ServerResponse object and, consequentially, the specific properties that are mapped to the JSON.  For example,
+the <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time" target="_blank">time</a> endpoint returns a <code>TimeResponse</code> with one additional property value, the "serverTime", accessible as follows:</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;binance&quot;</span>
+
+client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">REST</span>.<span class="k">new</span>
+
+puts client.time.server_time.inspect
+
+<span class="c"># =&gt; 2019-07-03 18:41:45.491000000 UTC</span></code></pre>
 
 <h2>Testing</h2>
 

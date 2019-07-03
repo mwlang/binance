@@ -51,6 +51,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/mwlang/binance/Binance/HttpMethods" data-name="binance::httpmethods">
+      <a href="../Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/mwlang/binance/Binance/Responses" data-name="binance::responses">
       <a href="../Binance/Responses.html">Responses</a>
       
@@ -151,6 +156,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradeEntry" data-name="binance::responses::mytradeentry">
+      <a href="../Binance/Responses/MyTradeEntry.html">MyTradeEntry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradesResponse" data-name="binance::responses::mytradesresponse">
+      <a href="../Binance/Responses/MyTradesResponse.html">MyTradesResponse</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/Order" data-name="binance::responses::order">
       <a href="../Binance/Responses/Order.html">Order</a>
       
@@ -241,11 +256,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mwlang/binance/TimestampRequestMiddleware" data-name="timestamprequestmiddleware">
-      <a href="../TimestampRequestMiddleware.html">TimestampRequestMiddleware</a>
-      
-    </li>
-  
 </ul>
 
   </div>
@@ -293,7 +303,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L1" target="_blank">
+      <a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L1" target="_blank">
         binance/client/rest/endpoints.cr
       </a>
     
@@ -375,6 +385,13 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method" class="signature"><strong>#my_trades</strong>(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32 = <span class="n">0</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Get trades for a specific account and symbol.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#open_orders%28symbol%3AString%29-instance-method" class="signature"><strong>#open_orders</strong>(symbol : String)</a>
         
       </li>
@@ -415,6 +432,16 @@
 
 
 
+  <h2>Macro Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#fetch%28action%2Cclient%2Cendpoint%2Cresponse_klass%2Cparams%3DHTTP%3A%3AParams.new%29-macro" class="signature"><strong>fetch</strong>(action, client, endpoint, response_klass, params = <span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.<span class="k">new</span>)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 <div class="methods-inherited">
@@ -449,7 +476,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L224" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L260" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -475,7 +502,7 @@ limit      | INT    | NO         | Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L134" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -506,7 +533,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L166" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L199" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -522,7 +549,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L85" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -538,7 +565,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L108" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -554,7 +581,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -570,7 +597,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L65" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -586,7 +613,7 @@ timestamp   LONG    YES </p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L87" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L116" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,7 +638,37 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L130" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L163" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="my_trades(symbol:String,limit:Int32=500,from_id:Int32=0,start_time:Time?=nil,end_time:Time?=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>my_trades</strong>(symbol : String, limit : Int32 = <span class="n">500</span>, from_id : Int32 = <span class="n">0</span>, start_time : Time? = <span class="n">nil</span>, end_time : Time? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#my_trades%28symbol%3AString%2Climit%3AInt32%3D500%2Cfrom_id%3AInt32%3D0%2Cstart_time%3ATime%3F%3Dnil%2Cend_time%3ATime%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Get trades for a specific account and symbol.</p>
+
+<p>Name  Type  Mandatory Description
+symbol  STRING  YES 
+startTime LONG  NO  
+endTime LONG  NO  
+fromId  LONG  NO  TradeId to fetch from. Default gets most recent trades.
+limit INT NO  Default 500; max 1000.
+recvWindow  LONG  NO  
+timestamp LONG  YES 
+Notes:</p>
+
+<ul><li>If fromId is set, it will get orders >= that fromId. Otherwise most recent orders are returned.</li></ul></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L278" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -627,7 +684,7 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L220" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L253" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -654,7 +711,7 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L202" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L235" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -670,7 +727,7 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -686,7 +743,7 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L100" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -702,7 +759,7 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L61" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -718,7 +775,7 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -734,13 +791,32 @@ limit       INT     NO          Default 500; max 1000.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/85e9c679e70f8f75ae16e3b6ed8b3d256e59858d/src/binance/client/rest/endpoints.cr#L63" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L92" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>Macro Detail</h2>
+  
+    <div class="entry-detail" id="fetch(action,client,endpoint,response_klass,params=HTTP::Params.new)-macro">
+      <div class="signature">
+        
+        macro <strong>fetch</strong>(action, client, endpoint, response_klass, params = <span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.<span class="k">new</span>)
+
+        <a class="method-permalink" href="#fetch%28action%2Cclient%2Cendpoint%2Cresponse_klass%2Cparams%3DHTTP%3A%3AParams.new%29-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/endpoints.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 </div>

@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/mwlang/binance">
-  <title>Binance::Responses::ExchangeFilter - github.com/mwlang/binance</title>
+  <title>Binance::Responses::MyTradeEntry - github.com/mwlang/binance</title>
 </head>
 <body>
 
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/mwlang/binance/Binance/Responses/ExchangeFilter" data-name="binance::responses::exchangefilter">
+  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/ExchangeFilter" data-name="binance::responses::exchangefilter">
       <a href="../../Binance/Responses/ExchangeFilter.html">ExchangeFilter</a>
       
     </li>
@@ -156,7 +156,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mwlang/binance/Binance/Responses/MyTradeEntry" data-name="binance::responses::mytradeentry">
+  <li class=" current" data-id="github.com/mwlang/binance/Binance/Responses/MyTradeEntry" data-name="binance::responses::mytradeentry">
       <a href="../../Binance/Responses/MyTradeEntry.html">MyTradeEntry</a>
       
     </li>
@@ -265,12 +265,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Binance::Responses::ExchangeFilter
+  <span class="kind">class</span> Binance::Responses::MyTradeEntry
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/ExchangeFilter.html">Binance::Responses::ExchangeFilter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/MyTradeEntry.html">Binance::Responses::MyTradeEntry</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -279,46 +279,20 @@
 
   <p>Typical server response</p>
 
-<pre><code>[
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;PRICE_FILTER&quot;</span>,
-      <span class="s">&quot;minPrice&quot;</span><span class="n">:&quot;0.00000100&quot;</span>,
-      <span class="s">&quot;maxPrice&quot;</span><span class="n">:&quot;100000.00000000&quot;</span>,
-      <span class="s">&quot;tickSize&quot;</span><span class="n">:&quot;0.00000100&quot;</span>
-    },
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;PERCENT_PRICE&quot;</span>,
-      <span class="s">&quot;multiplierUp&quot;</span><span class="n">:&quot;5&quot;</span>,
-      <span class="s">&quot;multiplierDown&quot;</span><span class="n">:&quot;0.2&quot;</span>,
-      <span class="s">&quot;avgPriceMins&quot;</span>:<span class="n">5</span>
-    },
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;LOT_SIZE&quot;</span>,
-      <span class="s">&quot;minQty&quot;</span><span class="n">:&quot;0.00100000&quot;</span>,
-      <span class="s">&quot;maxQty&quot;</span><span class="n">:&quot;100000.00000000&quot;</span>,
-      <span class="s">&quot;stepSize&quot;</span><span class="n">:&quot;0.00100000&quot;</span>
-    },
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;MIN_NOTIONAL&quot;</span>,
-      <span class="s">&quot;minNotional&quot;</span><span class="n">:&quot;0.00100000&quot;</span>,
-      <span class="s">&quot;applyToMarket&quot;</span><span class="n">:true</span>,
-      <span class="s">&quot;avgPriceMins&quot;</span>:<span class="n">5</span>
-    },
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;ICEBERG_PARTS&quot;</span>,
-      <span class="s">&quot;limit&quot;</span>:<span class="n">10</span>
-    },
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;MARKET_LOT_SIZE&quot;</span>,
-      <span class="s">&quot;minQty&quot;</span><span class="n">:&quot;0.00000000&quot;</span>,
-      <span class="s">&quot;maxQty&quot;</span><span class="n">:&quot;63100.00000000&quot;</span>,
-      <span class="s">&quot;stepSize&quot;</span><span class="n">:&quot;0.00000000&quot;</span>
-    },
-    {
-      <span class="s">&quot;filterType&quot;</span><span class="n">:&quot;MAX_NUM_ALGO_ORDERS&quot;</span>,
-      <span class="s">&quot;maxNumAlgoOrders&quot;</span>:<span class="n">5</span>
-    }
-]</code></pre>
+<pre><code>{
+  <span class="s">&quot;symbol&quot;</span>: <span class="s">&quot;BNBBTC&quot;</span>,
+  <span class="s">&quot;id&quot;</span>: <span class="n">28457</span>,
+  <span class="s">&quot;orderId&quot;</span>: <span class="n">100234</span>,
+  <span class="s">&quot;price&quot;</span>: <span class="s">&quot;4.00000100&quot;</span>,
+  <span class="s">&quot;qty&quot;</span>: <span class="s">&quot;12.00000000&quot;</span>,
+  <span class="s">&quot;quoteQty&quot;</span>: <span class="s">&quot;48.000012&quot;</span>,
+  <span class="s">&quot;commission&quot;</span>: <span class="s">&quot;10.10000000&quot;</span>,
+  <span class="s">&quot;commissionAsset&quot;</span>: <span class="s">&quot;BNB&quot;</span>,
+  <span class="s">&quot;time&quot;</span>: <span class="n">1499865549590</span>,
+  <span class="s">&quot;isBuyer&quot;</span>: <span class="n">true</span>,
+  <span class="s">&quot;isMaker&quot;</span>: <span class="n">false</span>,
+  <span class="s">&quot;isBestMatch&quot;</span>: <span class="n">true</span>
+}</code></pre>
 
 
 
@@ -329,32 +303,11 @@
   
     <li class="other-type">JSON::Serializable</li>
   
-    <li class="other-type">JSON::Serializable::Unmapped</li>
-  
   </ul>
 
 
 
 
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Binance/Responses/IcebergPartsFilter.html">Binance::Responses::IcebergPartsFilter</a></li>
-  
-    <li class="other-type"><a href="../../Binance/Responses/LotSizeFilter.html">Binance::Responses::LotSizeFilter</a></li>
-  
-    <li class="other-type"><a href="../../Binance/Responses/MarketLotSizeFilter.html">Binance::Responses::MarketLotSizeFilter</a></li>
-  
-    <li class="other-type"><a href="../../Binance/Responses/MaxNumAlgoOrdersFilter.html">Binance::Responses::MaxNumAlgoOrdersFilter</a></li>
-  
-    <li class="other-type"><a href="../../Binance/Responses/MinNotionalFilter.html">Binance::Responses::MinNotionalFilter</a></li>
-  
-    <li class="other-type"><a href="../../Binance/Responses/PercentPriceFilter.html">Binance::Responses::PercentPriceFilter</a></li>
-  
-    <li class="other-type"><a href="../../Binance/Responses/PriceFilter.html">Binance::Responses::PriceFilter</a></li>
-  
-  </ul>
 
 
 
@@ -364,8 +317,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/exchange_filter.cr#L44" target="_blank">
-        binance/client/rest/responses/exchange_filter.cr
+      <a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L17" target="_blank">
+        binance/client/rest/responses/my_trade_entry.cr
       </a>
     
     <br/>
@@ -387,23 +340,58 @@
 
 
 
-  <h2>Class Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#from_array%28string%3AString%29-class-method" class="signature"><strong>.from_array</strong>(string : String)</a>
-        
-      </li>
-    
-  </ul>
-
 
 
   <h2>Instance Method Summary</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#filter_type%3AString-instance-method" class="signature"><strong>#filter_type</strong> : String</a>
+        <a href="#is_best_match%3ABool-instance-method" class="signature"><strong>#is_best_match</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#is_buyer%3ABool-instance-method" class="signature"><strong>#is_buyer</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#is_maker%3ABool-instance-method" class="signature"><strong>#is_maker</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#order_id%3AInt32-instance-method" class="signature"><strong>#order_id</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#price%3AFloat64-instance-method" class="signature"><strong>#price</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#quantity%3AFloat64-instance-method" class="signature"><strong>#quantity</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#quote_quantity%3AFloat64-instance-method" class="signature"><strong>#quote_quantity</strong> : Float64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#symbol%3AString%3F-instance-method" class="signature"><strong>#symbol</strong> : String?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#time%3ATime-instance-method" class="signature"><strong>#time</strong> : Time</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#trade_id%3AInt32-instance-method" class="signature"><strong>#trade_id</strong> : Int32</a>
         
       </li>
     
@@ -414,16 +402,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -471,49 +449,174 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/exchange_filter.cr#L45" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
-
-  <h2>Class Method Detail</h2>
-  
-    <div class="entry-detail" id="from_array(string:String)-class-method">
-      <div class="signature">
-        
-        def self.<strong>from_array</strong>(string : String)
-
-        <a class="method-permalink" href="#from_array%28string%3AString%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/exchange_filter.cr#L51" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="filter_type:String-instance-method">
+    <div class="entry-detail" id="is_best_match:Bool-instance-method">
       <div class="signature">
         
-        def <strong>filter_type</strong> : String
+        def <strong>is_best_match</strong> : Bool
 
-        <a class="method-permalink" href="#filter_type%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#is_best_match%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/exchange_filter.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L50" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="is_buyer:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>is_buyer</strong> : Bool
+
+        <a class="method-permalink" href="#is_buyer%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="is_maker:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>is_maker</strong> : Bool
+
+        <a class="method-permalink" href="#is_maker%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="order_id:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>order_id</strong> : Int32
+
+        <a class="method-permalink" href="#order_id%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="price:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>price</strong> : Float64
+
+        <a class="method-permalink" href="#price%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="quantity:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>quantity</strong> : Float64
+
+        <a class="method-permalink" href="#quantity%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="quote_quantity:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>quote_quantity</strong> : Float64
+
+        <a class="method-permalink" href="#quote_quantity%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="symbol:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>symbol</strong> : String?
+
+        <a class="method-permalink" href="#symbol%3AString%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="time:Time-instance-method">
+      <div class="signature">
+        
+        def <strong>time</strong> : Time
+
+        <a class="method-permalink" href="#time%3ATime-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="trade_id:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>trade_id</strong> : Int32
+
+        <a class="method-permalink" href="#trade_id%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/7a3bbb46d12ca8fe91f772fe47eb41dd2352d139/src/binance/client/rest/responses/my_trade_entry.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>

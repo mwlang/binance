@@ -2,6 +2,10 @@
 
 This is an unofficial Crystal wrapper for the Binance exchange REST and WebSocket APIs.
 
+* [Source Documentation](https://mwlang.github.io/binance/)
+* [Examples](https://github.com/mwlang/binance/tree/master/examples)
+* [Official Binance API Documentation](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md)
+
 ## Features
 
 Current
@@ -43,17 +47,17 @@ Coming Soon!
 - [ ] [POST order (new order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#new-order--trade) Send in a new order.
 - [ ] [POST order/test (test new order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-new-order-trade) Creates and validates a new order but does not send it into the matching engine.
 - [ ] [DELETE order (cancel order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#cancel-order-trade) Cancel an active order.
-- [ ] [myTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data) Get trades for a specific account and symbol.
+- [x] [myTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data) Get trades for a specific account and symbol.
 
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
 
-   ```yaml
-   dependencies:
-     binance:
-       github: mwlang/binance
-   ```
+```yaml
+dependencies:
+  binance:
+    github: mwlang/binance
+```
 
 2. Run `shards install`
 
@@ -124,13 +128,13 @@ When accessing the properties of the JSON responses, Generally speaking:
   * If an API can return one or more, it's always an Array property on the `ServerResponse` object.
 
 ```crystal
-require "../src/binance"
+require "binance"
 
 client = Binance::REST.new
 
 puts client.ping.inspect
 
-# # <Binance::Responses::PingResponse:0x10d40c280 
+# => #<Binance::Responses::PingResponse:0x10d40c280 
 #   @success=true, 
 #   @error_code=nil, 
 #   @error_message=nil, 
@@ -162,6 +166,19 @@ puts client.ping.inspect
 #       }, 
 #     @body="{}">, 
 #   @exception=nil>
+```
+
+Each endpoint has it's own Response object derived from the ServerResponse object and, consequentially, the specific properties that are mapped to the JSON.  For example,
+the [time](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time) endpoint returns a `TimeResponse` with one additional property value, the "serverTime", accessible as follows:
+
+```crystal
+require "binance"
+
+client = Binance::REST.new
+
+puts client.time.server_time.inspect
+
+# => 2019-07-03 18:41:45.491000000 UTC
 ```
 
 ## Testing
