@@ -1,6 +1,24 @@
 module Binance::Endpoints
   include Binance::Responses
 
+  macro fetch(action, client, endpoint, response_klass, params = HTTP::Params.new)
+    begin
+      if response = {{client.id}}_{{action.id}}(Binance::Endpoints::ENDPOINTS[{{endpoint}}], {{params}})
+        if response.status == 200
+          {{response_klass}}.from_json(response.body).tap do |resp| 
+            resp.response = response
+          end
+        else
+          {{response_klass}}.from_error(response)
+        end
+      else
+        {{response_klass}}.from_failure(response)
+      end
+    rescue ex : Exception
+      {{response_klass}}.from_exception(ex)
+    end
+  end
+
   ENDPOINTS = {
     # Public API Endpoints
     ping:              "v1/ping",
@@ -37,27 +55,38 @@ module Binance::Endpoints
   }
 
   def ping
-    fetch :public, :ping, PingResponse
+    fetch :get, :public, :ping, PingResponse
   end
 
   def time
-    fetch :public, :time, TimeResponse
+    fetch :get, :public, :time, TimeResponse
   end
 
   def exchange_info
-    fetch :public, :exchange_info, ExchangeInfoResponse
+    fetch :get, :public, :exchange_info, ExchangeInfoResponse
   end
 
   def depth(symbol : String, limit : Int32 = 5)
-    fetch :public, :depth, DepthResponse, {symbol: symbol.upcase, limit: limit}
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
+
+    fetch :get, :public, :depth, DepthResponse, params
   end
 
   def trades(symbol : String, limit : Int32 = 500)
-    fetch :public, :trades, TradesResponse, {symbol: symbol.upcase, limit: limit}
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
+
+    fetch :get, :public, :trades, TradesResponse, params
   end
 
   def avg_price(symbol : String)
-    fetch :public, :avg_price, AvgPriceResponse, {symbol: symbol.upcase}
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+
+    fetch :get, :public, :avg_price, AvgPriceResponse, params
   end
 
   def twenty_four_hour(symbol : String? = nil)
@@ -65,7 +94,7 @@ module Binance::Endpoints
     symb = symbol
     params["symbol"] = symb.upcase unless (symb).nil?
 
-    fetch :public, :twenty_four_hour, TwentyFourHourResponse, params
+    fetch :get, :public, :twenty_four_hour, TwentyFourHourResponse, params
   end
 
   def price(symbol : String? = nil)
@@ -73,7 +102,7 @@ module Binance::Endpoints
     symb = symbol
     params["symbol"] = symb.upcase unless (symb).nil?
 
-    fetch :public, :price, PriceResponse, params
+    fetch :get, :public, :price, PriceResponse, params
   end
 
   def book_ticker(symbol : String? = nil)
@@ -81,11 +110,15 @@ module Binance::Endpoints
     symb = symbol
     params["symbol"] = symb.upcase unless (symb).nil?
 
-    fetch :public, :book_ticker, BookTickerResponse, params
+    fetch :get, :public, :book_ticker, BookTickerResponse, params
   end
 
   def historical_trades(symbol : String, limit : Int32 = 500)
-    fetch :verified, :historical_trades, TradesResponse, {symbol: symbol.upcase, limit: limit}
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
+
+    fetch :get, :verified, :historical_trades, TradesResponse, params
   end
 
   # Name       | Type   | Mandatory  | Description
@@ -116,7 +149,7 @@ module Binance::Endpoints
     ts = end_time
     params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
 
-    fetch :public, :agg_trades, AggTradesResponse, params
+    fetch :get, :public, :agg_trades, AggTradesResponse, params
   end
 
   # Name        Type    Mandatory   Description
@@ -146,7 +179,7 @@ module Binance::Endpoints
     ts = end_time
     params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
 
-    fetch :public, :klines, KlinesResponse, params
+    fetch :get, :public, :klines, KlinesResponse, params
   end
 
   # Get all account orders; active, canceled, or filled.
@@ -184,7 +217,7 @@ module Binance::Endpoints
     ts = end_time
     params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
 
-    fetch :signed, :all_orders, OrderResponse, params
+    fetch :get, :signed, :all_orders, OrderResponse, params
   end
 
   # Check an order's status
@@ -214,15 +247,53 @@ module Binance::Endpoints
     ocoid = original_client_order_id
     params["origClientOrderId"] = ocoid unless ocoid.nil?
 
-    fetch :signed, :order, OrderResponse, params
+    fetch :get, :signed, :order, OrderResponse, params
   end
 
   def open_orders(symbol : String)
-    fetch :signed, :open_orders, OrderResponse, {symbol: symbol.upcase}
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+
+    fetch :get, :signed, :open_orders, OrderResponse, params
   end
 
   def account
-    fetch :signed, :account, AccountResponse
+    fetch :get, :signed, :account, AccountResponse
+  end
+
+  # Get trades for a specific account and symbol.
+  #
+  # Name  Type  Mandatory Description
+  # symbol  STRING  YES 
+  # startTime LONG  NO  
+  # endTime LONG  NO  
+  # fromId  LONG  NO  TradeId to fetch from. Default gets most recent trades.
+  # limit INT NO  Default 500; max 1000.
+  # recvWindow  LONG  NO  
+  # timestamp LONG  YES 
+  # Notes:
+  #
+  # * If fromId is set, it will get orders >= that fromId. Otherwise most recent orders are returned.
+  #
+  def my_trades(
+      symbol : String,           # The market symbol to query
+      limit : Int32 = 500,       # Number of entries to return. Default 500; max 1000.
+      from_id : Int32 = 0,       # TradeId to fetch from. Default gets most recent trades.
+      start_time : Time? = nil,  # Timestamp in ms to get aggregate trades from INCLUSIVE.
+      end_time : Time? = nil     # Timestamp in ms to get aggregate trades until INCLUSIVE.
+    )
+
+    params = HTTP::Params.new
+    params["symbol"] = symbol.upcase
+    params["limit"] = limit.to_s
+
+    params["fromId"] = from_id.to_s unless from_id.zero?
+    ts = start_time
+    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
+    ts = end_time
+    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
+
+    fetch :get, :signed, :my_trades, MyTradesResponse, params
   end
 
 end
