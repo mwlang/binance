@@ -271,6 +271,8 @@
 
 <h2>TL;DR</h2>
 
+<p>Run this:</p>
+
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;binance&quot;</span>
 
 api_key <span class="o">=</span> <span class="s">&quot;vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A&quot;</span>
@@ -316,7 +318,7 @@ puts <span class="s">&quot;Order placed successfully? </span><span class="i">#{<
 
 puts <span class="s">&quot;That&#39;s all folks!&quot;</span></code></pre>
 
-<p>The above outputs:</p>
+<p>Get This:</p>
 
 <pre><code class="language-text">>> crystal run examples/orders.cr
 current price for BNBUSDC is 32.633600
@@ -472,14 +474,14 @@ puts client.time.server_time.inspect
 <span class="c"># =&gt; 2019-07-04 07:07:06.009000000 UTC</span></code></pre>
 
 <p>The weight used on the API call is returned in the response headers as "X-MBX-USED-WEIGHT".
-This is conveniently accessible via <code>#weight_used</code> property of the <code>ServerResponse</code></p>
+This is conveniently accessible via <code>#used_weight</code> property of the <code>ServerResponse</code></p>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;binance&quot;</span>
 
 client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">REST</span>.<span class="k">new</span>
 
 response <span class="o">=</span> client.twenty_four_hour
-puts <span class="s">&quot;WEIGHT %i&quot;</span> <span class="o">%</span> response.weight_used
+puts <span class="s">&quot;WEIGHT %i&quot;</span> <span class="o">%</span> response.used_weight
 puts <span class="s">&quot;TICKERS %i&quot;</span> <span class="o">%</span> response.tickers.size
 
 response.tickers[<span class="n">0</span>,<span class="n">5</span>].each <span class="k">do</span> <span class="o">|</span>ticker<span class="o">|</span>
@@ -501,7 +503,7 @@ BNBBTC bid: 0.002767 ask: 0.002768 change: -3.726 high: 0.002969 low: 0.002705
 NEOBTC bid: 0.001521 ask: 0.001522 change: -2.311 high: 0.001589 low: 0.001484
 QTUMETH bid: 0.017040 ask: 0.017126 change: -0.719 high: 0.017617 low: 0.016782</code></pre>
 
-<p><span class="flag purple">NOTE</span>  weight_used is cumulative
+<p><span class="flag purple">NOTE</span>  used_weight is cumulative
 Each endpoint has it's own Response object derived from the ServerResponse object and, consequentially, the specific properties that are mapped to the JSON.  For example,
 the <a href="https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time" target="_blank">time</a> endpoint returns a <code>TimeResponse</code> with one additional property value, the "serverTime", accessible as follows:</p>
 

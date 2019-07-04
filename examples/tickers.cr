@@ -3,7 +3,7 @@ require "../src/binance"
 client = Binance::REST.new
 
 response = client.twenty_four_hour
-puts "WEIGHT %i" % response.weight_used
+puts "WEIGHT %i" % response.used_weight
 puts "TICKERS %i" % response.tickers.size
 
 response.tickers[0,5].each do |ticker|

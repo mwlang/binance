@@ -8,6 +8,8 @@ This is an unofficial Crystal wrapper for the Binance exchange REST and WebSocke
 
 ## TL;DR
 
+Run this:
+
 ```crystal
 require "binance"
 
@@ -55,7 +57,7 @@ end
 puts "That's all folks!"
 ```
 
-The above outputs:
+Get This:
 
 ```text
 >> crystal run examples/orders.cr
@@ -243,7 +245,7 @@ puts client.time.server_time.inspect
 ```
 
 The weight used on the API call is returned in the response headers as "X-MBX-USED-WEIGHT".
-This is conveniently accessible via `#weight_used` property of the `ServerResponse`
+This is conveniently accessible via `#used_weight` property of the `ServerResponse`
 
 ```crystal
 require "binance"
@@ -251,7 +253,7 @@ require "binance"
 client = Binance::REST.new
 
 response = client.twenty_four_hour
-puts "WEIGHT %i" % response.weight_used
+puts "WEIGHT %i" % response.used_weight
 puts "TICKERS %i" % response.tickers.size
 
 response.tickers[0,5].each do |ticker|
@@ -276,7 +278,7 @@ NEOBTC bid: 0.001521 ask: 0.001522 change: -2.311 high: 0.001589 low: 0.001484
 QTUMETH bid: 0.017040 ask: 0.017126 change: -0.719 high: 0.017617 low: 0.016782
 ```
 
-NOTE: weight_used is cumulative
+NOTE: used_weight is cumulative
 Each endpoint has it's own Response object derived from the ServerResponse object and, consequentially, the specific properties that are mapped to the JSON.  For example,
 the [time](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time) endpoint returns a `TimeResponse` with one additional property value, the "serverTime", accessible as follows:
 

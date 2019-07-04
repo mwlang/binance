@@ -47,7 +47,7 @@ module Binance::Responses
       @response.nil? ? "" : @response.as(Cossack::Response).body
     end
 
-    def weight_used
+    def used_weight
       return 0 if @response.nil?
       value = @response.as(Cossack::Response).headers["X-MBX-USED-WEIGHT"]?
       value.nil? ? 0 : value.to_i
