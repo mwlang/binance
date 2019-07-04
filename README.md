@@ -55,6 +55,18 @@ end
 puts "That's all folks!"
 ```
 
+The above outputs:
+
+```text
+>> crystal run examples/orders.cr
+current price for BNBUSDC is 32.633600
+placing limit SELL order...
+Order placed successfully? true
+Order 20556246 placed.  Status: NEW
+canceling the order...
+order cancelled successfully
+That's all folks!
+```
 ## Features
 
 Current
@@ -216,7 +228,55 @@ puts client.ping.inspect
 #     @body="{}">, 
 #   @exception=nil>
 ```
+The raw JSON returned is accessible via the #body property of the `ServerResponse`
 
+```crystal
+require "binance"
+
+client = Binance::REST.new
+
+puts client.time.body
+# => {"serverTime":1562224025253}
+
+puts client.time.server_time.inspect
+# => 2019-07-04 07:07:06.009000000 UTC
+```
+
+The weight used on the API call is returned in the response headers as "X-MBX-USED-WEIGHT".
+This is conveniently accessible via `#weight_used` property of the `ServerResponse`
+
+```crystal
+require "binance"
+
+client = Binance::REST.new
+
+response = client.twenty_four_hour
+puts "WEIGHT %i" % response.weight_used
+puts "TICKERS %i" % response.tickers.size
+
+response.tickers[0,5].each do |ticker|
+  puts [
+      ticker.symbol,
+      "bid: %0.6f" % ticker.bid_price,
+      "ask: %0.6f" % ticker.ask_price,
+      "change: %0.3f" % ticker.price_change_percent,
+      "high: %0.6f" % ticker.high_price,
+      "low: %0.6f" % ticker.low_price
+    ].join(" ")
+end
+```
+
+```text
+WEIGHT 40
+TICKERS 558
+ETHBTC bid: 0.025352 ask: 0.025362 change: -2.282 high: 0.026600 low: 0.025004
+LTCBTC bid: 0.010711 ask: 0.010717 change: 1.046 high: 0.010872 low: 0.009991
+BNBBTC bid: 0.002767 ask: 0.002768 change: -3.726 high: 0.002969 low: 0.002705
+NEOBTC bid: 0.001521 ask: 0.001522 change: -2.311 high: 0.001589 low: 0.001484
+QTUMETH bid: 0.017040 ask: 0.017126 change: -0.719 high: 0.017617 low: 0.016782
+```
+
+NOTE: weight_used is cumulative
 Each endpoint has it's own Response object derived from the ServerResponse object and, consequentially, the specific properties that are mapped to the JSON.  For example,
 the [time](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time) endpoint returns a `TimeResponse` with one additional property value, the "serverTime", accessible as follows:
 

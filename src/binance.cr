@@ -3,6 +3,8 @@ require "json"
 require "yaml"
 require "openssl/hmac"
 
+require "cossack"
+
 # ## Terminology
 # * `base asset` refers to the asset that is the `quantity` of a symbol.
 # * `quote asset` refers to the asset that is the `price` of a symbol.
@@ -97,9 +99,6 @@ module Binance
   RATE_LIMIT_INTERVALS = %w{SECOND MINUTE DAY}
 end
 
-require "cossack"
-
-require "./binance/version"
 require "./binance/responses/*"
 require "./binance/converters/*"
 require "./binance/client/rest"
