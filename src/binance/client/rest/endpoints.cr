@@ -155,7 +155,7 @@ module Binance::Endpoints
   def agg_trades(
       symbol : String,           # The market symbol to query
       limit : Int32 = 500,       # Number of entries to return. Default 500; max 1000.
-      from_id : Int32 = 0,       # ID to get aggregate trades from INCLUSIVE.
+      from_id : Int32? = nil,    # ID to get aggregate trades from INCLUSIVE.
       start_time : Time? = nil,  # Timestamp in ms to get aggregate trades from INCLUSIVE.
       end_time : Time? = nil     # Timestamp in ms to get aggregate trades until INCLUSIVE.
     )
@@ -164,11 +164,9 @@ module Binance::Endpoints
     symbol_param params, symbol
     params["limit"] = limit.to_s
 
-    params["fromId"] = from_id.to_s unless from_id.zero?
-    ts = start_time
-    params["startTime"] = ts.to_unix_ms.to_s unless ts.nil?
-    ts = end_time
-    params["endTime"] = ts.to_unix_ms.to_s unless ts.nil?
+    optional_param params, "fromId", from_id
+    optional_param params, "startTime", start_time
+    optional_param params, "endTime", end_time
 
     fetch :get, :public, :agg_trades, AggTradesResponse, params
   end
