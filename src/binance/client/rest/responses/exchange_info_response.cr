@@ -37,7 +37,7 @@ module Binance::Responses
 
     @[JSON::Field(key: "serverTime", converter: Binance::Converters::ToTime)]
     # A `Time` representation of the serverTime property
-    getter server_time : ::Time = ::Time.now
+    getter server_time : ::Time = ::Time.utc
 
     @[JSON::Field(key: "rateLimits")]
     getter rate_limits : Array(Binance::Responses::RateLimit) = [] of Binance::Responses::RateLimit

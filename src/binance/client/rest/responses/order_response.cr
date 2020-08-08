@@ -23,7 +23,7 @@ module Binance::Responses
     def self.from_json(json)
       pull = JSON::PullParser.new(json)
       OrderResponse.new.tap do |resp|
-        if pull.kind == :begin_array
+        if pull.kind.begin_array?
           resp.orders = Array(Order).new(pull)
         else
           resp.orders << Order.new(pull)

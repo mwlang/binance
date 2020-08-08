@@ -1,17 +1,17 @@
 name: binance
-version: 0.2.6
+version: 0.3.0
 
 authors:
   - mwlang <mwlang@cybrains.net>
 
-crystal: 0.28.0
+crystal: 0.35.0
 
 license: MIT
 
 dependencies:
   cossack:
-    github: crystal-community/cossack
-    version: ~> 0.1
+    github: mwlang/cossack
+    branch: master
 
 development_dependencies:
   timecop:

@@ -29,7 +29,7 @@ module Binance::Responses
     getter last_trade_id : Int32
 
     @[JSON::Field(key: "T", converter: Binance::Converters::ToTime)]
-    getter time : ::Time = ::Time.now
+    getter time : ::Time = ::Time.utc
 
     @[JSON::Field(key: "m")]
     getter is_buyer_maker : Bool

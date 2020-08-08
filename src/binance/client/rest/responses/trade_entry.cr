@@ -25,7 +25,7 @@ module Binance::Responses
     getter quote_quantity : Float64
 
     @[JSON::Field(key: "time", converter: Binance::Converters::ToTime)]
-    getter time : ::Time = ::Time.now
+    getter time : ::Time = ::Time.utc
 
     @[JSON::Field(key: "isBuyerMaker")]
     getter is_buyer_maker : Bool

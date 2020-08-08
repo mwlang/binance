@@ -7,6 +7,6 @@ module Binance::Responses
 
     @[JSON::Field(key: "serverTime", converter: Binance::Converters::ToTime)]
     # A `Time` representation of the serverTime property
-    getter server_time : ::Time = ::Time.now
+    getter server_time : ::Time = ::Time.utc
   end
 end

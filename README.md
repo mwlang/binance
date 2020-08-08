@@ -2,6 +2,8 @@
 
 This is an unofficial Crystal wrapper for the Binance exchange REST and WebSocket APIs.
 
+Requires Crystal >= 0.35.0
+
 * [Source Documentation](https://mwlang.github.io/binance/)
 * [Examples](https://github.com/mwlang/binance/tree/master/examples)
 * [Official Binance API Documentation](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md)

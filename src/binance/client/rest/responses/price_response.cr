@@ -23,7 +23,7 @@ module Binance::Responses
     def self.from_json(json)
       pull = JSON::PullParser.new(json)
       PriceResponse.new.tap do |resp|
-        if pull.kind == :begin_array
+        if pull.kind.begin_array?
           resp.tickers = Array(PriceEntry).new(pull)
         else
           resp.tickers << PriceEntry.new(pull)

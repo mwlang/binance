@@ -31,7 +31,7 @@ module Binance::Responses
     getter client_order_id : String = ""
 
     @[JSON::Field(key: "transactTime", converter: Binance::Converters::ToTime)]
-    getter transaction_time : Time = Time.now
+    getter transaction_time : Time = Time.utc
 
     @[JSON::Field(key: "price", converter: Binance::Converters::ToFloat)]
     getter price : Float64 = 0.0

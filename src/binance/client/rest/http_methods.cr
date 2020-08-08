@@ -38,7 +38,7 @@ module Binance::HttpMethods
         client.headers["Accept"] = "application/json"
         client.headers["X-MBX-APIKEY"] = api_key
       end
-      params["timestamp"] = Time.now.to_unix_ms.to_s
+      params["timestamp"] = Time.utc.to_unix_ms.to_s
       params["signature"] = hmac to_query(params)
 
       http_{{method.id}} connection, url, params
