@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#agg_trades(\"BNBUSDT\", limit: 5)" do
     with_vcr_cassette "public/agg_trades_limit_5" do
       response = client.agg_trades("BNBUSDT", limit: 5)

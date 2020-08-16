@@ -2,8 +2,8 @@ module Binance::HttpMethods
   BASE_URL = "https://api.binance.com/api"
 
   def to_query(params)
-    params.map{ |k, v| "#{k.to_s}=#{v.to_s}" }.join("&")
-  end      
+    params.map { |k, v| "#{k.to_s}=#{v.to_s}" }.join("&")
+  end
 
   {% for method in %w(get post delete) %}
 
@@ -44,6 +44,5 @@ module Binance::HttpMethods
       http_{{method.id}} connection, url, params
     end
 
-  {% end %}    
-
+  {% end %}
 end

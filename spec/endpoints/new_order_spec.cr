@@ -5,11 +5,10 @@ client = Binance::REST.new(api_key, api_secret)
 # To get the below VCR cassettes passing:
 # * ensure you have BNB free to sell
 # The specs will create SELL orders on BNB to USDC
-# * The MARKET sells will execute.  
+# * The MARKET sells will execute.
 # * The LIMIT sells may or may not execute depending on current BNB prices.
 #   Intention of LIMIT sell is to set price *above* current market value.
 describe Binance do
-
   context "MARKET SELL" do
     # To get this VCR cassette passing:
     # * ensure you have BNB free to sell
@@ -78,5 +77,5 @@ describe Binance do
         order.status.should eq "NEW"
       end
     end
-  end    
+  end
 end

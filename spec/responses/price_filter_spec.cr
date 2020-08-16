@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-json = <<-JSON 
+json = <<-JSON
   {
     "filterType": "PRICE_FILTER",
     "minPrice": "0.00000100",
@@ -10,7 +10,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::PriceFilter do
-
   it "parses" do
     filter = Binance::Responses::PriceFilter.from_json(json)
     filter.min_price.should eq 0.000001
@@ -18,4 +17,3 @@ describe Binance::Responses::PriceFilter do
     filter.tick_size.should eq 0.0001
   end
 end
-

@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#depth(\"BNBUSDT\", 5)" do
     with_vcr_cassette "public/depth_5" do
       response = client.depth("BNBUSDT", 5)

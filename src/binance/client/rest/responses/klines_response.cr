@@ -1,5 +1,4 @@
 module Binance::Responses
-
   # Typical Server Response:
   #     [
   #       [

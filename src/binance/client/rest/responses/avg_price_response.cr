@@ -5,7 +5,6 @@ module Binance::Responses
   #       "price": "9.35751834"
   #     }
   class AvgPriceResponse < Responses::ServerResponse
-
     @[JSON::Field(key: "mins")]
     getter minutes : Int32 = 0
 

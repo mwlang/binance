@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-json = <<-JSON 
+json = <<-JSON
   {
     "filterType": "LOT_SIZE",
     "minQty": "0.00100000",
@@ -17,4 +17,3 @@ describe Binance::Responses::LotSizeFilter do
     filter.step_size.should eq 0.01
   end
 end
-

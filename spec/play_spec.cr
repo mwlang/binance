@@ -48,11 +48,9 @@ class TradesResponse
 end
 
 describe TradesResponse do
-
   it "parses" do
     response = TradesResponse.from_json(json)
     response.trades.map(&.price).should eq [0.0032406, 0.0032394]
     response.trades.map(&.quantity).should eq [3.27, 0.66]
   end
-
 end

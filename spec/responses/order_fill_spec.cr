@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-json = <<-JSON 
+json = <<-JSON
   {
     "price": "4000.00000000",
     "qty": "1.00000000",
@@ -18,6 +18,4 @@ describe Binance::Responses::OrderFill do
     fill.commission.should eq 4.0
     fill.commission_asset.should eq "USDT"
   end
-
 end
-

@@ -75,7 +75,7 @@ module Binance::Endpoints
     account_status:   "v3/accountStatus.html",
     system_status:    "v3/systemStatus.html",
     withdraw_fee:     "v3/withdrawFee.html",
-    dust_log:         "v3/userAssetDribbletLog.html"
+    dust_log:         "v3/userAssetDribbletLog.html",
   }
 
   def ping
@@ -153,13 +153,12 @@ module Binance::Endpoints
   #   * If both startTime and endTime are sent, time between startTime and endTime must be less than 1 hour.
   #   * If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
   def agg_trades(
-      symbol : String,           # The market symbol to query
-      limit : Int32 = 500,       # Number of entries to return. Default 500; max 1000.
-      from_id : Int32? = nil,    # ID to get aggregate trades from INCLUSIVE.
-      start_time : Time? = nil,  # Timestamp in ms to get aggregate trades from INCLUSIVE.
-      end_time : Time? = nil     # Timestamp in ms to get aggregate trades until INCLUSIVE.
-    )
-
+    symbol : String,          # The market symbol to query
+    limit : Int32 = 500,      # Number of entries to return. Default 500; max 1000.
+    from_id : Int32? = nil,   # ID to get aggregate trades from INCLUSIVE.
+    start_time : Time? = nil, # Timestamp in ms to get aggregate trades from INCLUSIVE.
+    end_time : Time? = nil    # Timestamp in ms to get aggregate trades until INCLUSIVE.
+  )
     params = HTTP::Params.new
     symbol_param params, symbol
     params["limit"] = limit.to_s
@@ -172,21 +171,20 @@ module Binance::Endpoints
   end
 
   # Name        Type    Mandatory   Description
-  # symbol      STRING  YES 
-  # interval    ENUM    YES 
-  # startTime   LONG    NO  
-  # endTime     LONG    NO  
+  # symbol      STRING  YES
+  # interval    ENUM    YES
+  # startTime   LONG    NO
+  # endTime     LONG    NO
   # limit       INT     NO          Default 500; max 1000.
   #
   #   * If startTime and endTime are not sent, the most recent klines are returned.
   def klines(
-      symbol : String,
-      interval : String,
-      limit : Int32 = 500,
-      start_time : Time? = nil, 
-      end_time : Time? = nil
-    )
-    
+    symbol : String,
+    interval : String,
+    limit : Int32 = 500,
+    start_time : Time? = nil,
+    end_time : Time? = nil
+  )
     params = HTTP::Params.new
 
     symbol_param params, symbol
@@ -202,25 +200,24 @@ module Binance::Endpoints
   # Get all account orders; active, canceled, or filled.
   #
   # Name        Type    Mandatory Description
-  # symbol      STRING  YES 
-  # orderId     LONG    NO  
-  # startTime   LONG    NO  
-  # endTime     LONG    NO  
+  # symbol      STRING  YES
+  # orderId     LONG    NO
+  # startTime   LONG    NO
+  # endTime     LONG    NO
   # limit       INT     NO        Default 500; max 1000.
-  # recvWindow  LONG    NO  
-  # timestamp   LONG    YES 
+  # recvWindow  LONG    NO
+  # timestamp   LONG    YES
   #
   # Notes:
   # * If orderId is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
   # * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
   def all_orders(
-      symbol : String,
-      order_id : Int32? = nil,
-      limit : Int32 = 500,
-      start_time : Time? = nil, 
-      end_time : Time? = nil
-    )
-    
+    symbol : String,
+    order_id : Int32? = nil,
+    limit : Int32 = 500,
+    start_time : Time? = nil,
+    end_time : Time? = nil
+  )
     params = HTTP::Params.new
 
     symbol_param params, symbol
@@ -238,18 +235,18 @@ module Binance::Endpoints
   # Parameters:
   #
   # * Name              Type    Mandatory Description
-  # * symbol            STRING  YES 
-  # * side              ENUM    YES 
-  # * type              ENUM    YES 
-  # * timeInForce       ENUM    NO  
-  # * quantity          DECIMAL YES 
-  # * price             DECIMAL NO  
+  # * symbol            STRING  YES
+  # * side              ENUM    YES
+  # * type              ENUM    YES
+  # * timeInForce       ENUM    NO
+  # * quantity          DECIMAL YES
+  # * price             DECIMAL NO
   # * newClientOrderId  STRING  NO  A unique id for the order. Automatically generated if not sent.
   # * stopPrice         DECIMAL NO  Used with STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, and TAKE_PROFIT_LIMIT orders.
   # * icebergQty        DECIMAL NO  Used with LIMIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT to create an iceberg order.
   # * newOrderRespType  ENUM    NO  Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
-  # * recvWindow        LONG    NO  
-  # * timestamp         LONG    YES 
+  # * recvWindow        LONG    NO
+  # * timestamp         LONG    YES
   #
   # Additional mandatory parameters based on type:
   #
@@ -274,18 +271,17 @@ module Binance::Endpoints
   # * Price below market price: STOP_LOSS SELL, TAKE_PROFIT BUY
   #
   def new_order(
-      symbol : String,
-      side : String,
-      order_type : String,
-      quantity : Float64,
-      time_in_force : String? = nil,
-      price : Float64? = nil,
-      client_order_id : String? = nil,
-      stop_price : Float64? = nil,
-      iceberg_quantity : Float64? = nil,
-      response_type : String? = nil
-    )
-
+    symbol : String,
+    side : String,
+    order_type : String,
+    quantity : Float64,
+    time_in_force : String? = nil,
+    price : Float64? = nil,
+    client_order_id : String? = nil,
+    stop_price : Float64? = nil,
+    iceberg_quantity : Float64? = nil,
+    response_type : String? = nil
+  )
     params = HTTP::Params.new
     symbol_param params, symbol
     params["side"] = side.upcase
@@ -302,18 +298,17 @@ module Binance::Endpoints
   end
 
   def new_test_order(
-      symbol : String,
-      side : String,
-      order_type : String,
-      quantity : Float64,
-      time_in_force : String? = nil,
-      price : Float64? = nil,
-      client_order_id : String? = nil,
-      stop_price : Float64? = nil,
-      iceberg_quantity : Float64? = nil,
-      response_type : String? = nil
-    )
-
+    symbol : String,
+    side : String,
+    order_type : String,
+    quantity : Float64,
+    time_in_force : String? = nil,
+    price : Float64? = nil,
+    client_order_id : String? = nil,
+    stop_price : Float64? = nil,
+    iceberg_quantity : Float64? = nil,
+    response_type : String? = nil
+  )
     params = HTTP::Params.new
     symbol_param params, symbol
     params["side"] = side.upcase
@@ -330,23 +325,22 @@ module Binance::Endpoints
   end
 
   # Check an order's status
-  # 
+  #
   #   Name              Type    Mandatory Description
-  #   symbol            STRING  YES 
-  #   orderId           LONG    NO  
-  #   origClientOrderId STRING  NO  
-  #   recvWindow        LONG    NO  
-  #   timestamp         LONG    YES 
+  #   symbol            STRING  YES
+  #   orderId           LONG    NO
+  #   origClientOrderId STRING  NO
+  #   recvWindow        LONG    NO
+  #   timestamp         LONG    YES
   #
   # * Either orderId or origClientOrderId must be sent.
   # * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
   #
   def get_order(
-      symbol : String,
-      order_id : Int32? = nil,
-      client_order_id : String? = nil
-    )
-
+    symbol : String,
+    order_id : Int32? = nil,
+    client_order_id : String? = nil
+  )
     params = HTTP::Params.new
     symbol_param params, symbol
 
@@ -357,22 +351,21 @@ module Binance::Endpoints
   end
 
   # Cancel an active order
-  # 
+  #
   #   Name              Type    Mandatory Description
-  #   symbol            STRING  YES 
-  #   orderId           LONG    NO  
-  #   origClientOrderId STRING  NO  
-  #   recvWindow        LONG    NO  
-  #   timestamp         LONG    YES 
+  #   symbol            STRING  YES
+  #   orderId           LONG    NO
+  #   origClientOrderId STRING  NO
+  #   recvWindow        LONG    NO
+  #   timestamp         LONG    YES
   #
   # * Either orderId or origClientOrderId must be sent.
   #
   def cancel_order(
-      symbol : String,
-      order_id : Int32? = nil,
-      client_order_id : String? = nil
-    )
-
+    symbol : String,
+    order_id : Int32? = nil,
+    client_order_id : String? = nil
+  )
     params = HTTP::Params.new
     symbol_param params, symbol
 
@@ -396,25 +389,24 @@ module Binance::Endpoints
   # Get trades for a specific account and symbol.
   #
   # Name  Type  Mandatory Description
-  # symbol  STRING  YES 
-  # startTime LONG  NO  
-  # endTime LONG  NO  
+  # symbol  STRING  YES
+  # startTime LONG  NO
+  # endTime LONG  NO
   # fromId  LONG  NO  TradeId to fetch from. Default gets most recent trades.
   # limit INT NO  Default 500; max 1000.
-  # recvWindow  LONG  NO  
-  # timestamp LONG  YES 
+  # recvWindow  LONG  NO
+  # timestamp LONG  YES
   # Notes:
   #
   # * If fromId is set, it will get orders >= that fromId. Otherwise most recent orders are returned.
   #
   def my_trades(
-      symbol : String,           # The market symbol to query
-      limit : Int32 = 500,       # Number of entries to return. Default 500; max 1000.
-      from_id : Int32? = nil,    # TradeId to fetch from. Default gets most recent trades.
-      start_time : Time? = nil,  # Timestamp in ms to get aggregate trades from INCLUSIVE.
-      end_time : Time? = nil     # Timestamp in ms to get aggregate trades until INCLUSIVE.
-    )
-
+    symbol : String,          # The market symbol to query
+    limit : Int32 = 500,      # Number of entries to return. Default 500; max 1000.
+    from_id : Int32? = nil,   # TradeId to fetch from. Default gets most recent trades.
+    start_time : Time? = nil, # Timestamp in ms to get aggregate trades from INCLUSIVE.
+    end_time : Time? = nil    # Timestamp in ms to get aggregate trades until INCLUSIVE.
+  )
     params = HTTP::Params.new
     symbol_param params, symbol
     params["limit"] = limit.to_s
@@ -425,5 +417,4 @@ module Binance::Endpoints
 
     fetch :get, :signed, :my_trades, MyTradesResponse, params
   end
-
 end

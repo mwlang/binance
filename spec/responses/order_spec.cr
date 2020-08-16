@@ -2,8 +2,7 @@ require "../spec_helper"
 
 describe Binance::Responses::Order do
   it "parses ACK order" do
-
-    json_ack = <<-JSON 
+    json_ack = <<-JSON
       {
         "symbol": "BTCUSDT",
         "orderId": 28,
@@ -30,7 +29,6 @@ describe Binance::Responses::Order do
   end
 
   it "parses RESULT order" do
-
     json_result = <<-JSON
       {
         "symbol": "BTCUSDT",
@@ -66,7 +64,6 @@ describe Binance::Responses::Order do
   end
 
   it "parses FULL order" do
-
     json_full = <<-JSON
       {
         "symbol": "BTCUSDT",
@@ -131,7 +128,7 @@ describe Binance::Responses::Order do
     order.side.should eq "SELL"
     order.stop_price.should eq 0.0
     order.fills.size.should eq 5
-    
+
     fill = order.fills[-1]
     fill.price.should eq 3995.0
     fill.quantity.should eq 1.0
@@ -139,4 +136,3 @@ describe Binance::Responses::Order do
     fill.commission_asset.should eq "USDT"
   end
 end
-

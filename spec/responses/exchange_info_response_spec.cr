@@ -31,7 +31,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::ExchangeInfoResponse do
-
   it "parses" do
     filter = Binance::Responses::ExchangeInfoResponse.from_json(json)
     filter.timezone.should eq "UTC"
@@ -41,4 +40,3 @@ describe Binance::Responses::ExchangeInfoResponse do
     filter.symbols[0].symbol.should eq "ETHBTC"
   end
 end
-

@@ -23,11 +23,11 @@ end
 def playback_cassette(name : String)
   cassette = YAML.parse(File.read(cassette_filepath(name)))
 
-  full_uri = if cassette["request"]["query_params"]? 
-    "#{cassette["request"]["uri"]}?#{cassette["request"]["query_params"]}"
-  else
-    "#{cassette["request"]["uri"]}"
-  end
+  full_uri = if cassette["request"]["query_params"]?
+               "#{cassette["request"]["uri"]}?#{cassette["request"]["query_params"]}"
+             else
+               "#{cassette["request"]["uri"]}"
+             end
 
   method = cassette["request"]["method"]? ? cassette["request"]["method"].as_s : "GET"
   status = cassette["response"]["status"]? ? cassette["response"]["status"].as_i : 400
@@ -40,20 +40,19 @@ end
 def record_cassette(name : String)
   WebMock.callbacks.add do
     after_live_request do |request, response|
-
       data = {
         request: {
-          method: request.method,
-          uri: request.resource.split("?")[0],
-          body: request.body.to_s,
+          method:       request.method,
+          uri:          request.resource.split("?")[0],
+          body:         request.body.to_s,
           query_params: request.query_params.to_s,
-          headers: request.headers,
-          timestamp: Time.utc.to_unix_ms
+          headers:      request.headers,
+          timestamp:    Time.utc.to_unix_ms,
         },
         response: {
           status: response.status_code,
-          body: response.body,
-        }
+          body:   response.body,
+        },
       }
 
       File.open(cassette_filepath(name), "w") { |f| YAML.dump(data, f) }

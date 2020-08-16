@@ -10,7 +10,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::PercentPriceFilter do
-
   it "parses price filter" do
     filter = Binance::Responses::PercentPriceFilter.from_json(json)
     filter.multiplier_up.should eq 1.3
@@ -18,4 +17,3 @@ describe Binance::Responses::PercentPriceFilter do
     filter.avg_price_mins.should eq 5
   end
 end
-

@@ -5,7 +5,7 @@ module Binance::Responses
   #       "minQty":"0.00000000",
   #       "maxQty":"63100.00000000",
   #       "stepSize":"0.00000000"
-  #     }  
+  #     }
   class MarketLotSizeFilter < ExchangeFilter
     @[JSON::Field(key: "minQty", converter: Binance::Converters::ToFloat)]
     getter min_quantity : Float64 = 0.0

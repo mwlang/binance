@@ -21,7 +21,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::DepthResponse do
-
   it "parses" do
     response = Binance::Responses::DepthResponse.from_json(json)
     response.last_update_id.should eq 252500077
@@ -31,4 +30,3 @@ describe Binance::Responses::DepthResponse do
     response.asks.map(&.quantity).should eq [37.02, 2.94, 34.97, 2043.25, 23.09]
   end
 end
-

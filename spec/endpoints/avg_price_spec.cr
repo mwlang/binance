@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#avg_price(\"BNBUSDT\")" do
     with_vcr_cassette "public/avg_price_valid" do
       response = client.avg_price("BNBUSDT")

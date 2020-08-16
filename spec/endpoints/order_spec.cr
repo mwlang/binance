@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new(api_key, api_secret)
 
 describe Binance do
-
   it "#get_order(\"BNBUSDC\")" do
     with_vcr_cassette "signed/order_wo_order_id" do
       response = client.get_order("BNBUSDC")

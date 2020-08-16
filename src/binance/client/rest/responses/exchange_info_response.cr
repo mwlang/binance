@@ -1,5 +1,4 @@
 module Binance::Responses
-
   # Typical Server Response:
   #     {
   #       "timezone": "UTC",
@@ -29,7 +28,7 @@ module Binance::Responses
   #           // All filters are optional.
   #         ]
   #       }]
-  #     }  
+  #     }
   class ExchangeInfoResponse < ServerResponse
     @[JSON::Field(key: "timezone")]
     # Time Zone for server's time values
@@ -44,7 +43,7 @@ module Binance::Responses
 
     @[JSON::Field(key: "exchangeFilters")]
     getter exchange_filters : Array(Binance::Responses::ExchangeFilter) = [] of Binance::Responses::ExchangeFilter
-  
+
     @[JSON::Field(key: "symbols")]
     getter symbols : Array(Binance::Responses::ExchangeSymbol) = [] of Binance::Responses::ExchangeSymbol
   end

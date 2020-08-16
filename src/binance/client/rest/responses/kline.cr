@@ -17,21 +17,21 @@ module Binance::Responses
   # <tr> <td>endTime</td> <td>LONG</td> <td>NO</td> <td></td> </tr>
   # <tr> <td>limit</td> <td>INT</td> <td>NO</td> <td>Default 500; max 1000.</td> </tr>
   # </tbody>
-  # </table>  
+  # </table>
   #
-  # * If startTime and endTime are not sent, the most recent klines are returned.  
+  # * If startTime and endTime are not sent, the most recent klines are returned.
   #
   # ## Example Usage
   #
   # ```crystal
   # response = client.klines("BNBUSDT", "1h", 5)
-  # response.klines.size # => 5
-  # response.klines.map(&.open_price) # => [34.4949, 34.3671, 34.3842, 34.2751, 34.2592]
+  # response.klines.size               # => 5
+  # response.klines.map(&.open_price)  # => [34.4949, 34.3671, 34.3842, 34.2751, 34.2592]
   # response.klines.map(&.close_price) # => [34.3887, 34.376, 34.2218, 34.2658, 34.2749]
-  # response.klines[0].open_time # => "2019-06-28 17:00:00 UTC"
-  # response.klines[0].close_time # => "2019-06-28 17:59:59 UTC"
-  # response.klines[4].open_time # => "2019-06-28 21:00:00 UTC"
-  # response.klines[4].close_time # => "2019-06-28 21:59:59 UTC"
+  # response.klines[0].open_time       # => "2019-06-28 17:00:00 UTC"
+  # response.klines[0].close_time      # => "2019-06-28 17:59:59 UTC"
+  # response.klines[4].open_time       # => "2019-06-28 21:00:00 UTC"
+  # response.klines[4].close_time      # => "2019-06-28 21:59:59 UTC"
   # ```
   #
   # ## Typical server response (unparsed JSON)
@@ -56,10 +56,10 @@ module Binance::Responses
 
     # Open Price
     getter open_price : Float64
-    
+
     # High Price
     getter high_price : Float64
-    
+
     # Low Price
     getter low_price : Float64
 

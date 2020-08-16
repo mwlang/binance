@@ -48,7 +48,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::ExchangeFilter do
-
   it "parses" do
     filters = Binance::Responses::ExchangeFilter.from_array(json)
     filters.size.should eq 8
@@ -74,4 +73,3 @@ describe Binance::Responses::ExchangeFilter do
     filters[7].json_unmapped["foo"].should eq "bar"
   end
 end
-

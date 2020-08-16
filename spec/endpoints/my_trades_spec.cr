@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new(api_key, api_secret)
 
 describe Binance do
-
   it "#my_trades(\"BNBUSDC\", limit: 5)" do
     with_vcr_cassette "signed/my_trades_limit_5" do
       response = client.my_trades("BNBUSDC", limit: 5)
@@ -16,5 +15,4 @@ describe Binance do
       response.trades.map(&.is_maker).should eq [true, false, false, true, true]
     end
   end
-
 end

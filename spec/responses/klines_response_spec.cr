@@ -49,4 +49,3 @@ describe Binance::Responses::TradesResponse do
     response.klines.map(&.taker_quote_volume).should eq [3365005.8137628, 736436.401706]
   end
 end
-

@@ -79,4 +79,3 @@ describe Binance::Responses::ExchangeSymbol do
     filter.take_profit_orders?.should eq false
   end
 end
-

@@ -6,7 +6,6 @@ client = Binance::REST.new(api_key, api_secret)
 # * ensure you have an open order that you can cancel
 # * set the order_id of that order accordingly
 describe Binance do
-
   context "active Order" do
     order_id = 20553269
     it "#cancel_order(\"BNBUSDC\", order_id: #{order_id})" do
@@ -46,5 +45,4 @@ describe Binance do
       end
     end
   end
-
 end

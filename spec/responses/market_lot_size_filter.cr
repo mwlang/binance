@@ -10,7 +10,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::LotSizeFilter do
-
   it "parses price filter" do
     filter = Binance::Responses::LotSizeFilter.from_json(json)
     filter.min_quantity.should eq 0.0
@@ -18,5 +17,3 @@ describe Binance::Responses::LotSizeFilter do
     filter.step_size.should eq 0.0
   end
 end
-
-

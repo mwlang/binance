@@ -1,11 +1,9 @@
 require "../spec_helper"
 
 describe Binance::Responses::RateLimit do
-
   describe "REQUEST WEIGHT" do
-
     it "parses" do
-      json = <<-JSON 
+      json = <<-JSON
         {
           "rateLimitType": "REQUEST_WEIGHT",
           "interval": "MINUTE",
@@ -13,7 +11,7 @@ describe Binance::Responses::RateLimit do
           "limit": 1200
         }
       JSON
-   
+
       filter = Binance::Responses::RateLimit.from_json(json)
       filter.rate_limit_type.should eq "REQUEST_WEIGHT"
       filter.interval.should eq "MINUTE"
@@ -23,9 +21,8 @@ describe Binance::Responses::RateLimit do
   end
 
   describe "ORDERS" do
-
     it "parses" do
-      json = <<-JSON 
+      json = <<-JSON
         {
           "rateLimitType": "ORDERS",
           "interval": "SECOND",
@@ -43,9 +40,8 @@ describe Binance::Responses::RateLimit do
   end
 
   describe "RAW_REQUESTS" do
-  
     it "parses" do
-      json = <<-JSON 
+      json = <<-JSON
         {
           "rateLimitType": "RAW_REQUESTS",
           "interval": "MINUTE",
@@ -53,7 +49,7 @@ describe Binance::Responses::RateLimit do
           "limit": 5000
         }
       JSON
-  
+
       filter = Binance::Responses::RateLimit.from_json(json)
       filter.rate_limit_type.should eq "RAW_REQUESTS"
       filter.interval.should eq "MINUTE"

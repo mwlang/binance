@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#klines(\"BNBUSDT\", \"1h\", 5)" do
     with_vcr_cassette "public/klines_1h_5" do
       response = client.klines("BNBUSDT", "1h", 5)

@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#twenty_four_hour(\"BNBUSDT\")" do
     with_vcr_cassette "public/twenty_four_hour" do
       response = client.twenty_four_hour("BNBUSDT")

@@ -8,7 +8,7 @@ signed_client.historical_trades("BTCUSDC", 5).trades.each do |trade|
   puts "#{trade.time} #{"%0.6f" % trade.price} #{"%0.6f" % trade.quantity}"
 end
 
-# => 
+# =>
 # 2019-07-02 16:08:07 UTC 10465.560000 0.001689
 # 2019-07-02 16:08:09 UTC 10465.650000 1.000000
 # 2019-07-02 16:08:09 UTC 10465.650000 0.034570

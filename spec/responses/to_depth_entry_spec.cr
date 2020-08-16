@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-json = <<-JSON 
+json = <<-JSON
   [
     ["4.00000000", "431.00000000"]
   ]
@@ -14,4 +14,3 @@ describe Binance::Converters::ToDepthEntry do
     response.should be_a Array(Binance::Responses::DepthEntry)
   end
 end
-

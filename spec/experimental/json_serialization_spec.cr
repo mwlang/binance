@@ -4,7 +4,7 @@
 # require "spec"
 # require "json"
 
-# json = <<-JSON 
+# json = <<-JSON
 #   {
 #     "symbol":"ETHBTC",
 #     "status":"TRADING",

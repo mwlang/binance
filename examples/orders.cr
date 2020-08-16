@@ -14,10 +14,10 @@ puts "placing limit SELL order..."
 
 response = signed_client.new_order(
   symbol: symbol,
-  side: "SELL", 
-  order_type: "LIMIT", 
-  time_in_force: "GTC", 
-  quantity: 1.0, 
+  side: "SELL",
+  order_type: "LIMIT",
+  time_in_force: "GTC",
+  quantity: 1.0,
   price: (current_price * 1.1).round(4)
 )
 

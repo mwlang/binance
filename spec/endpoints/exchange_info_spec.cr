@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#exchange_info" do
     with_vcr_cassette "public/exchange_info" do
       response = client.exchange_info
@@ -14,5 +13,4 @@ describe Binance do
       response.exchange_filters.should be_a Array(Binance::Responses::ExchangeFilter)
     end
   end
-
 end

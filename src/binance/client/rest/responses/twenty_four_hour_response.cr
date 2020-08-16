@@ -19,12 +19,12 @@ module Binance::Responses
   #         "openTime": 1499783499040,
   #         "closeTime": 1499869899040,
   #         "firstId": 28385,
-  #         "lastId": 28460, 
+  #         "lastId": 28460,
   #         "count": 76
   #       }
   #     ]
   #
-  #   OR 
+  #   OR
   #
   #     {
   #       "symbol": "BNBBTC",
@@ -44,7 +44,7 @@ module Binance::Responses
   #       "openTime": 1499783499040,
   #       "closeTime": 1499869899040,
   #       "firstId": 28385,
-  #       "lastId": 28460, 
+  #       "lastId": 28460,
   #       "count": 76
   #     }
   class TwentyFourHourResponse < Responses::ServerResponse
@@ -60,6 +60,5 @@ module Binance::Responses
         end
       end
     end
-
   end
 end

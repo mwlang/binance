@@ -1,5 +1,4 @@
 module Binance::Responses
-
   # Typical Server Response:
   #   [
   #     {
@@ -56,6 +55,5 @@ module Binance::Responses
         resp.trades = Array(TradeEntry).new(JSON::PullParser.new(json))
       end
     end
-
   end
 end

@@ -18,7 +18,7 @@ describe Binance do
       response.account_type.should eq "MARGIN"
     end
   end
-  
+
   it "#account.balances" do
     with_vcr_cassette "signed/account" do
       response = client.account

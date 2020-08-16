@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-json = <<-JSON 
+json = <<-JSON
   {
     "filterType":"MIN_NOTIONAL",
     "minNotional":"0.00100000",
@@ -10,7 +10,6 @@ json = <<-JSON
 JSON
 
 describe Binance::Responses::MinNotionalFilter do
-
   it "parses" do
     filter = Binance::Responses::MinNotionalFilter.from_json(json)
     filter.min_notional.should eq 0.001
@@ -18,4 +17,3 @@ describe Binance::Responses::MinNotionalFilter do
     filter.avg_price_mins.should eq 5
   end
 end
-

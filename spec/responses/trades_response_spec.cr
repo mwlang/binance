@@ -61,4 +61,3 @@ describe Binance::Responses::TradesResponse do
     response.trades.map(&.is_best_match).should eq [true, true, true, true, true]
   end
 end
-

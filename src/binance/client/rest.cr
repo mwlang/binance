@@ -18,6 +18,5 @@ module Binance
     def hmac(data : String)
       OpenSSL::HMAC.hexdigest(:sha256, secret_key, data)
     end
-
   end
 end

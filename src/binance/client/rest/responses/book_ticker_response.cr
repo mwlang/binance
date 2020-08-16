@@ -39,6 +39,5 @@ module Binance::Responses
         end
       end
     end
-
   end
 end

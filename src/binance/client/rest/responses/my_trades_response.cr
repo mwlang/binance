@@ -24,6 +24,5 @@ module Binance::Responses
         resp.trades = Array(MyTradeEntry).new(JSON::PullParser.new(json))
       end
     end
-
   end
 end

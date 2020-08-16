@@ -40,6 +40,5 @@ module Binance::Responses
         @order_types.includes? "{{name.id}}"
       end
     {% end %}
-
   end
 end

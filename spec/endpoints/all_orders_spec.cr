@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new(api_key, api_secret)
 
 describe Binance do
-
   # To get this spec passing with a locally recorded cassette,
   # * Have at least two orders (any status) on BNBUSDC against your account
   it "#all_orders(\"BNBUSDC\")" do

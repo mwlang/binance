@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new(api_key, api_secret)
 
 describe Binance do
-
   # To capture a VCR cassette for this scenario to pass:
   #  * You should have two open orders at the time this vcr cassette is recorded
   #  * Open a Buy order for BNB/USDT with a price well below current price

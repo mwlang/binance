@@ -29,4 +29,3 @@ def api_from_yaml
     ApiKey.from_yaml("api_key: \"#{test_api_key}\"\napi_secret: \"#{test_api_secret}\"")
   end
 end
-

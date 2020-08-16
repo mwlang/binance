@@ -3,9 +3,8 @@ require "./spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   # To run these tests, you'll need a Binance account, valid API KEY and SECRET
-  # These are set in the ./spec/test.yml file.  
+  # These are set in the ./spec/test.yml file.
   # Copy ./spec/test.yml.example to ./spec/test.yml and
   # change to match your API key and secret
   context "./spec/test.yml exists" do
@@ -16,7 +15,6 @@ describe Binance do
     it "and finds \"api_secret\" entry in ./spec/test.yml" do
       api_secret.should_not eq test_api_secret
     end
-    
   end
 
   context "HMAC" do

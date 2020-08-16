@@ -4,8 +4,8 @@ module Binance::Responses
   # the success property will be true.  Otherwise it will be false and
   # error property will contain the error message.
   #  * If the endpoint itself is returning an error, the error_code will
-  # also be populated.  
-  # * If an exception occurred (for example timeout error), then it's 
+  # also be populated.
+  # * If an exception occurred (for example timeout error), then it's
   # message is captured to the error property and the exception itself
   # is captured to the exception property.
   # In all cases, the raw response from the endpoint is captured to

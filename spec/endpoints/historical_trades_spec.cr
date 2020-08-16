@@ -1,7 +1,6 @@
 require "../spec_helper"
 
 describe Binance do
-
   context "blank API KEY" do
     client = Binance::REST.new
 

@@ -3,7 +3,6 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
-
   it "#trades(\"BNBUSDT\", 5)" do
     with_vcr_cassette "public/trades_5" do
       response = client.trades("BNBUSDT", 5)
