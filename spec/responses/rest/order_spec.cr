@@ -1,4 +1,4 @@
-require "../spec_helper"
+require "../../spec_helper"
 
 describe Binance::Responses::Order do
   it "parses ACK order" do

@@ -19,7 +19,13 @@ def api_yaml_filename
 end
 
 class ApiKey
-  YAML.mapping(api_key: String, api_secret: String)
+  include YAML::Serializable
+
+  @[YAML::Field(key: "api_key")]
+  property api_key : String
+
+  @[YAML::Field(key: "api_secret")]
+  property api_secret : String
 end
 
 def api_from_yaml

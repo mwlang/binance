@@ -101,3 +101,4 @@ end
 require "./binance/responses/*"
 require "./binance/converters/*"
 require "./binance/client/rest"
+require "./binance/client/websocket"
