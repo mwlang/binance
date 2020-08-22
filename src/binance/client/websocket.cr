@@ -11,5 +11,9 @@ module Binance
       @secret_key = secret_key
     end
 
+    def ticker(markets : Array(String)) : Listener
+      # Work in Progress
+    end
+
   end
 end
