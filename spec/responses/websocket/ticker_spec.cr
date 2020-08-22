@@ -96,8 +96,8 @@ describe Binance::Responses::Websocket::Ticker do
     ticker.quote_volume.should eq 15.3
     ticker.open_time.to_s.should eq "2017-07-11 14:31:39 UTC"
     ticker.close_time.to_s.should eq "2017-07-12 14:31:39 UTC"
-    ticker.first_id.should eq 28385
-    ticker.last_id.should eq 28460
+    ticker.first_trade_id.should eq 28385
+    ticker.last_trade_id.should eq 28460
     ticker.trades.should eq 76
   end
 
@@ -122,8 +122,8 @@ describe Binance::Responses::Websocket::Ticker do
     ticker.event_time.to_s.should eq  "2020-08-22 14:15:54 UTC"
     ticker.close_time.to_s.should eq  "2020-08-22 14:15:54 UTC"
     ticker.open_time.to_s.should eq   "2020-08-21 14:15:53 UTC"
-    ticker.first_id.should eq 28385
-    ticker.last_id.should eq 18150
+    ticker.first_trade_id.should eq 28385
+    ticker.last_trade_id.should eq 18150
     ticker.trades.should eq 18151
   end
 end

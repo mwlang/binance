@@ -88,10 +88,10 @@ module Binance::Responses::Websocket
     getter close_time : Time?
 
     @[JSON::Field(key: "F")]
-    getter first_id : Int32 = 0
+    getter first_trade_id : Int32 = 0
 
     @[JSON::Field(key: "L")]
-    getter last_id : Int32 = 0
+    getter last_trade_id : Int32 = 0
 
     @[JSON::Field(key: "n")]
     getter trades : Int32 = 0

@@ -92,8 +92,8 @@ describe Binance::Responses::TwentyFourHourResponse do
     ticker.quote_volume.should eq 15.3
     ticker.open_time.to_s.should eq "2017-07-11 14:31:39 UTC"
     ticker.close_time.to_s.should eq "2017-07-12 14:31:39 UTC"
-    ticker.first_id.should eq 28385
-    ticker.last_id.should eq 28460
+    ticker.first_trade_id.should eq 28385
+    ticker.last_trade_id.should eq 28460
     ticker.trades.should eq 76
   end
 
@@ -117,8 +117,8 @@ describe Binance::Responses::TwentyFourHourResponse do
     ticker.quote_volume.should eq 15.3
     ticker.open_time.to_s.should eq "2017-07-11 14:31:39 UTC"
     ticker.close_time.to_s.should eq "2017-07-12 14:31:39 UTC"
-    ticker.first_id.should eq 28385
-    ticker.last_id.should eq 28460
+    ticker.first_trade_id.should eq 28385
+    ticker.last_trade_id.should eq 28460
     ticker.trades.should eq 76
   end
 end
