@@ -69,7 +69,9 @@ module Binance
 
         when ChannelMessage
           stream = message_stream(message)
-          @handlers[stream.symbol].update stream
+          handler = @handlers[stream.symbol]
+          handler.messages += 1
+          handler.update stream
 
         when ChannelClose
           puts "CLOSED #{symbols_param}"
