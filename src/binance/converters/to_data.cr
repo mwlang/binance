@@ -1,11 +1,10 @@
 module Binance
   module Converters
     # :nodoc:
-    module ToTime
+    module ToData
       def self.from_json(pull : JSON::PullParser)
-        value = pull.read_int
-        t = Time.unix_ms(value)
-        t.year <= 2015 ? Time.unix(value) : t
+
+        Binance::Responses::ExchangeFilter.from_array(pull.read_raw)
       end
     end
   end

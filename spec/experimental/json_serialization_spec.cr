@@ -1,117 +1,96 @@
-# # Goal is to find a way to serialize array of filters where each filter is it's own class
-# # This file was originally used to solve for solution that's currently in use.
-# # However, it's since changed in attempt to avoid double-parsing.
-# require "spec"
-# require "json"
+require "json"
+require "spec"
 
-# json = <<-JSON
-#   {
-#     "symbol":"ETHBTC",
-#     "status":"TRADING",
-#     "filters":[
-#       {
-#         "filterType":"PRICE_FILTER",
-#         "minPrice":"0.00000100",
-#         "maxPrice":"100000.00000000",
-#         "tickSize":"0.00000100"
-#       },
-#       {
-#         "filterType":"PERCENT_PRICE",
-#         "multiplierUp":"5",
-#         "multiplierDown":"0.2",
-#         "avgPriceMins":5
-#       },
-#       {
-#         "filterType":"LOT_SIZE",
-#         "minQty":"0.00100000",
-#         "maxQty":"100000.00000000",
-#         "stepSize":"0.00100000"
-#       }
-#   ]}
-# JSON
+ticker_json = <<-JSON
+  {
+    "stream":"btcusdt@ticker",
+    "data":{
+      "e":"24hrTicker",
+      "E":1598127580715,
+      "s":"BTCUSDT",
+      "p":"-115.32000000",
+      "P":"-0.986",
+      "w":"11539.47825399",
+      "x":"11692.98000000",
+      "c":"11577.55000000",
+      "Q":"0.08326000",
+      "b":"11577.55000000",
+      "B":"2.34161000",
+      "a":"11577.56000000",
+      "A":"1.93661500",
+      "o":"11692.87000000",
+      "h":"11709.10000000",
+      "l":"11376.81000000",
+      "v":"50129.48441400",
+      "q":"578468095.27887401",
+      "O":1598041180596,
+      "C":1598127580596,
+      "F":391750555,
+      "L":392664752,
+      "n":914198
+    }
+  }
+JSON
 
-# class ExchangeFilter
-#   include JSON::Serializable
-#   include JSON::Serializable::Unmapped
+class Stream
+  getter stream : String
+  getter symbol : String
+  getter name : String
+  getter data : Data
 
-#   @[JSON::Field(key: "filterType")]
-#   getter filter_type : String = ""
-# end
+  def initialize(stream : String, symbol : String, name : String, data : Data)
+    @stream = stream
+    @symbol = symbol
+    @name = name
+    @data = data
+  end
 
-# class PercentPriceFilter < ExchangeFilter
-#   @[JSON::Field(key: "multiplierUp", converter: ToFloat)]
-#   getter multiplier_up : Float64 = 0.0
+  def self.new(pull : JSON::PullParser)
+    pull.read_begin_object
+    pull.read_next
+    stream = pull.read_string
+    pull.read_next
+    symbol, _, name = stream.partition('@')
+    if name == "ticker"
+      data = Ticker.new(pull)
+    else
+      data = Data.new(pull)
+    end
+    new(stream, symbol, name, data)
+  end
 
-#   @[JSON::Field(key: "multiplierDown", converter: ToFloat)]
-#   getter multiplier_down : Float64 = 0.0
+end
 
-#   @[JSON::Field(key: "avgPriceMins")]
-#   getter avg_price_mins : Int32 = 0
-# end
+module ToTime
+  def self.from_json(pull : JSON::PullParser)
+    value = pull.read_int
+    t = Time.unix_ms(value)
+    t.year <= 2015 ? Time.unix(value) : t
+  end
+end
 
-# class PriceFilter < ExchangeFilter
-#   @[JSON::Field(key: "minPrice", converter: ToFloat)]
-#   getter min_price : Float64 = 0.0
+class Data
+  include JSON::Serializable
+  include JSON::Serializable::Unmapped
 
-#   @[JSON::Field(key: "maxPrice", converter: ToFloat)]
-#   getter max_price : Float64 = 0.0
+  @[JSON::Field(key: "e")]
+  getter event : String = ""
+end
 
-#   @[JSON::Field(key: "tickSize", converter: ToFloat)]
-#   getter tick_size : Float64 = 0.0
-# end
+class Ticker < Data
+  @[JSON::Field(key: "E", converter: ToTime)]
+  getter event_time : Time = Time.utc
 
-# module ToFloat
-#   def self.from_json(pull : JSON::PullParser)
-#     pull.read_string.to_f
-#   end
-# end
+  @[JSON::Field(key: "s")]
+  getter symbol : String = ""
+end
 
-# module ToFilter
-#   def self.from_json(pull : JSON::PullParser)
-#     filters = [] of ExchangeFilter
-#     pull.read_array do
-#       pull.read_object do |key|
-#         puts "*" * 40, key.inspect, "*" * 40
-#         value = pull.read_string
-#         filters << case value
-#         when "PRICE_FILTER" then PriceFilter.new pull
-#         when "PERCENT_PRICE" then PercentPriceFilter.new pull
-#         else ExchangeFilter.new pull
-#         end
-#       end
-#     end
-#     filters
-#     # JSON.parse(pull.read_raw).as_a.map do |item|
-#     #   puts "*" * 40, item.inspect, "*" * 40
-#     #   case item["filterType"]
-#     #   when "PRICE_FILTER" then PriceFilter.from_json item.to_json
-#     #   when "PERCENT_PRICE" then PercentPriceFilter.from_json item.to_json
-#     #   else ExchangeFilter.from_json(item.to_json)
-#     #   end
-#     # end
-
-#   end
-# end
-
-# class ExchangeSymbol
-#   include JSON::Serializable
-
-#   @[JSON::Field(key: "symbol")]
-#   getter symbol : String = ""
-
-#   @[JSON::Field(key: "status")]
-#   getter status : String = ""
-
-#   @[JSON::Field(key: "filters", converter: ToFilter)]
-#   getter filters : Array(ExchangeFilter) = [] of ExchangeFilter
-# end
-
-# describe Symbol do
-#   it "parses" do
-#     ExchangeSymbol.from_json(json).should be_a ExchangeSymbol
-#     ExchangeSymbol.from_json(json).filters[0].should be_a PriceFilter
-#     ExchangeSymbol.from_json(json).filters[1].should be_a PercentPriceFilter
-#     ExchangeSymbol.from_json(json).filters[2].should be_a ExchangeFilter
-#     ExchangeSymbol.from_json(json).filters[2].json_unmapped["minQty"].should eq "0.00100000"
-#   end
-# end
+describe Stream do
+  it "parses" do
+    stream = Stream.from_json(ticker_json)
+    stream.should be_a Stream
+    stream.stream.should eq "btcusdt@ticker"
+    stream.name.should eq "ticker"
+    stream.data.should be_a Ticker
+  end
+end

@@ -24,19 +24,10 @@
 #   "n": 18151          // Total number of trades
 # }
 module Binance::Responses::Websocket
-  class Ticker
+  class Ticker < MiniTicker
     include JSON::Serializable
 
-    @[JSON::Field(key: "e")]
-    getter event_type : String = ""
-
-    @[JSON::Field(key: "E", converter: Binance::Converters::ToTime)]
-    getter event_time : Time = Time.utc
-
-    @[JSON::Field(key: "s")]
-    getter symbol : String = ""
-
-    @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
+     @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
     getter price_change : Float64 = 0.0
 
     @[JSON::Field(key: "P", converter: Binance::Converters::ToFloat)]
@@ -47,9 +38,6 @@ module Binance::Responses::Websocket
 
     @[JSON::Field(key: "x", converter: Binance::Converters::ToFloat)]
     getter prev_close_price : Float64 = 0.0
-
-    @[JSON::Field(key: "c", converter: Binance::Converters::ToFloat)]
-    getter last_price : Float64 = 0.0
 
     @[JSON::Field(key: "Q", converter: Binance::Converters::ToFloat)]
     getter last_quantity : Float64 = 0.0
@@ -65,21 +53,6 @@ module Binance::Responses::Websocket
 
     @[JSON::Field(key: "A", converter: Binance::Converters::ToFloat)]
     getter ask_quantity : Float64 = 0.0
-
-    @[JSON::Field(key: "o", converter: Binance::Converters::ToFloat)]
-    getter open_price : Float64 = 0.0
-
-    @[JSON::Field(key: "h", converter: Binance::Converters::ToFloat)]
-    getter high_price : Float64 = 0.0
-
-    @[JSON::Field(key: "l", converter: Binance::Converters::ToFloat)]
-    getter low_price : Float64 = 0.0
-
-    @[JSON::Field(key: "v", converter: Binance::Converters::ToFloat)]
-    getter base_volume : Float64 = 0.0
-
-    @[JSON::Field(key: "q", converter: Binance::Converters::ToFloat)]
-    getter quote_volume : Float64 = 0.0
 
     @[JSON::Field(key: "O", converter: Binance::Converters::ToTime)]
     getter open_time : Time?

@@ -50,7 +50,7 @@ JSON
 json_object = <<-JSON
   {
     "e": "24hrTicker",
-    "E": 1598105754,
+    "E": 1598127580715,
     "s": "BNBBTC",
     "p": "0.0015",
     "P": "250.00",
@@ -68,7 +68,7 @@ json_object = <<-JSON
     "v": "10000",
     "q": "18",
     "O": 0,
-    "C": 86400000,
+    "C": 1598127580715,
     "F": 28385,
     "L": 18150,
     "n": 18151
@@ -76,31 +76,6 @@ json_object = <<-JSON
 JSON
 
 describe Binance::Responses::Websocket::Ticker do
-  it "parses array" do
-    response = Binance::Responses::TwentyFourHourResponse.from_json(json_array)
-    response.tickers.map(&.symbol).should eq ["BNBBTC", "BTCUSDT"]
-    response.tickers.size.should eq 2
-    ticker = response.tickers[0]
-    ticker.price_change.should eq -94.999998
-    ticker.price_change_percent.should eq -95.96
-    ticker.weighted_average_price.should eq 0.29628482
-    ticker.prev_close_price.should eq 0.10002
-    ticker.last_price.should eq 4.000002
-    ticker.last_quantity.should eq 200
-    ticker.bid_price.should eq 4.0
-    ticker.ask_price.should eq 4.000002
-    ticker.open_price.should eq 99.0
-    ticker.high_price.should eq 100
-    ticker.low_price.should eq 0.10
-    ticker.base_volume.should eq 8913.3
-    ticker.quote_volume.should eq 15.3
-    ticker.open_time.to_s.should eq "2017-07-11 14:31:39 UTC"
-    ticker.close_time.to_s.should eq "2017-07-12 14:31:39 UTC"
-    ticker.first_trade_id.should eq 28385
-    ticker.last_trade_id.should eq 28460
-    ticker.trades.should eq 76
-  end
-
   it "parses object" do
     ticker = Binance::Responses::Websocket::Ticker.from_json(json_object)
     ticker.symbol.should eq "BNBBTC"
@@ -119,9 +94,9 @@ describe Binance::Responses::Websocket::Ticker do
     ticker.low_price.should eq 0.001
     ticker.base_volume.should eq 10000.0
     ticker.quote_volume.should eq 18.0
-    ticker.event_time.to_s.should eq  "2020-08-22 14:15:54 UTC"
-    ticker.close_time.to_s.should eq  "2020-08-22 14:15:54 UTC"
-    ticker.open_time.to_s.should eq   "2020-08-21 14:15:53 UTC"
+    ticker.event_time.to_s.should eq  "2020-08-22 20:19:40 UTC"
+    ticker.close_time.to_s.should eq  "2020-08-22 20:19:40 UTC"
+    ticker.open_time.to_s.should eq   "2020-08-21 20:19:39 UTC"
     ticker.first_trade_id.should eq 28385
     ticker.last_trade_id.should eq 18150
     ticker.trades.should eq 18151
