@@ -9,11 +9,11 @@ module Binance
     record ChannelError, error : Exception
     record ChannelClose, message : String
 
-    def initialize(@symbols : Array(String), @stream_name : String)
+    def initialize(@symbols : Array(String), @stream_name : String, handler_class)
       @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
       @handlers = {} of String => Binance::Handler
       @symbols.each do |symbol|
-        @handlers[symbol.upcase] = Binance::Handler.new(symbol)
+        @handlers[symbol.upcase] = handler_class.new(symbol)
       end
 
       host = "stream.binance.com"
@@ -46,13 +46,6 @@ module Binance
       @symbols.join(",").downcase
     end
 
-    def extract_json(message)
-      JSON.parse(message)
-    rescue ex : JSON::ParseException
-      @channel.send ChannelError.new(ex)
-      return nil
-    end
-
     def open_connection
       puts "opening ws connection"
       spawn do
@@ -64,16 +57,8 @@ module Binance
       end
     end
 
-    def close_connection
-      puts "closing connection"
-      @ws.close unless @ws.closed?
-    end
-
-    def reopen_connection
-      puts "reopening ws connection"
-      close_connection
-      sleep(5)
-      open_connection
+    def message_stream(message : ChannelMessage)
+      Binance::Responses::Websocket::Stream.from_json(message.json)
     end
 
     def run
@@ -82,14 +67,13 @@ module Binance
       while message = @channel.receive?
         case message
 
+        when ChannelMessage
+          stream = message_stream(message)
+          @handlers[stream.symbol].update stream
+
         when ChannelClose
           puts "CLOSED #{symbols_param}"
           return {status: "CLOSED", message: symbols_param}
-
-        when ChannelMessage
-          if json = extract_json(message.json)
-            @handlers[json["data"]["s"]].update json["data"]
-          end
 
         when ChannelError
           puts message.error.message

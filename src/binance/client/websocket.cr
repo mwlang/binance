@@ -1,4 +1,6 @@
 require "./websocket/responses/*"
+require "./websocket/handler"
+require "./websocket/listener"
 
 module Binance
   class Websocket

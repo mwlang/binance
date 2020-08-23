@@ -7,6 +7,9 @@ module Binance
         t = Time.unix_ms(value)
         t.year <= 2015 ? Time.unix(value) : t
       end
+      def self.to_json(value : Time, builder : JSON::Builder)
+        builder.number(value.to_unix)
+      end
     end
   end
 end
