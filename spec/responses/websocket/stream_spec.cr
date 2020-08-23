@@ -1,53 +1,37 @@
-ticker_json = <<-JSON
-  {
-    "stream":"btcusdt@ticker",
-    "data":{
-      "e":"24hrTicker",
-      "E":1598127580715,
-      "s":"BTCUSDT",
-      "p":"-115.32000000",
-      "P":"-0.986",
-      "w":"11539.47825399",
-      "x":"11692.98000000",
-      "c":"11577.55000000",
-      "Q":"0.08326000",
-      "b":"11577.55000000",
-      "B":"2.34161000",
-      "a":"11577.56000000",
-      "A":"1.93661500",
-      "o":"11692.87000000",
-      "h":"11709.10000000",
-      "l":"11376.81000000",
-      "v":"50129.48441400",
-      "q":"578468095.27887401",
-      "O":1598041180596,
-      "C":1598127580596,
-      "F":391750555,
-      "L":392664752,
-      "n":914198
-    }
-  }
-JSON
-
-mini_ticker_json = <<-JSON
-  {
-    "stream":"bnbbtc@miniTicker",
-    "data":{
-      "e": "24hrMiniTicker",
-      "E": 1598127580715,
-      "s": "BNBBTC",
-      "c": "0.0025",
-      "o": "0.0010",
-      "h": "0.0025",
-      "l": "0.0010",
-      "v": "10000",
-      "q": "18"
-    }
-  }
-JSON
 
 describe Binance::Responses::Websocket::Stream do
   context "ticker" do
+    ticker_json = <<-JSON
+      {
+        "stream":"btcusdt@ticker",
+        "data":{
+          "e":"24hrTicker",
+          "E":1598127580715,
+          "s":"BTCUSDT",
+          "p":"-115.32000000",
+          "P":"-0.986",
+          "w":"11539.47825399",
+          "x":"11692.98000000",
+          "c":"11577.55000000",
+          "Q":"0.08326000",
+          "b":"11577.55000000",
+          "B":"2.34161000",
+          "a":"11577.56000000",
+          "A":"1.93661500",
+          "o":"11692.87000000",
+          "h":"11709.10000000",
+          "l":"11376.81000000",
+          "v":"50129.48441400",
+          "q":"578468095.27887401",
+          "O":1598041180596,
+          "C":1598127580596,
+          "F":391750555,
+          "L":392664752,
+          "n":914198
+        }
+      }
+    JSON
+
     it "parses" do
       stream = Binance::Responses::Websocket::Stream.from_json(ticker_json)
 
@@ -62,6 +46,23 @@ describe Binance::Responses::Websocket::Stream do
   end
 
   context "mini_ticker" do
+    mini_ticker_json = <<-JSON
+      {
+        "stream":"bnbbtc@miniTicker",
+        "data":{
+          "e": "24hrMiniTicker",
+          "E": 1598127580715,
+          "s": "BNBBTC",
+          "c": "0.0025",
+          "o": "0.0010",
+          "h": "0.0025",
+          "l": "0.0010",
+          "v": "10000",
+          "q": "18"
+        }
+      }
+    JSON
+
     it "parses" do
       stream = Binance::Responses::Websocket::Stream.from_json(mini_ticker_json)
 
