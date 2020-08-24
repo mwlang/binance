@@ -32,7 +32,7 @@ module Binance::HttpMethods
 
     def signed_{{method.id}}(url, params : HTTP::Params)
       raise "No API KEY assigned" if api_key.to_s.blank?
-      raise "No API SECRET assigned" if api_secret.to_s.blank?
+      raise "No API SECRET assigned" if secret_key.to_s.blank?
       connection = Cossack::Client.new(BASE_URL) do |client|
         client.headers["Content-Type"] = "application/json"
         client.headers["Accept"] = "application/json"
