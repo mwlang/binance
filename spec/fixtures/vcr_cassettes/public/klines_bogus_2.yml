@@ -1,7 +1,7 @@
 ---
 request:
   method: GET
-  uri: https://api.binance.com/api/v1/klines
+  uri: https://api.binance.com/api/v3/klines
   body: ""
   query_params: symbol=BOGUS&limit=2&interval=1h
   headers:

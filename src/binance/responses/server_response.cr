@@ -28,7 +28,7 @@ module Binance::Responses
 
     @[JSON::Field(ignore: true)]
     # The full HTTP Response object captured (if any).
-    property response : Cossack::Response?
+    property response : HTTP::Client::Response?
 
     @[JSON::Field(ignore: true)]
     # The exception captured (if any).
@@ -44,12 +44,12 @@ module Binance::Responses
 
     # The unparsed body of the HTTP response
     def body
-      @response.nil? ? "" : @response.as(Cossack::Response).body
+      @response.nil? ? "" : @response.as(HTTP::Client::Response).body
     end
 
     def used_weight
       return 0 if @response.nil?
-      value = @response.as(Cossack::Response).headers["X-MBX-USED-WEIGHT"]?
+      value = @response.as(HTTP::Client::Response).headers["X-MBX-USED-WEIGHT"]?
       value.nil? ? 0 : value.to_i
     end
 

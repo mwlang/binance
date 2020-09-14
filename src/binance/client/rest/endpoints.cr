@@ -26,7 +26,7 @@ module Binance::Endpoints
   macro fetch(action, client, endpoint, response_klass, params = HTTP::Params.new)
     begin
       if response = {{client.id}}_{{action.id}}(Binance::Endpoints::ENDPOINTS[{{endpoint}}], {{params}})
-        if response.status == 200
+        if response.status_code == 200
           {{response_klass}}.from_json(response.body).tap do |resp| 
             resp.response = response
           end
@@ -50,7 +50,7 @@ module Binance::Endpoints
     trades:            "v1/trades",
     historical_trades: "v1/historicalTrades",
     agg_trades:        "v1/aggTrades",
-    klines:            "v1/klines",
+    klines:            "v3/klines",
     twenty_four_hour:  "v1/ticker/24hr",
     price:             "v3/ticker/price",
     avg_price:         "v3/avgPrice",

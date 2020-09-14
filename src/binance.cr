@@ -3,8 +3,6 @@ require "json"
 require "yaml"
 require "openssl/hmac"
 
-require "cossack"
-
 # ## Terminology
 # * `base asset` refers to the asset that is the `quantity` of a symbol.
 # * `quote asset` refers to the asset that is the `price` of a symbol.

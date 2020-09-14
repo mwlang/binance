@@ -40,10 +40,11 @@ end
 def record_cassette(name : String)
   WebMock.callbacks.add do
     after_live_request do |request, response|
+      uri = "#{request.scheme}://#{request.headers["Host"]}#{request.resource.split("?")[0]}"
       data = {
         request: {
           method:       request.method,
-          uri:          request.resource.split("?")[0],
+          uri:          uri,
           body:         request.body.to_s,
           query_params: request.query_params.to_s,
           headers:      request.headers,
