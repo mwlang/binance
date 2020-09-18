@@ -219,6 +219,19 @@ end
 puts "starting ticker listener"
 
 listener = Binance::Listener.new ["BTCUSDT", "BNBBTC"], "ticker", TickerHandler
+
+# loop forever -- CTRL-C to break out in terminal
+loop do
+  if reason = listener.run
+    break if reason[:status] == "UNHANDLED"
+    sleep(30.seconds) if reason[:status] == "ERROR"
+    sleep(5.seconds) if reason[:status] == "CLOSED"
+  else
+    puts "No reason returned from listener"
+  end
+end
+
+puts "ticker listener stopped..."
 ```
 
 ### Exchange Filters
