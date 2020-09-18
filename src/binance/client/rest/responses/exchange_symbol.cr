@@ -35,7 +35,7 @@ module Binance::Responses
     @[JSON::Field(key: "filters", converter: Binance::Converters::ToFilter)]
     getter filters : Array(ExchangeFilter) = [] of Binance::Responses::ExchangeFilter
 
-    private def find_or_initialize(filter_class : T.class) forall T
+    private def find_or_initialize(filter_class : ExchangeFilter.class)
       filters.select(filter_class).first? || filter_class.new
     end
 
