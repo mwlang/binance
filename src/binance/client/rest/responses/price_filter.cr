@@ -32,6 +32,6 @@ module Binance::Responses
 
     @[JSON::Field(key: "tickSize", converter: Binance::Converters::ToFloat)]
     # tickSize defines the intervals that a price/stopPrice can be increased/decreased by; disabled on tickSize == 0.
-    getter tick_size : Float64 = 0.0
+    getter tick_size : Float64 = 0.00000001
   end
 end

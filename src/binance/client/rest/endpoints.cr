@@ -27,7 +27,7 @@ module Binance::Endpoints
     begin
       if response = {{client.id}}_{{action.id}}(Binance::Endpoints::ENDPOINTS[{{endpoint}}], {{params}})
         if response.status_code == 200
-          {{response_klass}}.from_json(response.body).tap do |resp| 
+          {{response_klass}}.from_json(response.body).tap do |resp|
             resp.response = response
           end
         else
@@ -45,7 +45,7 @@ module Binance::Endpoints
     # Public API Endpoints
     ping:              "v1/ping",
     time:              "v1/time",
-    exchange_info:     "v1/exchangeInfo",
+    exchange_info:     "v3/exchangeInfo",
     depth:             "v1/depth",
     trades:            "v1/trades",
     historical_trades: "v1/historicalTrades",

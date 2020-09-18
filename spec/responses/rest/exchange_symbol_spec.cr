@@ -60,22 +60,70 @@ json = <<-JSON
       ]}
 JSON
 
-describe Binance::Responses::ExchangeSymbol do
-  it "parses" do
-    filter = Binance::Responses::ExchangeSymbol.from_json(json)
-    filter.symbol.should eq "ETHBTC"
-    filter.status.should eq "TRADING"
-    filter.base_asset.should eq "ETH"
-    filter.base_asset_precision.should eq 8
-    filter.quote_asset.should eq "BTC"
-    filter.quote_asset_precision.should eq 8
-    filter.order_types.should eq ["LIMIT", "LIMIT_MAKER", "MARKET", "STOP_LOSS_LIMIT", "TAKE_PROFIT_LIMIT"]
-  end
+module Binance::Responses
+  describe ExchangeSymbol do
+    it "parses" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.symbol.should eq "ETHBTC"
+      symbol.status.should eq "TRADING"
+      symbol.base_asset.should eq "ETH"
+      symbol.base_asset_precision.should eq 8
+      symbol.quote_asset.should eq "BTC"
+      symbol.quote_asset_precision.should eq 8
+      symbol.order_types.should eq ["LIMIT", "LIMIT_MAKER", "MARKET", "STOP_LOSS_LIMIT", "TAKE_PROFIT_LIMIT"]
+    end
 
-  it "detects order types" do
-    filter = Binance::Responses::ExchangeSymbol.from_json(json)
-    filter.limit_orders?.should eq true
-    filter.limit_maker_orders?.should eq true
-    filter.take_profit_orders?.should eq false
+    it "has price_filter properties" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.price_filter.should be_a(PriceFilter)
+      symbol.price_filter.tick_size.should eq 0.000001
+      symbol.tick_size.should eq 0.000001
+      symbol.min_price.should eq 0.000001
+      symbol.max_price.should eq 100000.0
+    end
+
+    it "has percent_price_filter properties" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.percent_price_filter.should be_a(PercentPriceFilter)
+      symbol.multiplier_up.should eq 5.0
+      symbol.multiplier_down.should eq 0.2
+      symbol.avg_price_mins.should eq 5
+    end
+
+    it "has market_lot_size properties" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.market_lot_size_filter.should be_a(MarketLotSizeFilter)
+      symbol.min_quantity.should eq 0.0
+      symbol.max_quantity.should eq 63100.0
+      symbol.step_size.should eq 0.0
+    end
+
+    it "has min_notional_filter properties" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.min_notional_filter.should be_a(MinNotionalFilter)
+      symbol.min_notional.should eq 0.001
+      symbol.apply_to_market.should be_true
+      symbol.avg_price_mins.should eq 5
+    end
+
+    it "has max_num_algo_orders properties" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.max_num_algo_orders_filter.should be_a(MaxNumAlgoOrdersFilter)
+      symbol.max_num_algo_orders.should eq 5
+    end
+
+    it "has iceberg_parts properties" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.iceberg_parts_filter.should be_a(IcebergPartsFilter)
+      symbol.iceberg_parts_filter.limit.should eq 10
+      # :limit isn't delegated -- ambiguous!
+    end
+
+    it "detects order types" do
+      symbol = ExchangeSymbol.from_json(json)
+      symbol.limit_orders?.should eq true
+      symbol.limit_maker_orders?.should eq true
+      symbol.take_profit_orders?.should eq false
+    end
   end
 end
