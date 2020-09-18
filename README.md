@@ -29,10 +29,10 @@ puts "placing limit SELL order..."
 
 response = signed_client.new_order(
   symbol: symbol,
-  side: "SELL", 
-  order_type: "LIMIT", 
-  time_in_force: "GTC", 
-  quantity: 1.0, 
+  side: "SELL",
+  order_type: "LIMIT",
+  time_in_force: "GTC",
+  quantity: 1.0,
   price: (current_price * 1.1).round(4)
 )
 
@@ -80,14 +80,17 @@ Current
     * Methods return `Binance::Responses::ServerResponse` objects with JSON already deserialized
     * No need to generate signatures
 
+  * Basic Websocket API for Listening
+    * Pass procs or lambdas to event handlers
+
 Coming Soon!
 
-  * Basic implementation of WebSocket API
-    * Pass procs or lambdas to event handlers
-    * Single and multiple streams supported
+  * Websocket API
+    * WebSocket Live subscribe/unsubscribe and sending commands
+      * Single and multiple streams supported
 
 ## REST Endpoints
-  
+
 ### PUBLIC (NONE)
 - [x] `ping` [ping](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-connectivity) Test connectivity to the Rest API.
 - [x] `time` [time](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time) Test connectivity to the Rest API and get the current server time.
@@ -141,7 +144,7 @@ client.klines(symbol: "BNBBTC", interval: "5m", limit: 5).klines.each do |kline|
   puts "#{kline.open_time} O: #{"%0.6f" % kline.open_price} C: #{"%0.6f" % kline.close_price}"
 end
 
-# => 
+# =>
 # 2019-07-02 15:35:00 UTC O: 0.003031 C: 0.003035
 # 2019-07-02 15:40:00 UTC O: 0.003035 C: 0.003023
 # 2019-07-02 15:45:00 UTC O: 0.003023 C: 0.003031
@@ -156,7 +159,7 @@ signed_client.historical_trades("BTCUSDC", 5).trades.each do |trade|
   puts "#{trade.time} #{"%0.6f" % trade.price} #{"%0.6f" % trade.quantity}"
 end
 
-# => 
+# =>
 # 2019-07-02 16:08:07 UTC 10465.560000 0.001689
 # 2019-07-02 16:08:09 UTC 10465.650000 1.000000
 # 2019-07-02 16:08:09 UTC 10465.650000 0.034570
@@ -166,7 +169,7 @@ end
 
 Initializing the REST client:
 
-If you only plan on touching public API endpoints, you can forgo any arguments.  
+If you only plan on touching public API endpoints, you can forgo any arguments.
 Any of the public (NONE) api endpoints will work without an API key.
 
 ```crystal
@@ -178,6 +181,75 @@ Otherwise provide an api_key and secret_key as keyword arguments
 ```crystal
 client = Binance::REST.new api_key: "x", secret_key: "y"
 ```
+### Websocket client
+
+The basic Websocket API is implemented.  Advanced live subscribe/unsubscribe is not.
+
+Using a websocket is composed of two parts:
+
+1. The websocket listener/client
+2. The update handler for the incoming data stream(s)
+
+The handler should inherit from `Binance::Handler`
+
+```crystal
+require "binance"
+
+client = Binance::Websocket.new
+
+# Each market will instantiate it's own TickerHandler
+class TickerHandler < Binance::Handler
+
+  # implement an update() method in your handler to process
+  # what was sent over the websocket stream
+  def update(stream)
+    ticker = stream.ticker
+    puts [
+      ticker.symbol,
+      "messages: #{messages}",
+      "bid: %0.6f" % ticker.bid_price,
+      "ask: %0.6f" % ticker.ask_price,
+      "change: %0.3f" % ticker.price_change_percent,
+      "high: %0.6f" % ticker.high_price,
+      "low: %0.6f" % ticker.low_price,
+    ].join(" ")
+  end
+end
+
+puts "starting ticker listener"
+
+listener = Binance::Listener.new ["BTCUSDT", "BNBBTC"], "ticker", TickerHandler
+```
+
+### Exchange Filters
+
+Binance provides a flexible system of setting filters on each market pair (a.k.a. `ExchangeSymbol`).  For example, `PRICE_FILTER`
+is available on any given `ExchangeSymbol` as the `price_filter` property.  Most of the filters implement both a `validate` and
+`valid?(value : Float64)` method to make it easy to validate if your intended price or quantity, etc. will pass the
+filters on Binance's server when submitted.
+
+NOTE: The filters' validations are not invoked in the process of calling the new order API's
+and is your responsibility to utilize them as you see fit.
+
+Example:
+
+```crystal
+client = Binance::REST.new(api_key, api_secret)
+assets = client.exchange_info.symbols
+symbol = assets[0] # => Binance::Response::ExchangeSymbol for ETHBTC (coincidentally!)
+
+# The price_filter's properties are delegated, so are accessible directly on the symbol.
+puts symbol.tick_size # => 0.000001
+puts symbol.min_price # => 0.000001
+puts symbol.max_price # => 100000.0
+puts symbol.price_filter.valid?(0.0) # => false
+pp symbol.price_filter.validate(0.0) # => ["0.0 is below min_price of 0.000001"]
+pp symbol.price_filter.validate(0.0000011) # => ["0.0000011  is an invalid tick_size 0.000001"]
+```
+
+* `#validate` returns array of error messages which may be empty.
+* `#valid?` returns `true` or `false`
+* for filters with `#tick_size` and `#step_size`, `#decimals` returns number of decimals to round a value to.
 
 #### Anatomy of a `Binance::Responses::ServerResponse`
 
@@ -187,7 +259,7 @@ A ServerResponse is either a successful call and loaded with data or in an error
 from connection fails or the server returning error codes are captured.  It is up to you to check
 for errors before attempting to access the properties of the ServerResponses
 
-When accessing the properties of the JSON responses, Generally speaking: 
+When accessing the properties of the JSON responses, Generally speaking:
   * camel-cased JSON keys become downcased and underscored.
   * abbreviations are spelled out (e.g. qty => quantity).
   * If an API can return one or more, it's always an Array property on the `ServerResponse` object.
@@ -199,37 +271,37 @@ client = Binance::REST.new
 
 puts client.ping.inspect
 
-# => #<Binance::Responses::PingResponse:0x10d40c280 
-#   @success=true, 
-#   @error_code=nil, 
-#   @error_message=nil, 
-#   @response=#<Cossack::Response:0x10d3fe5a0 @status=200, 
+# => #<Binance::Responses::PingResponse:0x10d40c280
+#   @success=true,
+#   @error_code=nil,
+#   @error_message=nil,
+#   @response=#<Cossack::Response:0x10d3fe5a0 @status=200,
 #     @headers=HTTP::Headers{
-#       "Content-Type" => "application/json;charset=utf-8", 
-#       "Transfer-Encoding" => "chunked", 
-#       "Connection" => "keep-alive", 
-#       "Date" => "Tue, 02 Jul 2019 15:26:47 GMT", 
-#       "Server" => "nginx", 
-#       "Vary" => "Accept-Encoding", 
-#       "X-MBX-USED-WEIGHT" => "3", 
-#       "Strict-Transport-Security" => 
-#       "max-age=31536000; includeSubdomains", 
-#       "X-Frame-Options" => "SAMEORIGIN", 
+#       "Content-Type" => "application/json;charset=utf-8",
+#       "Transfer-Encoding" => "chunked",
+#       "Connection" => "keep-alive",
+#       "Date" => "Tue, 02 Jul 2019 15:26:47 GMT",
+#       "Server" => "nginx",
+#       "Vary" => "Accept-Encoding",
+#       "X-MBX-USED-WEIGHT" => "3",
+#       "Strict-Transport-Security" =>
+#       "max-age=31536000; includeSubdomains",
+#       "X-Frame-Options" => "SAMEORIGIN",
 #       "X-Xss-Protection" => "1; mode=block",
-#       "X-Content-Type-Options" => "nosniff", 
-#       "Content-Security-Policy" => "default-src 'self'", 
-#       "X-Content-Security-Policy" => "default-src 'self'", 
-#       "X-WebKit-CSP" => "default-src 'self'", 
-#       "Cache-Control" => "no-cache, no-store, must-revalidate", 
-#       "Pragma" => "no-cache", 
-#       "Expires" => "0", 
-#       "Content-Encoding" => "gzip", 
-#       "X-Cache" => "Miss from cloudfront", 
-#       "Via" => "1.1 f5d17f65245ed818b0a01bb46646051c.cloudfront.net (CloudFront)", 
-#       "X-Amz-Cf-Pop" => "ATL50-C1", 
+#       "X-Content-Type-Options" => "nosniff",
+#       "Content-Security-Policy" => "default-src 'self'",
+#       "X-Content-Security-Policy" => "default-src 'self'",
+#       "X-WebKit-CSP" => "default-src 'self'",
+#       "Cache-Control" => "no-cache, no-store, must-revalidate",
+#       "Pragma" => "no-cache",
+#       "Expires" => "0",
+#       "Content-Encoding" => "gzip",
+#       "X-Cache" => "Miss from cloudfront",
+#       "Via" => "1.1 f5d17f65245ed818b0a01bb46646051c.cloudfront.net (CloudFront)",
+#       "X-Amz-Cf-Pop" => "ATL50-C1",
 #       "X-Amz-Cf-Id" => "-lcrDlHfRIAYp7ULZLmEqNzDMCU8U4q5LnS60csCxtYe-SRY3qqqTQ=="
-#       }, 
-#     @body="{}">, 
+#       },
+#     @body="{}">,
 #   @exception=nil>
 ```
 The raw JSON returned is accessible via the #body property of the `ServerResponse`
@@ -298,20 +370,20 @@ puts client.time.server_time.inspect
 
 Testing is done primarily with webmock and stubbing server responses.  To make testing
 easier, a mini-[VCR style record and playback](https://github.com/vcr/vcr) set of helpers
-was implemented.  
+was implemented.
 
 However, only PUBLIC API VCR cassettes are committed to the repo.  To test SIGNED/VERIFIED
 API calls, you'll have to setup your private API credentials.
 
 ## Development
 
-All API's are TDD and have specs.  If you find a bug or want to contribute, then your 
+All API's are TDD and have specs.  If you find a bug or want to contribute, then your
 contributions is expected to have specs exercising your code changes.
 
 API calls are captured with so-called VCR cassettes, which is a [small library](https://github.com/mwlang/binance/blob/master/spec/support/vcr.cr) built upon Webmock for capturing and playing back a server interaction with one caveat:  signed APIs (those requiring API key) are not checked
 into the repository.  As a consequence, you'll have to set up your API key and record your own
 cassettes locally to get specs passing.  Signed exchanges are necessarily kept somewhat generic, but read the specs for prerequisites to actions you much take on Binance manually to prepare
-to capture your signed cassettes. 
+to capture your signed cassettes.
 
 NOTE: Signed exchanges are saved to ./spec/fixtures/vcr_cassettes/signed and this folder is excluded in the .gitignore file.
 

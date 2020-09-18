@@ -1,4 +1,7 @@
 module Binance::Responses
+  class FilterException < Exception
+  end
+
   # The ServerResponse class is the base class returned for all endpoint calls
   #  * If the endpoint call was successfully executed and parsed, then
   # the success property will be true.  Otherwise it will be false and

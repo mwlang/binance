@@ -50,7 +50,7 @@ module Binance
       puts "opening ws connection"
       spawn do
         begin
-          @ws.run 
+          @ws.run
         rescue ex : OpenSSL::SSL::Error
           @channel.send ChannelError.new(ex)
         end

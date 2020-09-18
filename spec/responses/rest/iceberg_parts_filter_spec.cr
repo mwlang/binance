@@ -12,4 +12,10 @@ describe Binance::Responses::IcebergPartsFilter do
     filter = Binance::Responses::IcebergPartsFilter.from_json(json)
     filter.limit.should eq 10
   end
+
+  it "validates correctly" do
+    filter = Binance::Responses::IcebergPartsFilter.from_json(json)
+    filter.valid?(20).should be_false
+    filter.valid?(5).should be_true
+  end
 end
