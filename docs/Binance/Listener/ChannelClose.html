@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="binance">
-  <title>Binance::Responses::TimeResponse - binance master</title>
+  <title>Binance::Listener::ChannelClose - binance master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -76,12 +76,12 @@
       
     </li>
   
-  <li class="parent " data-id="binance/Binance/Listener" data-name="binance::listener">
+  <li class="parent open current" data-id="binance/Binance/Listener" data-name="binance::listener">
       <a href="../../Binance/Listener.html">Listener</a>
       
         <ul>
   
-  <li class=" " data-id="binance/Binance/Listener/ChannelClose" data-name="binance::listener::channelclose">
+  <li class=" current" data-id="binance/Binance/Listener/ChannelClose" data-name="binance::listener::channelclose">
       <a href="../../Binance/Listener/ChannelClose.html">ChannelClose</a>
       
     </li>
@@ -101,7 +101,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="binance/Binance/Responses" data-name="binance::responses">
+  <li class="parent " data-id="binance/Binance/Responses" data-name="binance::responses">
       <a href="../../Binance/Responses.html">Responses</a>
       
         <ul>
@@ -266,7 +266,7 @@
       
     </li>
   
-  <li class=" current" data-id="binance/Binance/Responses/TimeResponse" data-name="binance::responses::timeresponse">
+  <li class=" " data-id="binance/Binance/Responses/TimeResponse" data-name="binance::responses::timeresponse">
       <a href="../../Binance/Responses/TimeResponse.html">TimeResponse</a>
       
     </li>
@@ -355,30 +355,15 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Binance::Responses::TimeResponse
+  <span class="kind">struct</span> Binance::Listener::ChannelClose
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/TimeResponse.html">Binance::Responses::TimeResponse</a></li><li class="superclass"><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Listener/ChannelClose.html">Binance::Listener::ChannelClose</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
-
-  <h2>
-    <a id="overview" class="anchor" href="#overview">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Overview
-  </h2>
-
-  <p>Example Server Response:</p>
-
-<pre><code>{
-  <span class="s">&quot;serverTime&quot;</span>: <span class="n">1499827319559</span>
-}</code></pre>
 
 
 
@@ -403,8 +388,8 @@
   </h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/time_response.cr#L6" target="_blank">
-        binance/client/rest/responses/time_response.cr
+      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L10" target="_blank">
+        binance/client/websocket/listener.cr
       </a>
     
     <br/>
@@ -425,9 +410,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(pull:JSON::PullParser)-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
-        
-          <div class="summary"><p>Example Server Response:     {       "serverTime": 1499827319559     }</p></div>
+        <a href="#new(message:String)-class-method" class="signature"><strong>.new</strong>(message : String)</a>
         
       </li>
     
@@ -448,9 +431,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#server_time:Time-instance-method" class="signature"><strong>#server_time</strong> : Time</a>
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
         
-          <div class="summary"><p>A <code>Time</code> representation of the serverTime property</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with(message_message=@message)-instance-method" class="signature"><strong>#copy_with</strong>(message _message = @message)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#message:String-instance-method" class="signature"><strong>#message</strong> : String</a>
         
       </li>
     
@@ -461,89 +452,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></code></h3>
-  
-  
-    <a href="../../Binance/Responses/ServerResponse.html#body-instance-method" class="tooltip">
-      <span>body</span>
-    body</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#error_code:Int32?-instance-method" class="tooltip">
-      <span>error_code : Int32?</span>
-    error_code</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#error_code=(error_code:Int32?)-instance-method" class="tooltip">
-      <span>error_code=(error_code : Int32?)</span>
-    error_code=</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#error_message:String?-instance-method" class="tooltip">
-      <span>error_message : String?</span>
-    error_message</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#error_message=(error_message:String?)-instance-method" class="tooltip">
-      <span>error_message=(error_message : String?)</span>
-    error_message=</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#exception:Exception?-instance-method" class="tooltip">
-      <span>exception : Exception?</span>
-    exception</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#exception=(exception:Exception?)-instance-method" class="tooltip">
-      <span>exception=(exception : Exception?)</span>
-    exception=</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#response:HTTP::Client::Response?-instance-method" class="tooltip">
-      <span>response : HTTP::Client::Response?</span>
-    response</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#response=(response:HTTP::Client::Response?)-instance-method" class="tooltip">
-      <span>response=(response : HTTP::Client::Response?)</span>
-    response=</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#success:Bool-instance-method" class="tooltip">
-      <span>success : Bool</span>
-    success</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#success=(success:Bool)-instance-method" class="tooltip">
-      <span>success=(success : Bool)</span>
-    success=</a>, 
-    
-  
-    <a href="../../Binance/Responses/ServerResponse.html#used_weight-instance-method" class="tooltip">
-      <span>used_weight</span>
-    used_weight</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></code></h3>
-  
-  
-    <a href="../../Binance/Responses/ServerResponse.html#new(pull:JSON::PullParser)-class-method" class="tooltip">
-      <span>new(pull : JSON::PullParser)</span>
-    new</a>
-    
-  
-
-
-    
-
-
   
     
 
@@ -587,27 +495,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+    <div class="entry-detail" id="new(message:String)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(pull : JSON::PullParser)
+        def self.<strong>new</strong>(message : String)
 
-        <a class="method-permalink" href="#new(pull:JSON::PullParser)-class-method">#</a>
+        <a class="method-permalink" href="#new(message:String)-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Example Server Response:</p>
-
-<pre><code>{
-  <span class="s">&quot;serverTime&quot;</span>: <span class="n">1499827319559</span>
-}</code></pre>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/time_response.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -626,23 +525,48 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="server_time:Time-instance-method">
+    <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
-        def <strong>server_time</strong> : Time
+        def <strong>clone</strong>
 
-        <a class="method-permalink" href="#server_time:Time-instance-method">#</a>
+        <a class="method-permalink" href="#clone-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>A <code>Time</code> representation of the serverTime property</p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/time_response.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(message_message=@message)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(message _message = @message)
+
+        <a class="method-permalink" href="#copy_with(message_message=@message)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="message:String-instance-method">
+      <div class="signature">
+        
+        def <strong>message</strong> : String
+
+        <a class="method-permalink" href="#message:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
         
       </div>
     </div>

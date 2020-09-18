@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="binance">
-  <title>Binance::Websocket - binance master</title>
+  <title>Binance::Listener - binance master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -76,7 +76,7 @@
       
     </li>
   
-  <li class="parent " data-id="binance/Binance/Listener" data-name="binance::listener">
+  <li class="parent open current" data-id="binance/Binance/Listener" data-name="binance::listener">
       <a href="../Binance/Listener.html">Listener</a>
       
         <ul>
@@ -336,7 +336,7 @@
       
     </li>
   
-  <li class=" current" data-id="binance/Binance/Websocket" data-name="binance::websocket">
+  <li class=" " data-id="binance/Binance/Websocket" data-name="binance::websocket">
       <a href="../Binance/Websocket.html">Websocket</a>
       
     </li>
@@ -355,12 +355,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Binance::Websocket
+  <span class="kind">class</span> Binance::Listener
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Binance/Websocket.html">Binance::Websocket</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Binance/Listener.html">Binance::Listener</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -388,8 +388,8 @@
   </h2>
   
     
-      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L6" target="_blank">
-        binance/client/websocket.cr
+      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L2" target="_blank">
+        binance/client/websocket/listener.cr
       </a>
     
     <br/>
@@ -410,7 +410,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(api_key=&quot;&quot;,secret_key=&quot;&quot;)-class-method" class="signature"><strong>.new</strong>(api_key = <span class="s">&quot;&quot;</span>, secret_key = <span class="s">&quot;&quot;</span>)</a>
+        <a href="#new(symbols:Array(String),stream_name:String,handler_class)-class-method" class="signature"><strong>.new</strong>(symbols : Array(String), stream_name : String, handler_class)</a>
         
       </li>
     
@@ -431,27 +431,52 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#api_key:String-instance-method" class="signature"><strong>#api_key</strong> : String</a>
+        <a href="#handlers:Hash(String,Binance::Handler)-instance-method" class="signature"><strong>#handlers</strong> : Hash(String, Binance::Handler)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#api_key=(api_key:String)-instance-method" class="signature"><strong>#api_key=</strong>(api_key : String)</a>
+        <a href="#message_stream(message:ChannelMessage)-instance-method" class="signature"><strong>#message_stream</strong>(message : ChannelMessage)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#secret_key:String-instance-method" class="signature"><strong>#secret_key</strong> : String</a>
+        <a href="#messages:Int32-instance-method" class="signature"><strong>#messages</strong> : Int32</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#secret_key=(secret_key:String)-instance-method" class="signature"><strong>#secret_key=</strong>(secret_key : String)</a>
+        <a href="#messages=(messages:Int32)-instance-method" class="signature"><strong>#messages=</strong>(messages : Int32)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#ticker(markets:Array(String)):Listener-instance-method" class="signature"><strong>#ticker</strong>(markets : Array(String)) : Listener</a>
+        <a href="#open_connection-instance-method" class="signature"><strong>#open_connection</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#run-instance-method" class="signature"><strong>#run</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#stream_name:String-instance-method" class="signature"><strong>#stream_name</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#stream_names-instance-method" class="signature"><strong>#stream_names</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#symbols:Array(String)-instance-method" class="signature"><strong>#symbols</strong> : Array(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#symbols_param-instance-method" class="signature"><strong>#symbols_param</strong></a>
         
       </li>
     
@@ -495,18 +520,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(api_key=&quot;&quot;,secret_key=&quot;&quot;)-class-method">
+    <div class="entry-detail" id="new(symbols:Array(String),stream_name:String,handler_class)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(api_key = <span class="s">&quot;&quot;</span>, secret_key = <span class="s">&quot;&quot;</span>)
+        def self.<strong>new</strong>(symbols : Array(String), stream_name : String, handler_class)
 
-        <a class="method-permalink" href="#new(api_key=&quot;&quot;,secret_key=&quot;&quot;)-class-method">#</a>
+        <a class="method-permalink" href="#new(symbols:Array(String),stream_name:String,handler_class)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -525,82 +550,162 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="api_key:String-instance-method">
+    <div class="entry-detail" id="handlers:Hash(String,Binance::Handler)-instance-method">
       <div class="signature">
         
-        def <strong>api_key</strong> : String
+        def <strong>handlers</strong> : Hash(String, <a href="../Binance/Handler.html">Binance::Handler</a>)
 
-        <a class="method-permalink" href="#api_key:String-instance-method">#</a>
+        <a class="method-permalink" href="#handlers:Hash(String,Binance::Handler)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="api_key=(api_key:String)-instance-method">
+    <div class="entry-detail" id="message_stream(message:ChannelMessage)-instance-method">
       <div class="signature">
         
-        def <strong>api_key=</strong>(api_key : String)
+        def <strong>message_stream</strong>(message : <a href="../Binance/Listener/ChannelMessage.html">ChannelMessage</a>)
 
-        <a class="method-permalink" href="#api_key=(api_key:String)-instance-method">#</a>
+        <a class="method-permalink" href="#message_stream(message:ChannelMessage)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="secret_key:String-instance-method">
+    <div class="entry-detail" id="messages:Int32-instance-method">
       <div class="signature">
         
-        def <strong>secret_key</strong> : String
+        def <strong>messages</strong> : Int32
 
-        <a class="method-permalink" href="#secret_key:String-instance-method">#</a>
+        <a class="method-permalink" href="#messages:Int32-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="secret_key=(secret_key:String)-instance-method">
+    <div class="entry-detail" id="messages=(messages:Int32)-instance-method">
       <div class="signature">
         
-        def <strong>secret_key=</strong>(secret_key : String)
+        def <strong>messages=</strong>(messages : Int32)
 
-        <a class="method-permalink" href="#secret_key=(secret_key:String)-instance-method">#</a>
+        <a class="method-permalink" href="#messages=(messages:Int32)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="ticker(markets:Array(String)):Listener-instance-method">
+    <div class="entry-detail" id="open_connection-instance-method">
       <div class="signature">
         
-        def <strong>ticker</strong>(markets : Array(String)) : <a href="../Binance/Listener.html">Listener</a>
+        def <strong>open_connection</strong>
 
-        <a class="method-permalink" href="#ticker(markets:Array(String)):Listener-instance-method">#</a>
+        <a class="method-permalink" href="#open_connection-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="run-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>
+
+        <a class="method-permalink" href="#run-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="stream_name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>stream_name</strong> : String
+
+        <a class="method-permalink" href="#stream_name:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="stream_names-instance-method">
+      <div class="signature">
+        
+        def <strong>stream_names</strong>
+
+        <a class="method-permalink" href="#stream_names-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="symbols:Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>symbols</strong> : Array(String)
+
+        <a class="method-permalink" href="#symbols:Array(String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="symbols_param-instance-method">
+      <div class="signature">
+        
+        def <strong>symbols_param</strong>
+
+        <a class="method-permalink" href="#symbols_param-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/websocket/listener.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>

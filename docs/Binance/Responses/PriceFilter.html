@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Crystal Docs 0.34.0">
-<meta name="crystal_docs.project_version" content="master-dev">
+<meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="binance">
 
 
@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="binance">
-  <title>Binance::Responses::PriceFilter - binance master-dev</title>
+  <title>Binance::Responses::PriceFilter - binance master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master-dev
+        master
       </span>
     </div>
   </div>
@@ -66,8 +66,38 @@
       
     </li>
   
+  <li class=" " data-id="binance/Binance/Handler" data-name="binance::handler">
+      <a href="../../Binance/Handler.html">Handler</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/HttpMethods" data-name="binance::httpmethods">
       <a href="../../Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
+  <li class="parent " data-id="binance/Binance/Listener" data-name="binance::listener">
+      <a href="../../Binance/Listener.html">Listener</a>
+      
+        <ul>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelClose" data-name="binance::listener::channelclose">
+      <a href="../../Binance/Listener/ChannelClose.html">ChannelClose</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelError" data-name="binance::listener::channelerror">
+      <a href="../../Binance/Listener/ChannelError.html">ChannelError</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelMessage" data-name="binance::listener::channelmessage">
+      <a href="../../Binance/Listener/ChannelMessage.html">ChannelMessage</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -133,6 +163,11 @@
   
   <li class=" " data-id="binance/Binance/Responses/ExchangeSymbol" data-name="binance::responses::exchangesymbol">
       <a href="../../Binance/Responses/ExchangeSymbol.html">ExchangeSymbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/FilterException" data-name="binance::responses::filterexception">
+      <a href="../../Binance/Responses/FilterException.html">FilterException</a>
       
     </li>
   
@@ -261,8 +296,28 @@
       
         <ul>
   
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Data" data-name="binance::responses::websocket::data">
+      <a href="../../Binance/Responses/Websocket/Data.html">Data</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/MiniTicker" data-name="binance::responses::websocket::miniticker">
+      <a href="../../Binance/Responses/Websocket/MiniTicker.html">MiniTicker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Stream" data-name="binance::responses::websocket::stream">
+      <a href="../../Binance/Responses/Websocket/Stream.html">Stream</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/Responses/Websocket/Ticker" data-name="binance::responses::websocket::ticker">
       <a href="../../Binance/Responses/Websocket/Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Trade" data-name="binance::responses::websocket::trade">
+      <a href="../../Binance/Responses/Websocket/Trade.html">Trade</a>
       
     </li>
   
@@ -364,6 +419,13 @@
     Defined in:
   </h2>
   
+    
+      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L24" target="_blank">
+        binance/client/rest/responses/price_filter.cr
+      </a>
+    
+    <br/>
+  
 
 
 
@@ -407,6 +469,11 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#decimals-instance-method" class="signature"><strong>#decimals</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#max_price:Float64-instance-method" class="signature"><strong>#max_price</strong> : Float64</a>
         
           <div class="summary"><p>maxPrice defines the maximum price/stopPrice allowed; disabled on maxPrice == 0.</p></div>
@@ -424,6 +491,16 @@
         <a href="#tick_size:Float64-instance-method" class="signature"><strong>#tick_size</strong> : Float64</a>
         
           <div class="summary"><p>tickSize defines the intervals that a price/stopPrice can be increased/decreased by; disabled on tickSize == 0.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#valid?(value:Float64)-instance-method" class="signature"><strong>#valid?</strong>(value : Float64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#validate(value:Float64)-instance-method" class="signature"><strong>#validate</strong>(value : Float64)</a>
         
       </li>
     
@@ -453,7 +530,7 @@
   
   
     <a href="../../Binance/Responses/ExchangeFilter.html#new(pull:JSON::PullParser)-class-method" class="tooltip">
-      <span>new(pull : JSON::PullParser)</span>
+      <span>new(pull : JSON::PullParser)<br/>new</span>
     new</a>
     
   
@@ -561,6 +638,8 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L24" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -578,6 +657,22 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="decimals-instance-method">
+      <div class="signature">
+        
+        def <strong>decimals</strong>
+
+        <a class="method-permalink" href="#decimals-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="max_price:Float64-instance-method">
       <div class="signature">
         
@@ -593,6 +688,8 @@
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -613,6 +710,8 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L27" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -631,6 +730,40 @@
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="valid?(value:Float64)-instance-method">
+      <div class="signature">
+        
+        def <strong>valid?</strong>(value : Float64)
+
+        <a class="method-permalink" href="#valid?(value:Float64)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="validate(value:Float64)-instance-method">
+      <div class="signature">
+        
+        def <strong>validate</strong>(value : Float64)
+
+        <a class="method-permalink" href="#validate(value:Float64)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest/responses/price_filter.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>

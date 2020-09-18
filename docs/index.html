@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Crystal Docs 0.34.0">
-<meta name="crystal_docs.project_version" content="master-dev">
+<meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="binance">
 
 
@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="binance">
-  <title>binance master-dev</title>
+  <title>binance master</title>
   <script type="text/javascript">
   CrystalDocs.base_path = "";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master-dev
+        master
       </span>
     </div>
   </div>
@@ -66,8 +66,38 @@
       
     </li>
   
+  <li class=" " data-id="binance/Binance/Handler" data-name="binance::handler">
+      <a href="Binance/Handler.html">Handler</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/HttpMethods" data-name="binance::httpmethods">
       <a href="Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
+  <li class="parent " data-id="binance/Binance/Listener" data-name="binance::listener">
+      <a href="Binance/Listener.html">Listener</a>
+      
+        <ul>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelClose" data-name="binance::listener::channelclose">
+      <a href="Binance/Listener/ChannelClose.html">ChannelClose</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelError" data-name="binance::listener::channelerror">
+      <a href="Binance/Listener/ChannelError.html">ChannelError</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelMessage" data-name="binance::listener::channelmessage">
+      <a href="Binance/Listener/ChannelMessage.html">ChannelMessage</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -133,6 +163,11 @@
   
   <li class=" " data-id="binance/Binance/Responses/ExchangeSymbol" data-name="binance::responses::exchangesymbol">
       <a href="Binance/Responses/ExchangeSymbol.html">ExchangeSymbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/FilterException" data-name="binance::responses::filterexception">
+      <a href="Binance/Responses/FilterException.html">FilterException</a>
       
     </li>
   
@@ -261,8 +296,28 @@
       
         <ul>
   
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Data" data-name="binance::responses::websocket::data">
+      <a href="Binance/Responses/Websocket/Data.html">Data</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/MiniTicker" data-name="binance::responses::websocket::miniticker">
+      <a href="Binance/Responses/Websocket/MiniTicker.html">MiniTicker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Stream" data-name="binance::responses::websocket::stream">
+      <a href="Binance/Responses/Websocket/Stream.html">Stream</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/Responses/Websocket/Ticker" data-name="binance::responses::websocket::ticker">
       <a href="Binance/Responses/Websocket/Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Trade" data-name="binance::responses::websocket::trade">
+      <a href="Binance/Responses/Websocket/Trade.html">Trade</a>
       
     </li>
   
@@ -334,10 +389,10 @@ puts <span class="s">&quot;placing limit SELL order...&quot;</span>
 
 response <span class="o">=</span> signed_client.new_order(
   symbol: symbol,
-  side: <span class="s">&quot;SELL&quot;</span>, 
-  order_type: <span class="s">&quot;LIMIT&quot;</span>, 
-  time_in_force: <span class="s">&quot;GTC&quot;</span>, 
-  quantity: <span class="n">1.0</span>, 
+  side: <span class="s">&quot;SELL&quot;</span>,
+  order_type: <span class="s">&quot;LIMIT&quot;</span>,
+  time_in_force: <span class="s">&quot;GTC&quot;</span>,
+  quantity: <span class="n">1.0</span>,
   price: (current_price <span class="o">*</span> <span class="n">1.1</span>).round(<span class="n">4</span>)
 )
 
@@ -384,9 +439,11 @@ That's all folks!</code></pre>
 
 <ul><li>Basic implementation of REST API</li><li>Easy to use authentication</li><li>Methods return <code><a href="Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></code> objects with JSON already deserialized</li><li>No need to generate signatures</li></ul></ul>
 
+<ul><li>Basic Websocket API for Listening</li><li>Pass procs or lambdas to event handlers</li></ul></ul>
+
 <p>Coming Soon!</p>
 
-<ul><li>Basic implementation of WebSocket API</li><li>Pass procs or lambdas to event handlers</li><li>Single and multiple streams supported</li></ul></ul>
+<ul><li>Websocket API</li><li>WebSocket Live subscribe/unsubscribe and sending commands</li><li>Single and multiple streams supported</li></ul></ul>
 
 <h2><a id="rest-endpoints" class="anchor" href="#rest-endpoints">
   <svg class="octicon-link" aria-hidden="true">
@@ -454,7 +511,7 @@ client.klines(symbol: <span class="s">&quot;BNBBTC&quot;</span>, interval: <span
   puts <span class="s">&quot;</span><span class="i">#{</span>kline.open_time<span class="i">}</span><span class="s"> O: </span><span class="i">#{</span><span class="s">&quot;%0.6f&quot;</span> <span class="o">%</span> kline.open_price<span class="i">}</span><span class="s"> C: </span><span class="i">#{</span><span class="s">&quot;%0.6f&quot;</span> <span class="o">%</span> kline.close_price<span class="i">}</span><span class="s">&quot;</span>
 <span class="k">end</span>
 
-<span class="c"># =&gt; </span>
+<span class="c"># =&gt;</span>
 <span class="c"># 2019-07-02 15:35:00 UTC O: 0.003031 C: 0.003035</span>
 <span class="c"># 2019-07-02 15:40:00 UTC O: 0.003035 C: 0.003023</span>
 <span class="c"># 2019-07-02 15:45:00 UTC O: 0.003023 C: 0.003031</span>
@@ -469,7 +526,7 @@ signed_client.historical_trades(<span class="s">&quot;BTCUSDC&quot;</span>, <spa
   puts <span class="s">&quot;</span><span class="i">#{</span>trade.time<span class="i">}</span><span class="s"> </span><span class="i">#{</span><span class="s">&quot;%0.6f&quot;</span> <span class="o">%</span> trade.price<span class="i">}</span><span class="s"> </span><span class="i">#{</span><span class="s">&quot;%0.6f&quot;</span> <span class="o">%</span> trade.quantity<span class="i">}</span><span class="s">&quot;</span>
 <span class="k">end</span>
 
-<span class="c"># =&gt; </span>
+<span class="c"># =&gt;</span>
 <span class="c"># 2019-07-02 16:08:07 UTC 10465.560000 0.001689</span>
 <span class="c"># 2019-07-02 16:08:09 UTC 10465.650000 1.000000</span>
 <span class="c"># 2019-07-02 16:08:09 UTC 10465.650000 0.034570</span>
@@ -478,7 +535,7 @@ signed_client.historical_trades(<span class="s">&quot;BTCUSDC&quot;</span>, <spa
 
 <p>Initializing the REST client:</p>
 
-<p>If you only plan on touching public API endpoints, you can forgo any arguments.  
+<p>If you only plan on touching public API endpoints, you can forgo any arguments.
 Any of the public (NONE) api endpoints will work without an API key.</p>
 
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">REST</span>.<span class="k">new</span></code></pre>
@@ -486,6 +543,90 @@ Any of the public (NONE) api endpoints will work without an API key.</p>
 <p>Otherwise provide an api_key and secret_key as keyword arguments</p>
 
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">REST</span>.<span class="k">new</span> api_key: <span class="s">&quot;x&quot;</span>, secret_key: <span class="s">&quot;y&quot;</span></code></pre>
+
+<h3><a id="websocket-client" class="anchor" href="#websocket-client">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Websocket client</h3>
+
+<p>The basic Websocket API is implemented.  Advanced live subscribe/unsubscribe is not.</p>
+
+<p>Using a websocket is composed of two parts:</p>
+
+<ol><li>The websocket listener/client</li><li>The update handler for the incoming data stream(s)</li></ol>
+
+<p>The handler should inherit from <code><a href="Binance/Handler.html">Binance::Handler</a></code></p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;binance&quot;</span>
+
+client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">Websocket</span>.<span class="k">new</span>
+
+<span class="c"># Each market will instantiate it&#39;s own TickerHandler</span>
+<span class="k">class</span> <span class="t">TickerHandler</span> <span class="o">&lt;</span> <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>
+
+  <span class="c"># implement an update() method in your handler to process</span>
+  <span class="c"># what was sent over the websocket stream</span>
+  <span class="k">def</span> <span class="m">update</span>(stream)
+    ticker <span class="o">=</span> stream.ticker
+    puts [
+      ticker.symbol,
+      <span class="s">&quot;messages: </span><span class="i">#{</span>messages<span class="i">}</span><span class="s">&quot;</span>,
+      <span class="s">&quot;bid: %0.6f&quot;</span> <span class="o">%</span> ticker.bid_price,
+      <span class="s">&quot;ask: %0.6f&quot;</span> <span class="o">%</span> ticker.ask_price,
+      <span class="s">&quot;change: %0.3f&quot;</span> <span class="o">%</span> ticker.price_change_percent,
+      <span class="s">&quot;high: %0.6f&quot;</span> <span class="o">%</span> ticker.high_price,
+      <span class="s">&quot;low: %0.6f&quot;</span> <span class="o">%</span> ticker.low_price,
+    ].join(<span class="s">&quot; &quot;</span>)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+puts <span class="s">&quot;starting ticker listener&quot;</span>
+
+listener <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">Listener</span>.<span class="k">new</span> [<span class="s">&quot;BTCUSDT&quot;</span>, <span class="s">&quot;BNBBTC&quot;</span>], <span class="s">&quot;ticker&quot;</span>, <span class="t">TickerHandler</span>
+
+<span class="c"># loop forever -- CTRL-C to break out in terminal</span>
+loop <span class="k">do</span>
+  <span class="k">if</span> reason <span class="o">=</span> listener.run
+    <span class="k">break</span> <span class="k">if</span> reason[<span class="n">:status</span>] <span class="o">==</span> <span class="s">&quot;UNHANDLED&quot;</span>
+    sleep(<span class="n">30</span>.seconds) <span class="k">if</span> reason[<span class="n">:status</span>] <span class="o">==</span> <span class="s">&quot;ERROR&quot;</span>
+    sleep(<span class="n">5</span>.seconds) <span class="k">if</span> reason[<span class="n">:status</span>] <span class="o">==</span> <span class="s">&quot;CLOSED&quot;</span>
+  <span class="k">else</span>
+    puts <span class="s">&quot;No reason returned from listener&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+puts <span class="s">&quot;ticker listener stopped...&quot;</span></code></pre>
+
+<h3><a id="exchange-filters" class="anchor" href="#exchange-filters">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Exchange Filters</h3>
+
+<p>Binance provides a flexible system of setting filters on each market pair (a.k.a. <code>ExchangeSymbol</code>).  For example, <code>PRICE_FILTER</code>
+is available on any given <code>ExchangeSymbol</code> as the <code>price_filter</code> property.  Most of the filters implement both a <code>validate</code> and
+<code>valid?(value : Float64)</code> method to make it easy to validate if your intended price or quantity, etc. will pass the
+filters on Binance's server when submitted.</p>
+
+<p><span class="flag purple">NOTE</span>  The filters' validations are not invoked in the process of calling the new order API's
+and is your responsibility to utilize them as you see fit.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Binance</span><span class="t">::</span><span class="t">REST</span>.<span class="k">new</span>(api_key, api_secret)
+assets <span class="o">=</span> client.exchange_info.symbols
+symbol <span class="o">=</span> assets[<span class="n">0</span>] <span class="c"># =&gt; Binance::Response::ExchangeSymbol for ETHBTC (coincidentally!)</span>
+
+<span class="c"># The price_filter&#39;s properties are delegated, so are accessible directly on the symbol.</span>
+puts symbol.tick_size <span class="c"># =&gt; 0.000001</span>
+puts symbol.min_price <span class="c"># =&gt; 0.000001</span>
+puts symbol.max_price <span class="c"># =&gt; 100000.0</span>
+puts symbol.price_filter.valid?(<span class="n">0.0</span>) <span class="c"># =&gt; false</span>
+pp symbol.price_filter.validate(<span class="n">0.0</span>) <span class="c"># =&gt; [&quot;0.0 is below min_price of 0.000001&quot;]</span>
+pp symbol.price_filter.validate(<span class="n">0.0000011</span>) <span class="c"># =&gt; [&quot;0.0000011  is an invalid tick_size 0.000001&quot;]</span></code></pre>
+
+<ul><li><code>#validate</code> returns array of error messages which may be empty.</li><li><code>#valid?</code> returns <code>true</code> or <code>false</code></li><li>for filters with <code>#tick_size</code> and <code>#step_size</code>, <code>#decimals</code> returns number of decimals to round a value to.</li></ul>
 
 <h4><a id="anatomy-of-a-binanceresponsesserver-response" class="anchor" href="#anatomy-of-a-binanceresponsesserver-response">
   <svg class="octicon-link" aria-hidden="true">
@@ -499,7 +640,7 @@ Any of the public (NONE) api endpoints will work without an API key.</p>
 from connection fails or the server returning error codes are captured.  It is up to you to check
 for errors before attempting to access the properties of the ServerResponses</p>
 
-<p>When accessing the properties of the JSON responses, Generally speaking: </p>
+<p>When accessing the properties of the JSON responses, Generally speaking:</p>
 
 <ul><li>camel-cased JSON keys become downcased and underscored.</li><li>abbreviations are spelled out (e.g. qty => quantity).</li><li>If an API can return one or more, it's always an Array property on the <code>ServerResponse</code> object.</li></ul></ul>
 
@@ -509,37 +650,37 @@ client <span class="o">=</span> <span class="t">Binance</span><span class="t">::
 
 puts client.ping.inspect
 
-<span class="c"># =&gt; #&lt;Binance::Responses::PingResponse:0x10d40c280 </span>
-<span class="c">#   @success=true, </span>
-<span class="c">#   @error_code=nil, </span>
-<span class="c">#   @error_message=nil, </span>
-<span class="c">#   @response=#&lt;Cossack::Response:0x10d3fe5a0 @status=200, </span>
+<span class="c"># =&gt; #&lt;Binance::Responses::PingResponse:0x10d40c280</span>
+<span class="c">#   @success=true,</span>
+<span class="c">#   @error_code=nil,</span>
+<span class="c">#   @error_message=nil,</span>
+<span class="c">#   @response=#&lt;Cossack::Response:0x10d3fe5a0 @status=200,</span>
 <span class="c">#     @headers=HTTP::Headers{</span>
-<span class="c">#       &quot;Content-Type&quot; =&gt; &quot;application/json;charset=utf-8&quot;, </span>
-<span class="c">#       &quot;Transfer-Encoding&quot; =&gt; &quot;chunked&quot;, </span>
-<span class="c">#       &quot;Connection&quot; =&gt; &quot;keep-alive&quot;, </span>
-<span class="c">#       &quot;Date&quot; =&gt; &quot;Tue, 02 Jul 2019 15:26:47 GMT&quot;, </span>
-<span class="c">#       &quot;Server&quot; =&gt; &quot;nginx&quot;, </span>
-<span class="c">#       &quot;Vary&quot; =&gt; &quot;Accept-Encoding&quot;, </span>
-<span class="c">#       &quot;X-MBX-USED-WEIGHT&quot; =&gt; &quot;3&quot;, </span>
-<span class="c">#       &quot;Strict-Transport-Security&quot; =&gt; </span>
-<span class="c">#       &quot;max-age=31536000; includeSubdomains&quot;, </span>
-<span class="c">#       &quot;X-Frame-Options&quot; =&gt; &quot;SAMEORIGIN&quot;, </span>
+<span class="c">#       &quot;Content-Type&quot; =&gt; &quot;application/json;charset=utf-8&quot;,</span>
+<span class="c">#       &quot;Transfer-Encoding&quot; =&gt; &quot;chunked&quot;,</span>
+<span class="c">#       &quot;Connection&quot; =&gt; &quot;keep-alive&quot;,</span>
+<span class="c">#       &quot;Date&quot; =&gt; &quot;Tue, 02 Jul 2019 15:26:47 GMT&quot;,</span>
+<span class="c">#       &quot;Server&quot; =&gt; &quot;nginx&quot;,</span>
+<span class="c">#       &quot;Vary&quot; =&gt; &quot;Accept-Encoding&quot;,</span>
+<span class="c">#       &quot;X-MBX-USED-WEIGHT&quot; =&gt; &quot;3&quot;,</span>
+<span class="c">#       &quot;Strict-Transport-Security&quot; =&gt;</span>
+<span class="c">#       &quot;max-age=31536000; includeSubdomains&quot;,</span>
+<span class="c">#       &quot;X-Frame-Options&quot; =&gt; &quot;SAMEORIGIN&quot;,</span>
 <span class="c">#       &quot;X-Xss-Protection&quot; =&gt; &quot;1; mode=block&quot;,</span>
-<span class="c">#       &quot;X-Content-Type-Options&quot; =&gt; &quot;nosniff&quot;, </span>
-<span class="c">#       &quot;Content-Security-Policy&quot; =&gt; &quot;default-src &#39;self&#39;&quot;, </span>
-<span class="c">#       &quot;X-Content-Security-Policy&quot; =&gt; &quot;default-src &#39;self&#39;&quot;, </span>
-<span class="c">#       &quot;X-WebKit-CSP&quot; =&gt; &quot;default-src &#39;self&#39;&quot;, </span>
-<span class="c">#       &quot;Cache-Control&quot; =&gt; &quot;no-cache, no-store, must-revalidate&quot;, </span>
-<span class="c">#       &quot;Pragma&quot; =&gt; &quot;no-cache&quot;, </span>
-<span class="c">#       &quot;Expires&quot; =&gt; &quot;0&quot;, </span>
-<span class="c">#       &quot;Content-Encoding&quot; =&gt; &quot;gzip&quot;, </span>
-<span class="c">#       &quot;X-Cache&quot; =&gt; &quot;Miss from cloudfront&quot;, </span>
-<span class="c">#       &quot;Via&quot; =&gt; &quot;1.1 f5d17f65245ed818b0a01bb46646051c.cloudfront.net (CloudFront)&quot;, </span>
-<span class="c">#       &quot;X-Amz-Cf-Pop&quot; =&gt; &quot;ATL50-C1&quot;, </span>
+<span class="c">#       &quot;X-Content-Type-Options&quot; =&gt; &quot;nosniff&quot;,</span>
+<span class="c">#       &quot;Content-Security-Policy&quot; =&gt; &quot;default-src &#39;self&#39;&quot;,</span>
+<span class="c">#       &quot;X-Content-Security-Policy&quot; =&gt; &quot;default-src &#39;self&#39;&quot;,</span>
+<span class="c">#       &quot;X-WebKit-CSP&quot; =&gt; &quot;default-src &#39;self&#39;&quot;,</span>
+<span class="c">#       &quot;Cache-Control&quot; =&gt; &quot;no-cache, no-store, must-revalidate&quot;,</span>
+<span class="c">#       &quot;Pragma&quot; =&gt; &quot;no-cache&quot;,</span>
+<span class="c">#       &quot;Expires&quot; =&gt; &quot;0&quot;,</span>
+<span class="c">#       &quot;Content-Encoding&quot; =&gt; &quot;gzip&quot;,</span>
+<span class="c">#       &quot;X-Cache&quot; =&gt; &quot;Miss from cloudfront&quot;,</span>
+<span class="c">#       &quot;Via&quot; =&gt; &quot;1.1 f5d17f65245ed818b0a01bb46646051c.cloudfront.net (CloudFront)&quot;,</span>
+<span class="c">#       &quot;X-Amz-Cf-Pop&quot; =&gt; &quot;ATL50-C1&quot;,</span>
 <span class="c">#       &quot;X-Amz-Cf-Id&quot; =&gt; &quot;-lcrDlHfRIAYp7ULZLmEqNzDMCU8U4q5LnS60csCxtYe-SRY3qqqTQ==&quot;</span>
-<span class="c">#       }, </span>
-<span class="c">#     @body=&quot;{}&quot;&gt;, </span>
+<span class="c">#       },</span>
+<span class="c">#     @body=&quot;{}&quot;&gt;,</span>
 <span class="c">#   @exception=nil&gt;</span></code></pre>
 
 <p>The raw JSON returned is accessible via the #body property of the <code>ServerResponse</code></p>
@@ -604,7 +745,7 @@ puts client.time.server_time.inspect
 
 <p>Testing is done primarily with webmock and stubbing server responses.  To make testing
 easier, a mini-<a href="https://github.com/vcr/vcr" target="_blank">VCR style record and playback</a> set of helpers
-was implemented.  </p>
+was implemented.</p>
 
 <p>However, only PUBLIC API VCR cassettes are committed to the repo.  To test SIGNED/VERIFIED
 API calls, you'll have to setup your private API credentials.</p>
@@ -615,13 +756,13 @@ API calls, you'll have to setup your private API credentials.</p>
   </svg>
 </a>Development</h2>
 
-<p>All API's are TDD and have specs.  If you find a bug or want to contribute, then your 
+<p>All API's are TDD and have specs.  If you find a bug or want to contribute, then your
 contributions is expected to have specs exercising your code changes.</p>
 
 <p>API calls are captured with so-called VCR cassettes, which is a <a href="https://github.com/mwlang/binance/blob/master/spec/support/vcr.cr" target="_blank">small library</a> built upon Webmock for capturing and playing back a server interaction with one caveat:  signed APIs (those requiring API key) are not checked
 into the repository.  As a consequence, you'll have to set up your API key and record your own
 cassettes locally to get specs passing.  Signed exchanges are necessarily kept somewhat generic, but read the specs for prerequisites to actions you much take on Binance manually to prepare
-to capture your signed cassettes. </p>
+to capture your signed cassettes.</p>
 
 <p><span class="flag purple">NOTE</span>  Signed exchanges are saved to ./spec/fixtures/vcr_cassettes/signed and this folder is excluded in the .gitignore file.</p>
 

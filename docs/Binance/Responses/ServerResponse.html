@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Crystal Docs 0.34.0">
-<meta name="crystal_docs.project_version" content="master-dev">
+<meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="binance">
 
 
@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="binance">
-  <title>Binance::Responses::ServerResponse - binance master-dev</title>
+  <title>Binance::Responses::ServerResponse - binance master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master-dev
+        master
       </span>
     </div>
   </div>
@@ -66,8 +66,38 @@
       
     </li>
   
+  <li class=" " data-id="binance/Binance/Handler" data-name="binance::handler">
+      <a href="../../Binance/Handler.html">Handler</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/HttpMethods" data-name="binance::httpmethods">
       <a href="../../Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
+  <li class="parent " data-id="binance/Binance/Listener" data-name="binance::listener">
+      <a href="../../Binance/Listener.html">Listener</a>
+      
+        <ul>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelClose" data-name="binance::listener::channelclose">
+      <a href="../../Binance/Listener/ChannelClose.html">ChannelClose</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelError" data-name="binance::listener::channelerror">
+      <a href="../../Binance/Listener/ChannelError.html">ChannelError</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelMessage" data-name="binance::listener::channelmessage">
+      <a href="../../Binance/Listener/ChannelMessage.html">ChannelMessage</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -133,6 +163,11 @@
   
   <li class=" " data-id="binance/Binance/Responses/ExchangeSymbol" data-name="binance::responses::exchangesymbol">
       <a href="../../Binance/Responses/ExchangeSymbol.html">ExchangeSymbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/FilterException" data-name="binance::responses::filterexception">
+      <a href="../../Binance/Responses/FilterException.html">FilterException</a>
       
     </li>
   
@@ -261,8 +296,28 @@
       
         <ul>
   
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Data" data-name="binance::responses::websocket::data">
+      <a href="../../Binance/Responses/Websocket/Data.html">Data</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/MiniTicker" data-name="binance::responses::websocket::miniticker">
+      <a href="../../Binance/Responses/Websocket/MiniTicker.html">MiniTicker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Stream" data-name="binance::responses::websocket::stream">
+      <a href="../../Binance/Responses/Websocket/Stream.html">Stream</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/Responses/Websocket/Ticker" data-name="binance::responses::websocket::ticker">
       <a href="../../Binance/Responses/Websocket/Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Trade" data-name="binance::responses::websocket::trade">
+      <a href="../../Binance/Responses/Websocket/Trade.html">Trade</a>
       
     </li>
   
@@ -406,6 +461,13 @@ the response property.</li></ul>
     Defined in:
   </h2>
   
+    
+      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L17" target="_blank">
+        binance/responses/server_response.cr
+      </a>
+    
+    <br/>
+  
 
 
 
@@ -492,14 +554,14 @@ the response property.</li></ul>
       </li>
     
       <li class="entry-summary">
-        <a href="#response:Cossack::Response?-instance-method" class="signature"><strong>#response</strong> : Cossack::Response?</a>
+        <a href="#response:HTTP::Client::Response?-instance-method" class="signature"><strong>#response</strong> : HTTP::Client::Response?</a>
         
           <div class="summary"><p>The full HTTP Response object captured (if any).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#response=(response:Cossack::Response?)-instance-method" class="signature"><strong>#response=</strong>(response : Cossack::Response?)</a>
+        <a href="#response=(response:HTTP::Client::Response?)-instance-method" class="signature"><strong>#response=</strong>(response : HTTP::Client::Response?)</a>
         
           <div class="summary"><p>The full HTTP Response object captured (if any).</p></div>
         
@@ -585,6 +647,8 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L18" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -618,6 +682,8 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L49" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -636,6 +702,8 @@ the response property.</li></ul>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -656,6 +724,8 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L26" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -674,6 +744,8 @@ the response property.</li></ul>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -694,6 +766,8 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L30" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -712,6 +786,8 @@ the response property.</li></ul>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -732,15 +808,17 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L38" target="_blank">View source</a>]
+        
       </div>
     </div>
   
-    <div class="entry-detail" id="response:Cossack::Response?-instance-method">
+    <div class="entry-detail" id="response:HTTP::Client::Response?-instance-method">
       <div class="signature">
         
-        def <strong>response</strong> : Cossack::Response?
+        def <strong>response</strong> : HTTP::Client::Response?
 
-        <a class="method-permalink" href="#response:Cossack::Response?-instance-method">#</a>
+        <a class="method-permalink" href="#response:HTTP::Client::Response?-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -751,15 +829,17 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L34" target="_blank">View source</a>]
+        
       </div>
     </div>
   
-    <div class="entry-detail" id="response=(response:Cossack::Response?)-instance-method">
+    <div class="entry-detail" id="response=(response:HTTP::Client::Response?)-instance-method">
       <div class="signature">
         
-        def <strong>response=</strong>(response : Cossack::Response?)
+        def <strong>response=</strong>(response : HTTP::Client::Response?)
 
-        <a class="method-permalink" href="#response=(response:Cossack::Response?)-instance-method">#</a>
+        <a class="method-permalink" href="#response=(response:HTTP::Client::Response?)-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -769,6 +849,8 @@ the response property.</li></ul>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -789,6 +871,8 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L22" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -808,6 +892,8 @@ the response property.</li></ul>
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L22" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -821,6 +907,8 @@ the response property.</li></ul>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/responses/server_response.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
