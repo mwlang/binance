@@ -1,7 +1,5 @@
 require "../src/binance"
 
-client = Binance::Websocket.new
-
 # Each market will instantiate it's own TickerHandler
 class TickerHandler < Binance::Handler
 
