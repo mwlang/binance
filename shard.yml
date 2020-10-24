@@ -1,10 +1,10 @@
 name: binance
-version: 0.5.3
+version: 0.5.4
 
 authors:
   - mwlang <mwlang@cybrains.net>
 
-crystal: 0.35.0
+crystal: 0.35.1
 
 license: MIT
 

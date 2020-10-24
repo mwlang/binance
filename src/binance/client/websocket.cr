@@ -1,3 +1,4 @@
+require "./websocket/responses/data"
 require "./websocket/responses/*"
 require "./websocket/handler"
 require "./websocket/listener"

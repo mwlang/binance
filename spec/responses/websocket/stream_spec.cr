@@ -108,5 +108,35 @@ describe Binance::Responses::Websocket::Stream do
       stream.trade.quote_quantity.should eq 100.0
     end
   end
+
+  context "book_ticker" do
+    trade_json = <<-JSON
+      {
+        "stream":"bnbusdt@bookTicker",
+        "data":  {
+          "u":400900217,
+          "s":"BNBUSDT",
+          "b":"25.35190000",
+          "B":"31.21000000",
+          "a":"25.36520000",
+          "A":"40.66000000"
+        }
+      }
+    JSON
+
+    it "parses" do
+      stream = Binance::Responses::Websocket::Stream.from_json(trade_json)
+
+      stream.stream.should eq "bnbusdt@bookTicker"
+      stream.name.should eq "bookTicker"
+      stream.symbol.should eq "BNBUSDT"
+      stream.data.should be_a Binance::Responses::Websocket::BookTicker
+      stream.book_ticker.symbol.should eq "BNBUSDT"
+      stream.book_ticker.bid_price.should eq 25.3519
+      stream.book_ticker.bid_quantity.should eq 31.21
+      stream.book_ticker.ask_price.should eq 25.3652
+      stream.book_ticker.ask_quantity.should eq 40.66
+    end
+  end
 end
 

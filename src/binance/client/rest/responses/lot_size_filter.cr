@@ -6,6 +6,18 @@ module Binance::Responses
   #       "maxQty":"100000.00000000",
   #       "stepSize":"0.00100000"
   #     }
+  #
+  # The LOT_SIZE filter defines the quantity (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
+  #
+  # minQty defines the minimum quantity/icebergQty allowed.
+  # maxQty defines the maximum quantity/icebergQty allowed.
+  # stepSize defines the intervals that a quantity/icebergQty can be increased/decreased by.
+  # In order to pass the lot size, the following must be true for quantity/icebergQty:
+  #
+  # quantity >= minQty
+  # quantity <= maxQty
+  # (quantity-minQty) % stepSize == 0
+  #
   class LotSizeFilter < ExchangeFilter
     @[JSON::Field(key: "minQty", converter: Binance::Converters::ToFloat)]
     getter min_quantity : Float64 = 0.0

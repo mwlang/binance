@@ -25,10 +25,15 @@ module Binance::Responses::Websocket
       when "ticker"     then  Ticker.new(pull)
       when "miniTicker" then  MiniTicker.new(pull)
       when "trade"      then  Trade.new(pull)
+      when "bookTicker" then  BookTicker.new(pull)
       else                    Data.new(pull)
       end
 
       new stream, symbol.upcase, name, data
+    end
+
+    def book_ticker
+      @data.as(BookTicker)
     end
 
     def ticker
@@ -42,6 +47,5 @@ module Binance::Responses::Websocket
     def trade
       @data.as(Trade)
     end
-
   end
 end
