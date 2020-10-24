@@ -2,7 +2,7 @@
 
 This is an unofficial Crystal wrapper for the Binance exchange REST and WebSocket APIs.
 
-Requires Crystal >= 0.35.0
+Requires Crystal >= 0.35.1
 
 * [Source Documentation](https://mwlang.github.io/binance/)
 * [Examples](https://github.com/mwlang/binance/tree/master/examples)
@@ -82,10 +82,10 @@ Current
 
   * Basic Websocket API for Listening
     * Pass procs or lambdas to event handlers
-
-Coming Soon!
+    * Some streams mapped for JSON decoding (all streams currently accessible through JSON unmapped hash)
 
   * Websocket API
+    * Complete stream decoding (see TODO list below)
     * WebSocket Live subscribe/unsubscribe and sending commands
       * Single and multiple streams supported
 
@@ -116,6 +116,19 @@ Coming Soon!
 - [x] `new_test_order` [POST order/test (test new order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-new-order-trade) Creates and validates a new order but does not send it into the matching engine.
 - [x] `cancel_order` [DELETE order (cancel order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#cancel-order-trade) Cancel an active order.
 - [x] `my_trades` [myTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data) Get trades for a specific account and symbol.
+
+## Websocket Streams
+- [ ] [Aggregate Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams)
+- [x] [Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#trade-streams)
+- [x] [Kline/Candlestick Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams)
+- [x] [Individual Symbol Mini Ticker Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-mini-ticker-stream)
+- [x] [All Market Mini Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-market-mini-tickers-stream)
+- [x] [Individual Symbol Ticker Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-ticker-streams)
+- [x] [All Market Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream)
+- [x] [Individual Symbol Book Ticker Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-book-ticker-streams)
+- [x] [All Book Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
+- [ ] [Partial Book Depth Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
+- [ ] [Diff Depth Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
 
 ## Installation
 
