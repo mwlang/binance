@@ -14,7 +14,7 @@ module Binance
       @secret_key = secret_key
     end
 
-    def ticker(markets : Array(String), handler : Binance::Handler) : Listener
+    def ticker(markets : Array(String), handler : Binance::Handler.class) : Listener
       Binance::Listener.new markets, "ticker", handler
     end
 
