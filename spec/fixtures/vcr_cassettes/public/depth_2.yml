@@ -1,19 +1,17 @@
 ---
 request:
   method: GET
-  uri: https://api.binance.com/api/v1/depth
+  uri: https://api.binance.com/api/v3/depth
   body: ""
   query_params: symbol=BNBUSDT&limit=2
   headers:
-    User-Agent:
-    - Cossack v0.1.4
-    Content-Type:
-    - application/json
-    Accept:
-    - application/json
-    Host:
-    - api.binance.com
+    Content-Type: application/json
+    Accept: application/json
+    Connection: close
+    Host: api.binance.com
+    User-agent: Crystal
+  timestamp: 1604444544917
 response:
   status: 400
   body: '{"code":-1100,"msg":"Illegal characters found in parameter ''limit''; legal
-    range is ''5, 10, 20, 50, 100, 500, 1000''."}'
+    range is ''5, 10, 20, 50, 100, 500, 1000, 5000''."}'

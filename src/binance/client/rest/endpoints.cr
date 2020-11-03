@@ -46,7 +46,7 @@ module Binance::Endpoints
     ping:              "v1/ping",
     time:              "v1/time",
     exchange_info:     "v3/exchangeInfo",
-    depth:             "v1/depth",
+    depth:             "v3/depth",
     trades:            "v1/trades",
     historical_trades: "v1/historicalTrades",
     agg_trades:        "v1/aggTrades",
