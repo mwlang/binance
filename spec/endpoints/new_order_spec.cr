@@ -12,19 +12,39 @@ describe Binance do
   context "MARKET BUY" do
     # To get this VCR cassette passing:
     # * ensure you have enough USDC free to buy BNB
+    # * execute an order that fills against BNBUSDC
+    # * **change** the bnbusdc_order_id of the spec to match!
+    order_id = 86525339
     it "#new_order(\"BNBUSDC\", side: \"BUY\", order_type: \"MARKET\", quantity: 1.0, response_type: \"FULL\")" do
       with_vcr_cassette "signed/new_order_bnbusdc_buy_market_full_response" do
         response = client.new_order("BNBUSDC", side: "BUY", order_type: "MARKET", quantity: 1.0, response_type: "FULL")
-        pp! response
         response.should be_a Binance::Responses::OrderResponse
         response.success.should eq true
         order = response.orders[0]
         order.status.should eq "FILLED"
-        order.order_id.should be > 0
+        order.order_id.should eq order_id
         order.price.should eq 0.0
-        order.effective_price.should eq 26.9145
+        order.effective_fill_price.should eq 26.9145
+        order.average_price.should eq 26.9145
         order.original_quantity.should eq 1.0
         order.executed_quantity.should eq order.original_quantity
+      end
+    end
+    it "fetches the newly filled order" do
+      with_vcr_cassette "signed/order_bnbusdc_fetch_after_market_buy" do
+        response = client.get_order("BNBUSDC", order_id: order_id)
+        pp! response
+        response.success.should eq true
+        response.orders.size.should eq 1
+        order = response.orders[0]
+        order.order_id.should eq order_id
+        order.price.should eq 0.0
+        order.average_price.should eq 26.9145
+        order.original_quantity.should eq 1.0
+        order.executed_quantity.should eq 1.0
+        order.cummulative_quote_quantity.should eq 26.9145
+        order.status.should eq "NEW"
+        order.time_in_force.should eq "GTC"
       end
     end
   end
