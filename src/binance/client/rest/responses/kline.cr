@@ -76,7 +76,7 @@ module Binance::Responses
     getter quote_volume : Float64
 
     # Number of trades on asset pair in interval
-    getter trades : Int32
+    getter trades : Int64
 
     # Volume of taker trades on base asset
     getter taker_base_volume : Float64
@@ -98,7 +98,7 @@ module Binance::Responses
       @base_volume = pull.read_string.to_f
       @close_time = Binance::Converters::ToTime.from_json(pull)
       @quote_volume = pull.read_string.to_f
-      @trades = pull.read_int.to_i32
+      @trades = pull.read_int.to_i64
       @taker_base_volume = pull.read_string.to_f
       @taker_quote_volume = pull.read_string.to_f
       @reserved = pull.read_string.to_f

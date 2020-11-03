@@ -17,7 +17,7 @@ module Binance::Responses
   #     }
   class DepthResponse < ServerResponse
     @[JSON::Field(key: "lastUpdateId")]
-    getter last_update_id : Int32 = 0
+    getter last_update_id : Int64 = 0
 
     @[JSON::Field(key: "bids", converter: Binance::Converters::ToDepthEntry)]
     getter bids : Array(Binance::Responses::DepthEntry) = [] of Binance::Responses::DepthEntry

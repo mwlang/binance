@@ -43,7 +43,7 @@ module Binance::Responses
     getter symbol : String = ""
 
     @[JSON::Field(key: "orderId")]
-    getter order_id : Int32 = 0
+    getter order_id : Int64 = 0
 
     @[JSON::Field(key: "origClientOrderId")]
     getter orig_client_order_id : String = ""

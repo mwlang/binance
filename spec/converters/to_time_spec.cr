@@ -4,7 +4,7 @@ class ToTimeTest
   include JSON::Serializable
 
   @[JSON::Field(key: "id")]
-  getter trade_id : Int32
+  getter trade_id : Int64
 
   @[JSON::Field(key: "start_time", converter: Binance::Converters::ToTime)]
   getter start_time : Time

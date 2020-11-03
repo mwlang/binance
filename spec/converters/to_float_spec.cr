@@ -4,7 +4,7 @@ class ToFloatTest
   include JSON::Serializable
 
   @[JSON::Field(key: "id")]
-  getter trade_id : Int32
+  getter trade_id : Int64
 
   @[JSON::Field(key: "price", converter: Binance::Converters::ToFloat)]
   getter price : Float64

@@ -15,7 +15,7 @@ module Binance::Endpoints
     params[key] = value
   end
 
-  def optional_param(params : HTTP::Params, key : String, value : Float64 | Int32)
+  def optional_param(params : HTTP::Params, key : String, value : Float64 | Int32 | Int64)
     params[key] = value.to_s
   end
 
@@ -155,7 +155,7 @@ module Binance::Endpoints
   def agg_trades(
     symbol : String,          # The market symbol to query
     limit : Int32 = 500,      # Number of entries to return. Default 500; max 1000.
-    from_id : Int32? = nil,   # ID to get aggregate trades from INCLUSIVE.
+    from_id : Int64? = nil,   # ID to get aggregate trades from INCLUSIVE.
     start_time : Time? = nil, # Timestamp in ms to get aggregate trades from INCLUSIVE.
     end_time : Time? = nil    # Timestamp in ms to get aggregate trades until INCLUSIVE.
   )
@@ -213,7 +213,7 @@ module Binance::Endpoints
   # * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
   def all_orders(
     symbol : String,
-    order_id : Int32? = nil,
+    order_id : Int64? = nil,
     limit : Int32 = 500,
     start_time : Time? = nil,
     end_time : Time? = nil
@@ -338,7 +338,7 @@ module Binance::Endpoints
   #
   def get_order(
     symbol : String,
-    order_id : Int32? = nil,
+    order_id : (Int32 | Int64)? = nil,
     client_order_id : String? = nil
   )
     params = HTTP::Params.new
@@ -363,7 +363,7 @@ module Binance::Endpoints
   #
   def cancel_order(
     symbol : String,
-    order_id : Int32? = nil,
+    order_id : (Int32 | Int64)? = nil,
     client_order_id : String? = nil
   )
     params = HTTP::Params.new
@@ -403,7 +403,7 @@ module Binance::Endpoints
   def my_trades(
     symbol : String,          # The market symbol to query
     limit : Int32 = 500,      # Number of entries to return. Default 500; max 1000.
-    from_id : Int32? = nil,   # TradeId to fetch from. Default gets most recent trades.
+    from_id : Int64? = nil,   # TradeId to fetch from. Default gets most recent trades.
     start_time : Time? = nil, # Timestamp in ms to get aggregate trades from INCLUSIVE.
     end_time : Time? = nil    # Timestamp in ms to get aggregate trades until INCLUSIVE.
   )

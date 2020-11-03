@@ -61,13 +61,13 @@ module Binance::Responses::Websocket
     getter close_time : Time?
 
     @[JSON::Field(key: "F")]
-    getter first_trade_id : Int32 = 0
+    getter first_trade_id : Int64 = 0
 
     @[JSON::Field(key: "L")]
-    getter last_trade_id : Int32 = 0
+    getter last_trade_id : Int64 = 0
 
     @[JSON::Field(key: "n")]
-    getter trades : Int32 = 0
+    getter trades : Int64 = 0
 
     def open_time
       @event_time - 24.hours - 1.second

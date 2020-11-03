@@ -35,11 +35,11 @@ module Binance::Responses::Websocket
     getter interval : String = ""
 
     @[JSON::Field(key: "n")]
-    getter trades : Int32 = 0
+    getter trades : Int64 = 0
     @[JSON::Field(key: "f")]
-    getter first_trade_id : Int32 = 0
+    getter first_trade_id : Int64 = 0
     @[JSON::Field(key: "L")]
-    getter last_trade_id : Int32 = 0
+    getter last_trade_id : Int64 = 0
 
     @[JSON::Field(key: "s")]
     getter symbol : String = ""

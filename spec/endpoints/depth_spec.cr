@@ -3,6 +3,16 @@ require "../spec_helper"
 client = Binance::REST.new
 
 describe Binance do
+  it "#depth(\"BTCUSDT\", 100)" do
+    with_vcr_cassette "public/depth_100" do
+      response = client.depth("BTCUSDT", 100)
+      response.should be_a Binance::Responses::DepthResponse
+      response.success.should eq true
+      response.bids.size.should eq 100
+      response.asks.size.should eq 100
+    end
+  end
+
   it "#depth(\"BNBUSDT\", 5)" do
     with_vcr_cassette "public/depth_5" do
       response = client.depth("BNBUSDT", 5)

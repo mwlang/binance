@@ -73,12 +73,12 @@ module Binance::Responses
     getter close_time : Time?
 
     @[JSON::Field(key: "firstId")]
-    getter first_trade_id : Int32 = 0
+    getter first_trade_id : Int64 = 0
 
     @[JSON::Field(key: "lastId")]
-    getter last_trade_id : Int32 = 0
+    getter last_trade_id : Int64 = 0
 
     @[JSON::Field(key: "count")]
-    getter trades : Int32 = 0
+    getter trades : Int64 = 0
   end
 end

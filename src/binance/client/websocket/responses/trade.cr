@@ -16,7 +16,7 @@ module Binance::Responses::Websocket
     include JSON::Serializable
 
     @[JSON::Field(key: "t")]
-    getter trade_id : Int32
+    getter trade_id : Int64
 
     @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
     getter price : Float64
@@ -25,10 +25,10 @@ module Binance::Responses::Websocket
     getter quote_quantity : Float64
 
     @[JSON::Field(key: "b")]
-    getter buyer_order_id : Int32 = 0
+    getter buyer_order_id : Int64 = 0
 
     @[JSON::Field(key: "a")]
-    getter seller_order_id : Int32 = 0
+    getter seller_order_id : Int64 = 0
 
     @[JSON::Field(key: "T", converter: Binance::Converters::ToTime)]
     getter trade_time : Time = Time.utc

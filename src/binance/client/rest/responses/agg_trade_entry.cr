@@ -14,7 +14,7 @@ module Binance::Responses
     include JSON::Serializable
 
     @[JSON::Field(key: "a")]
-    getter trade_id : Int32
+    getter trade_id : Int64
 
     @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
     getter price : Float64
@@ -23,10 +23,10 @@ module Binance::Responses
     getter quantity : Float64
 
     @[JSON::Field(key: "f")]
-    getter first_trade_id : Int32
+    getter first_trade_id : Int64
 
     @[JSON::Field(key: "l")]
-    getter last_trade_id : Int32
+    getter last_trade_id : Int64
 
     @[JSON::Field(key: "T", converter: Binance::Converters::ToTime)]
     getter time : ::Time = ::Time.utc
