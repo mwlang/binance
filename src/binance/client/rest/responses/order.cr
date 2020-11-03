@@ -92,7 +92,8 @@ module Binance::Responses
     end
 
     def effective_fill_price
-      return @price if @price > 0.0
+      return price if price > 0.0 || fills.empty?
+
       total_fill_price = fills.reduce(0.0){|sum, fill| sum + (fill.price * fill.quantity)}
       total_fill_quantity = fills.reduce(0.0){|sum, fill| sum + fill.quantity}
       total_fill_price / total_fill_quantity

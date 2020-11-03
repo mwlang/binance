@@ -33,7 +33,6 @@ describe Binance do
     it "fetches the newly filled order" do
       with_vcr_cassette "signed/order_bnbusdc_fetch_after_market_buy" do
         response = client.get_order("BNBUSDC", order_id: order_id)
-        pp! response
         response.success.should eq true
         response.orders.size.should eq 1
         order = response.orders[0]
@@ -43,7 +42,7 @@ describe Binance do
         order.original_quantity.should eq 1.0
         order.executed_quantity.should eq 1.0
         order.cummulative_quote_quantity.should eq 26.9145
-        order.status.should eq "NEW"
+        order.status.should eq "FILLED"
         order.time_in_force.should eq "GTC"
       end
     end
