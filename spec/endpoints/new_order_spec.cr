@@ -9,6 +9,26 @@ client = Binance::REST.new(api_key, api_secret)
 # * The LIMIT sells may or may not execute depending on current BNB prices.
 #   Intention of LIMIT sell is to set price *above* current market value.
 describe Binance do
+  context "MARKET BUY" do
+    # To get this VCR cassette passing:
+    # * ensure you have enough USDC free to buy BNB
+    it "#new_order(\"BNBUSDC\", side: \"BUY\", order_type: \"MARKET\", quantity: 1.0, response_type: \"FULL\")" do
+      with_vcr_cassette "signed/new_order_bnbusdc_buy_market_full_response" do
+        response = client.new_order("BNBUSDC", side: "BUY", order_type: "MARKET", quantity: 1.0, response_type: "FULL")
+        pp! response
+        response.should be_a Binance::Responses::OrderResponse
+        response.success.should eq true
+        order = response.orders[0]
+        order.status.should eq "FILLED"
+        order.order_id.should be > 0
+        order.price.should eq 0.0
+        order.effective_price.should eq 26.9145
+        order.original_quantity.should eq 1.0
+        order.executed_quantity.should eq order.original_quantity
+      end
+    end
+  end
+
   context "MARKET SELL" do
     # To get this VCR cassette passing:
     # * ensure you have BNB free to sell
