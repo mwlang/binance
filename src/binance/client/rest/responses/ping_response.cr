@@ -3,7 +3,7 @@ module Binance::Responses
   #     {}
   class PingResponse < Responses::ServerResponse
     def pong
-      (r = response) && r.is_a?(Cossack::Response) ? r.body == "{}" : false
+      (r = response) && r.is_a?(HTTP::Client::Response) ? r.body == "{}" : false
     end
   end
 end

@@ -26,8 +26,8 @@ module Binance::Endpoints
   macro fetch(action, client, endpoint, response_klass, params = HTTP::Params.new)
     begin
       if response = {{client.id}}_{{action.id}}(Binance::Endpoints::ENDPOINTS[{{endpoint}}], {{params}})
-        if response.status == 200
-          {{response_klass}}.from_json(response.body).tap do |resp| 
+        if response.status_code == 200
+          {{response_klass}}.from_json(response.body).tap do |resp|
             resp.response = response
           end
         else
@@ -45,12 +45,12 @@ module Binance::Endpoints
     # Public API Endpoints
     ping:              "v1/ping",
     time:              "v1/time",
-    exchange_info:     "v1/exchangeInfo",
+    exchange_info:     "v3/exchangeInfo",
     depth:             "v1/depth",
     trades:            "v1/trades",
     historical_trades: "v1/historicalTrades",
     agg_trades:        "v1/aggTrades",
-    klines:            "v1/klines",
+    klines:            "v3/klines",
     twenty_four_hour:  "v1/ticker/24hr",
     price:             "v3/ticker/price",
     avg_price:         "v3/avgPrice",
@@ -274,7 +274,7 @@ module Binance::Endpoints
     symbol : String,
     side : String,
     order_type : String,
-    quantity : Float64,
+    quantity : (Float64 | String),
     time_in_force : String? = nil,
     price : Float64? = nil,
     client_order_id : String? = nil,
@@ -301,7 +301,7 @@ module Binance::Endpoints
     symbol : String,
     side : String,
     order_type : String,
-    quantity : Float64,
+    quantity : (Float64 | String),
     time_in_force : String? = nil,
     price : Float64? = nil,
     client_order_id : String? = nil,

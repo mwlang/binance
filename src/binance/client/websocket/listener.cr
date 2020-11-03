@@ -33,7 +33,7 @@ module Binance
       end
 
       @ws.on_ping do |message|
-        puts "TICKERS #{Time.utc.to_s}: Processed #{@messages.to_s} messages"
+        puts "#{stream_names} #{Time.utc.to_s}: Processed #{@messages.to_s} messages"
         @ws.pong
       end
     end
@@ -50,7 +50,7 @@ module Binance
       puts "opening ws connection"
       spawn do
         begin
-          @ws.run 
+          @ws.run
         rescue ex : OpenSSL::SSL::Error
           @channel.send ChannelError.new(ex)
         end

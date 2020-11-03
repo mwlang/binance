@@ -1,3 +1,4 @@
+require "./websocket/responses/data"
 require "./websocket/responses/*"
 require "./websocket/handler"
 require "./websocket/listener"
@@ -13,9 +14,12 @@ module Binance
       @secret_key = secret_key
     end
 
-    def ticker(markets : Array(String)) : Listener
-      # Work in Progress
+    def ticker(markets : Array(String), handler : Binance::Handler.class) : Listener
+      Binance::Listener.new markets, "ticker", handler
     end
 
+    def book_ticker(markets : Array(String), handler : Binance::Handler.class) : Listener
+      Binance::Listener.new markets, "bookTicker", handler
+    end
   end
 end

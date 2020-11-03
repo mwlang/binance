@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Crystal Docs 0.34.0">
-<meta name="crystal_docs.project_version" content="master-dev">
+<meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="binance">
 
 
@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="binance">
-  <title>Binance::REST - binance master-dev</title>
+  <title>Binance::REST - binance master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master-dev
+        master
       </span>
     </div>
   </div>
@@ -66,8 +66,38 @@
       
     </li>
   
+  <li class=" " data-id="binance/Binance/Handler" data-name="binance::handler">
+      <a href="../Binance/Handler.html">Handler</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/HttpMethods" data-name="binance::httpmethods">
       <a href="../Binance/HttpMethods.html">HttpMethods</a>
+      
+    </li>
+  
+  <li class="parent " data-id="binance/Binance/Listener" data-name="binance::listener">
+      <a href="../Binance/Listener.html">Listener</a>
+      
+        <ul>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelClose" data-name="binance::listener::channelclose">
+      <a href="../Binance/Listener/ChannelClose.html">ChannelClose</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelError" data-name="binance::listener::channelerror">
+      <a href="../Binance/Listener/ChannelError.html">ChannelError</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Listener/ChannelMessage" data-name="binance::listener::channelmessage">
+      <a href="../Binance/Listener/ChannelMessage.html">ChannelMessage</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -133,6 +163,11 @@
   
   <li class=" " data-id="binance/Binance/Responses/ExchangeSymbol" data-name="binance::responses::exchangesymbol">
       <a href="../Binance/Responses/ExchangeSymbol.html">ExchangeSymbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/FilterException" data-name="binance::responses::filterexception">
+      <a href="../Binance/Responses/FilterException.html">FilterException</a>
       
     </li>
   
@@ -261,8 +296,28 @@
       
         <ul>
   
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Data" data-name="binance::responses::websocket::data">
+      <a href="../Binance/Responses/Websocket/Data.html">Data</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/MiniTicker" data-name="binance::responses::websocket::miniticker">
+      <a href="../Binance/Responses/Websocket/MiniTicker.html">MiniTicker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Stream" data-name="binance::responses::websocket::stream">
+      <a href="../Binance/Responses/Websocket/Stream.html">Stream</a>
+      
+    </li>
+  
   <li class=" " data-id="binance/Binance/Responses/Websocket/Ticker" data-name="binance::responses::websocket::ticker">
       <a href="../Binance/Responses/Websocket/Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="binance/Binance/Responses/Websocket/Trade" data-name="binance::responses::websocket::trade">
+      <a href="../Binance/Responses/Websocket/Trade.html">Trade</a>
       
     </li>
   
@@ -348,6 +403,13 @@
     Defined in:
   </h2>
   
+    
+      <a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L6" target="_blank">
+        binance/client/rest.cr
+      </a>
+    
+    <br/>
+  
 
 
 
@@ -422,21 +484,6 @@
   <h3>Instance methods inherited from module <code><a href="../Binance/HttpMethods.html">Binance::HttpMethods</a></code></h3>
   
   
-    <a href="../Binance/HttpMethods.html#http_delete(connection,url,params)-instance-method" class="tooltip">
-      <span>http_delete(connection, url, params)</span>
-    http_delete</a>, 
-    
-  
-    <a href="../Binance/HttpMethods.html#http_get(connection,url,params)-instance-method" class="tooltip">
-      <span>http_get(connection, url, params)</span>
-    http_get</a>, 
-    
-  
-    <a href="../Binance/HttpMethods.html#http_post(connection,url,params)-instance-method" class="tooltip">
-      <span>http_post(connection, url, params)</span>
-    http_post</a>, 
-    
-  
     <a href="../Binance/HttpMethods.html#public_delete(url,params:HTTP::Params)-instance-method" class="tooltip">
       <span>public_delete(url, params : HTTP::Params)</span>
     public_delete</a>, 
@@ -465,11 +512,6 @@
     <a href="../Binance/HttpMethods.html#signed_post(url,params:HTTP::Params)-instance-method" class="tooltip">
       <span>signed_post(url, params : HTTP::Params)</span>
     signed_post</a>, 
-    
-  
-    <a href="../Binance/HttpMethods.html#to_query(params)-instance-method" class="tooltip">
-      <span>to_query(params)</span>
-    to_query</a>, 
     
   
     <a href="../Binance/HttpMethods.html#verified_delete(url,params:HTTP::Params)-instance-method" class="tooltip">
@@ -673,6 +715,8 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L13" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -701,6 +745,8 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L10" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -714,6 +760,8 @@
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -729,6 +777,8 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L18" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -743,6 +793,8 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L11" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -756,6 +808,8 @@
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/mwlang/binance/blob/383bd8d0774ac693d365389b7f0595b8a7407c1a/src/binance/client/rest.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>

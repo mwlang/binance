@@ -45,6 +45,8 @@ module Binance::Responses
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+    def initialize; end
+
     @[JSON::Field(key: "filterType")]
     getter filter_type : String = ""
 
