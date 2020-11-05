@@ -40,8 +40,7 @@ module Binance
     # 8. If the quantity is 0, remove the price level.
     # 9. Receiving an event that removes a price level that is not in your local order book can happen and is normal.
     def depth(markets : Array(String), handler : Binance::Handler.class, speed="") : Listener
-      stream_name = "depth"
-      stream_name << "@#{speed}" unless speed == ""
+      stream_name = speed == "" ? "depth" : "depth@#{speed}"
       Binance::Listener.new markets, stream_name, handler
     end
   end
