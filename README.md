@@ -128,7 +128,7 @@ Current
 - [x] [Individual Symbol Book Ticker Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-book-ticker-streams)
 - [ ] [All Book Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
 - [ ] [Partial Book Depth Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
-- [ ] [Diff Depth Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
+- [x] [Diff Depth Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
 
 ## Installation
 
@@ -207,8 +207,6 @@ The handler should inherit from `Binance::Handler`
 
 ```crystal
 require "binance"
-
-client = Binance::Websocket.new
 
 # Each market will instantiate it's own TickerHandler
 class TickerHandler < Binance::Handler
