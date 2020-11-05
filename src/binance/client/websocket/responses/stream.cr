@@ -26,6 +26,7 @@ module Binance::Responses::Websocket
       when "miniTicker" then  MiniTicker.new(pull)
       when "trade"      then  Trade.new(pull)
       when "bookTicker" then  BookTicker.new(pull)
+      when /^depth/     then  Depth.new(pull)
       when /^kline/     then  Kline.new(pull)
       else                    Data.new(pull)
       end
@@ -35,6 +36,10 @@ module Binance::Responses::Websocket
 
     def kline
       @data.as(Kline)
+    end
+
+    def depth
+      @data.as(Depth)
     end
 
     def book_ticker
