@@ -21,10 +21,14 @@ end
 
 puts "starting ticker listener"
 
-listener = Binance::Listener.new ["BTCUSDT", "BNBBTC"], "ticker", TickerHandler
+client = Binance::Websocket.new
 
 # loop forever -- CTRL-C to break out in terminal
 loop do
+
+  # will restart the websocket stream if 30 seconds lapses without new data arriving
+  listener = client.ticker ["BTCUSDT", "BNBBTC"], TickerHandler, 30.seconds
+
   if reason = listener.run
     break if reason[:status] == "UNHANDLED"
     sleep(30.seconds) if reason[:status] == "ERROR"

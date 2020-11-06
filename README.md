@@ -229,6 +229,11 @@ end
 
 puts "starting ticker listener"
 
+# Instantiating a Listener like this enables you to open any named stream
+# even if this library hasn't implemented the convenience methods or
+# the JSON serializers for that stream, yet.
+# If a serializer isn't available, then inspect the `stream.data#unmapped`
+# property to extract the desired data from the stream message.
 listener = Binance::Listener.new ["BTCUSDT", "BNBBTC"], "ticker", TickerHandler
 
 # loop forever -- CTRL-C to break out in terminal
@@ -244,6 +249,28 @@ end
 
 puts "ticker listener stopped..."
 ```
+
+Listeners may also be instantiated through the `Websocket` client class like this:
+
+```crystal
+#...
+client = Binance::Websocket.new
+listener = client.depth SYMBOLS, OrderBookHandler
+```
+Note:  Note all streams have convenient classes or serializers.  Pull requests greatly appreciated!
+
+If you want to handle the scenario where the Binance server sometimes stops sending
+data to the client, but doesn't actually close the stream, then invoke with a Timeout span:
+
+```crystal
+# ...
+client = Binance::Websocket.new
+listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
+# ...
+```
+
+This will cause the listener to close the websocket stream, thus breaking the `#run`
+blocking call.
 
 ### Exchange Filters
 

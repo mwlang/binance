@@ -14,12 +14,12 @@ module Binance
       @secret_key = secret_key
     end
 
-    def ticker(markets : Array(String), handler : Binance::Handler.class) : Listener
-      Binance::Listener.new markets, "ticker", handler
+    def ticker(markets : Array(String), handler : Binance::Handler.class, timeout = 0.seconds) : Listener
+      Binance::Listener.new markets, "ticker", handler, timeout
     end
 
-    def book_ticker(markets : Array(String), handler : Binance::Handler.class) : Listener
-      Binance::Listener.new markets, "bookTicker", handler
+    def book_ticker(markets : Array(String), handler : Binance::Handler.class, timeout = 0.seconds) : Listener
+      Binance::Listener.new markets, "bookTicker", handler, timeout
     end
 
     # Diff. Depth Stream
@@ -39,9 +39,9 @@ module Binance
     # 7. The data in each event is the absolute quantity for a price level.
     # 8. If the quantity is 0, remove the price level.
     # 9. Receiving an event that removes a price level that is not in your local order book can happen and is normal.
-    def depth(markets : Array(String), handler : Binance::Handler.class, speed="") : Listener
+    def depth(markets : Array(String), handler : Binance::Handler.class, speed="", timeout = 0.seconds) : Listener
       stream_name = speed == "" ? "depth" : "depth@#{speed}"
-      Binance::Listener.new markets, stream_name, handler
+      Binance::Listener.new markets, stream_name, handler, timeout
     end
   end
 end

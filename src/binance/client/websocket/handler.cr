@@ -2,8 +2,13 @@ module Binance
   class Handler
     getter symbol : String
     property messages : Int32 = 0
+    property stopped : Bool = false
 
     def initialize(@symbol : String)
+    end
+
+    def stopped?
+      @stopped
     end
 
     def update(stream)
