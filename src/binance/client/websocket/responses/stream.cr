@@ -34,28 +34,22 @@ module Binance::Responses::Websocket
       new stream, symbol.upcase, name, data
     end
 
-    def kline
-      @data.as(Kline)
-    end
+    def kline; @data.as(Kline) end
+    def kline?; @data.is_a?(Kline) ? kline : nil end
 
-    def depth
-      @data.as(Depth)
-    end
+    def depth; @data.as(Depth) end
+    def depth?; @data.is_a?(Depth) ? depth : nil end
 
-    def book_ticker
-      @data.as(BookTicker)
-    end
+    def book_ticker; @data.as(BookTicker) end
+    def book_ticker?; @data.is_a?(BookTicker) ? book_ticker : nil end
 
-    def ticker
-      @data.as(Ticker)
-    end
+    def ticker; @data.as(Ticker) end
+    def ticker?; @data.is_a?(Ticker) ? ticker : nil end
 
-    def mini_ticker
-      @data.as(MiniTicker)
-    end
+    def mini_ticker; @data.as(MiniTicker) end
+    def mini_ticker?; @data.is_a?(MiniTicker) ? mini_ticker : nil end
 
-    def trade
-      @data.as(Trade)
-    end
+    def trade; @data.as(Trade) end
+    def trade?; @data.is_a?(Trade) ? trade : nil end
   end
 end

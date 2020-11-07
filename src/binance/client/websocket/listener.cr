@@ -12,10 +12,11 @@ module Binance
   #
   class Listener
     getter symbols : Array(String)
+    getter stream_names : String
     getter timeout : Time::Span
     getter last_seen : Time = Time.utc
-    getter stream_name : String
     getter handlers : Hash(String, Binance::Handler)
+    getter websocket : HTTP::WebSocket
     property messages : Int32 = 0
     property stopped : Bool = false
 
@@ -26,17 +27,50 @@ module Binance
     # If the listener is started with a timeout > 0, then the
     # watcher will close the websocket connection if no messages
     # from the server is received within the timeout span.
-    def start_watcher(ws)
-      return if @timeout == 0.seconds
+    def start_watcher
+      return if timeout == 0.seconds
       spawn do
         loop do
           sleep(1.second)
-          break if @stopped || (Time.utc - last_seen) > timeout
+          break if stopped || (Time.utc - last_seen) > timeout
         end
         @stopped = true
         handlers.values.each{|h| h.stopped = true}
-        ws.close
+        websocket.close
       end
+    end
+
+    SENTINEL = "SENTINEL"
+
+    # Uses one handler for all market/symbols when an instantiated handler is passed
+    # If a timeout > 0.seconds is given, then a watcher loop is
+    # started and will force close the websocket stream if data
+    # stops flowing for longer than the given timeout span.
+    def initialize(
+      @symbols : Array(String),
+      streams : Array(String),
+      handler : Binance::Handler,
+      @timeout : Time::Span = 0.seconds
+    )
+      @stream_names = build_stream_names(streams)
+      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
+      @handlers = {} of String => Binance::Handler
+      @handlers[SENTINEL] = handler
+      @websocket = open_connection
+    end
+
+    def initialize(
+      symbol : String,
+      streams : Array(String),
+      handler : Binance::Handler,
+      @timeout : Time::Span = 0.seconds
+    )
+      @symbols = [symbol]
+      @stream_names = build_stream_names(streams)
+      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
+      @handlers = {} of String => Binance::Handler
+      @handlers[SENTINEL] = handler
+      @websocket = open_connection
     end
 
     # One handler for each market/symbol is instantiated.
@@ -45,56 +79,87 @@ module Binance
     # stops flowing for longer than the given timeout span.
     def initialize(
       @symbols : Array(String),
-      @stream_name : String,
+      stream : String,
       handler_class,
       @timeout : Time::Span = 0.seconds
     )
+      @stream_names = build_stream_names(stream)
       @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
       @handlers = {} of String => Binance::Handler
       @symbols.each do |symbol|
         @handlers[symbol.upcase] = handler_class.new(symbol)
       end
 
+      @websocket = open_connection
+    end
+
+    def initialize(
+      symbol : String,
+      stream : String,
+      handler_class,
+      @timeout : Time::Span = 0.seconds
+    )
+      @symbols = [symbol]
+      @stream_names = build_stream_names(stream)
+      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
+      @handlers = {} of String => Binance::Handler
+      @symbols.each do |symbol|
+        @handlers[symbol.upcase] = handler_class.new(symbol)
+      end
+
+      @websocket = open_connection
+    end
+
+    def open_connection
       host = "stream.binance.com"
       path = "/stream?streams=#{stream_names}"
       port = 9443
       puts "opening #{symbols_param}"
-      @ws = HTTP::WebSocket.new host, path, port, tls: true
+      HTTP::WebSocket.new(host, path, port, tls: true).tap{ |ws| attach_events(ws) }
+    end
 
-      @ws.on_message do |message|
+    def attach_events(ws)
+      ws.on_message do |message|
         @last_seen = Time.utc
         @messages += 1
         @channel.send ChannelMessage.new(message)
       end
 
-      @ws.on_close do |code, message|
+      ws.on_close do |code, message|
         @last_seen = Time.utc
         @stopped = true
         puts "Closed: #{message}"
         @channel.send ChannelClose.new(message)
       end
 
-      @ws.on_ping do |message|
+      ws.on_ping do |message|
         @last_seen = Time.utc
         puts "#{stream_names} #{Time.utc.to_s}: Processed #{@messages.to_s} messages"
-        @ws.pong
+        ws.pong
       end
+      return ws
     end
 
-    def stream_names
+    def build_stream_names(stream_name : String)
       @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+    end
+
+    def build_stream_names(stream_names : Array(String))
+      stream_names.map do |stream_name|
+        @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+      end.join("/")
     end
 
     def symbols_param
       @symbols.join(",").downcase
     end
 
-    def open_connection
+    def listen
       puts "opening ws connection"
       spawn do
         begin
-          start_watcher(@ws)
-          @ws.run
+          start_watcher
+          websocket.run
         rescue ex : OpenSSL::SSL::Error
           @stopped = true
           @channel.send ChannelError.new(ex)
@@ -107,14 +172,14 @@ module Binance
     end
 
     def run
-      open_connection
+      listen
 
       while message = @channel.receive?
         case message
 
         when ChannelMessage
           stream = message_stream(message)
-          handler = @handlers[stream.symbol]
+          handler = @handlers[SENTINEL]? || @handlers[stream.symbol]
           handler.messages += 1
           handler.update stream
 

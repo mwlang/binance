@@ -7,6 +7,10 @@ module Binance
     def initialize(@symbol : String)
     end
 
+    def initialize
+      @symbol = ""
+    end
+
     def stopped?
       @stopped
     end
