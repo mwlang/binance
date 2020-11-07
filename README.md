@@ -272,6 +272,21 @@ listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
 This will cause the listener to close the websocket stream, thus breaking the `#run`
 blocking call.
 
+#### One Handler, Multiple Streams
+
+The above examples are passing an uninstantiated `Binance::Handler+` class.  When the class is passed, a handler is
+instantiated for each symbol and stream.  Another way is to instantiate the `Binance::Handler+` class and pass that and
+this will cause the websocket to wire up such that the one handler services all the streams.  For example:
+
+```crystal
+handler = ComboHandler.new
+client = Binance::Websocket.new
+listener = client.combo ["BTCUSDT", "BNBBTC"], "ticker,bookTicker,depth", handler, 30.seconds
+```
+
+Sets up the websocket streaming such that ticker, book_ticker, and depth streams are subscribed for BTCUSDT and BNBBTC
+markets and all streamed messages are sent to the one `handler`.
+
 ### Exchange Filters
 
 Binance provides a flexible system of setting filters on each market pair (a.k.a. `ExchangeSymbol`).  For example, `PRICE_FILTER`
