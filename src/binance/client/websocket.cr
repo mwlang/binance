@@ -15,30 +15,24 @@ module Binance
       @secret_key = secret_key
     end
 
-    def combo(markets, streams, handler, timeout = 0.secons) : Listener
-      Binance::Listener.new markets, streams, handler, timeout
+    macro stream(method_name, stream_name)
+      def {{method_name}}(markets : (Array(String) | String), handler : (Binance::Handler | Binance::Handler.class), timeout : Time::Span = 0.seconds)
+        Binance::Listener.new markets, {{stream_name}}, handler, timeout
+      end
     end
 
     # The Aggregate Trade Streams push trade information that is aggregated for a single taker order.
-    def aggregate_trade(markets, handler, timeout = 0.seconds) : Listener
-      Binance::Listener.new markets, "aggTrade", handler, timeout
-    end
+    stream aggregate_trade, "aggTrade"
 
     # The Trade Streams push raw trade information; each trade has a unique buyer and seller.
-    def trade(markets, handler, timeout = 0.seconds) : Listener
-      Binance::Listener.new markets, "trade", handler, timeout
-    end
+    stream trade, "trade"
 
     # 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics
     # of the UTC day, but a 24hr rolling window for the previous 24hrs.
-    def ticker(markets, handler, timeout = 0.seconds) : Listener
-      Binance::Listener.new markets, "ticker", handler, timeout
-    end
+    stream ticker, "ticker"
 
     # Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
-    def book_ticker(markets, handler, timeout = 0.seconds) : Listener
-      Binance::Listener.new markets, "bookTicker", handler, timeout
-    end
+    stream book_ticker, "bookTicker"
 
     # Diff. Depth Stream
     # Order book price and quantity depth updates used to locally manage an order book.
@@ -68,6 +62,10 @@ module Binance
 
     def depth(markets, handler, timeout : Time::Span) : Listener
       depth markets, handler, "", timeout
+    end
+
+    def combo(markets, streams, handler, timeout = 0.seconds) : Listener
+      Binance::Listener.new markets, streams, handler, timeout
     end
   end
 end
