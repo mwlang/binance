@@ -73,21 +73,19 @@ That's all folks!
 ```
 ## Features
 
-Current
-
+Current:
   * Basic implementation of REST API
     * Easy to use authentication
     * Methods return `Binance::Responses::ServerResponse` objects with JSON already deserialized
     * No need to generate signatures
 
   * Basic Websocket API for Listening
-    * Pass procs or lambdas to event handlers
     * Some streams mapped for JSON decoding (all streams currently accessible through JSON unmapped hash)
 
   * Websocket API
-    * Complete stream decoding (see TODO list below)
+    * Most streams deserialized (see TODO list below)
+    * Single and multiple streams supported via `Handler` class
     * WebSocket Live subscribe/unsubscribe and sending commands
-      * Single and multiple streams supported
 
 ## REST Endpoints
 
@@ -118,7 +116,7 @@ Current
 - [x] `my_trades` [myTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data) Get trades for a specific account and symbol.
 
 ## Websocket Streams
-- [ ] [Aggregate Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams)
+- [x] [Aggregate Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams)
 - [x] [Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#trade-streams)
 - [x] [Kline/Candlestick Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams)
 - [x] [Individual Symbol Mini Ticker Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-mini-ticker-stream)
@@ -127,7 +125,7 @@ Current
 - [ ] [All Market Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream)
 - [x] [Individual Symbol Book Ticker Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-book-ticker-streams)
 - [ ] [All Book Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
-- [ ] [Partial Book Depth Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
+- [x] [Partial Book Depth Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
 - [x] [Diff Depth Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
 
 ## Installation
@@ -257,10 +255,18 @@ Listeners may also be instantiated through the `Websocket` client class like thi
 client = Binance::Websocket.new
 listener = client.depth SYMBOLS, OrderBookHandler
 ```
-Note:  Note all streams have convenient classes or serializers.  Pull requests greatly appreciated!
+Note:  Not all streams have convenience classes or serializers.  Pull requests greatly appreciated!
+The following streams have convenience classes:
+
+* `combo` -- pass an array of symbols and array of streams (more info below)
+* `aggregate_trade` -- opens `aggTrade` stream on given array of symbols
+* `trade` -- opens `trade` stream on given array of symbols
+* `ticker` -- opens `ticker` stream
+* `book_ticker` -- opens `bookTicker` stream
+* `depth` -- opens `depth` stream (pass also speed param "100ms" for faster updates)
 
 If you want to handle the scenario where the Binance server sometimes stops sending
-data to the client, but doesn't actually close the stream, then invoke with a Timeout span:
+data to the client, but doesn't actually close the stream, then invoke with a Timeout span greater than zero:
 
 ```crystal
 # ...
@@ -269,7 +275,7 @@ listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
 # ...
 ```
 
-This will cause the listener to close the websocket stream, thus breaking the `#run`
+This will cause the listener to close the websocket stream after 30 seconds of no updates, thus breaking the `#run`
 blocking call.
 
 #### One Handler, Multiple Streams

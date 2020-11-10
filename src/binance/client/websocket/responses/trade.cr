@@ -11,32 +11,24 @@
 #   "m": true,        // Is the buyer the market maker?
 #   "M": true         // Ignore
 # }
+#
+# Base DIFF:
+#
+# {
+#   "t": 12345,       // Trade ID
+#   "b": 88,          // Buyer order ID
+#   "a": 50,          // Seller order ID
+# }
+#
 module Binance::Responses::Websocket
-  class Trade < Data
-    include JSON::Serializable
-
+  class Trade < TradeBase
     @[JSON::Field(key: "t")]
     getter trade_id : Int64
-
-    @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
-    getter price : Float64
-
-    @[JSON::Field(key: "q", converter: Binance::Converters::ToFloat)]
-    getter quote_quantity : Float64
 
     @[JSON::Field(key: "b")]
     getter buyer_order_id : Int64 = 0
 
     @[JSON::Field(key: "a")]
     getter seller_order_id : Int64 = 0
-
-    @[JSON::Field(key: "T", converter: Binance::Converters::ToTime)]
-    getter trade_time : Time = Time.utc
-
-    @[JSON::Field(key: "m")]
-    getter is_buyer_maker : Bool
-
-    @[JSON::Field(key: "M")]
-    getter ignore : Bool
   end
 end

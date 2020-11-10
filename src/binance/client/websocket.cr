@@ -1,4 +1,5 @@
 require "./websocket/responses/data"
+require "./websocket/responses/trade_base"
 require "./websocket/responses/*"
 require "./websocket/handler"
 require "./websocket/listener"
@@ -18,10 +19,23 @@ module Binance
       Binance::Listener.new markets, streams, handler, timeout
     end
 
+    # The Aggregate Trade Streams push trade information that is aggregated for a single taker order.
+    def aggregate_trade(markets, handler, timeout = 0.seconds) : Listener
+      Binance::Listener.new markets, "aggTrade", handler, timeout
+    end
+
+    # The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+    def trade(markets, handler, timeout = 0.seconds) : Listener
+      Binance::Listener.new markets, "trade", handler, timeout
+    end
+
+    # 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics
+    # of the UTC day, but a 24hr rolling window for the previous 24hrs.
     def ticker(markets, handler, timeout = 0.seconds) : Listener
       Binance::Listener.new markets, "ticker", handler, timeout
     end
 
+    # Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
     def book_ticker(markets, handler, timeout = 0.seconds) : Listener
       Binance::Listener.new markets, "bookTicker", handler, timeout
     end
@@ -46,6 +60,14 @@ module Binance
     def depth(markets, handler, speed="", timeout = 0.seconds) : Listener
       stream_name = speed == "" ? "depth" : "depth@#{speed}"
       Binance::Listener.new markets, stream_name, handler, timeout
+    end
+
+    def depth(markets, handler) : Listener
+      depth markets, handler, "", 0.seconds
+    end
+
+    def depth(markets, handler, timeout : Time::Span) : Listener
+      depth markets, handler, "", timeout
     end
   end
 end

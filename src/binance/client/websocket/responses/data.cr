@@ -10,7 +10,7 @@ module Binance::Responses::Websocket
     getter event_time : Time = Time.utc
 
     @[JSON::Field(key: "s")]
-    getter symbol : String = ""
+    property symbol : String = ""
 
   end
 end

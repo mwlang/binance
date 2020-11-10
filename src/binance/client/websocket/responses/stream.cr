@@ -25,7 +25,9 @@ module Binance::Responses::Websocket
       when "ticker"     then  Ticker.new(pull)
       when "miniTicker" then  MiniTicker.new(pull)
       when "trade"      then  Trade.new(pull)
+      when "aggTrade"   then  AggregateTrade.new(pull)
       when "bookTicker" then  BookTicker.new(pull)
+      when /^depth\d+$/ then  PartialDepth.new(pull).tap{|pd| pd.symbol = symbol.upcase}
       when /^depth/     then  Depth.new(pull)
       when /^kline/     then  Kline.new(pull)
       else                    Data.new(pull)
@@ -34,22 +36,22 @@ module Binance::Responses::Websocket
       new stream, symbol.upcase, name, data
     end
 
-    def kline; @data.as(Kline) end
-    def kline?; @data.is_a?(Kline) ? kline : nil end
+    macro stream(name, response_klass)
+      def {{name}}
+        @data.as({{response_klass}})
+      end
+      def {{name}}?
+        @data.is_a?({{response_klass}}) ? @data.as({{response_klass}}) : nil
+      end
+    end
 
-    def depth; @data.as(Depth) end
-    def depth?; @data.is_a?(Depth) ? depth : nil end
-
-    def book_ticker; @data.as(BookTicker) end
-    def book_ticker?; @data.is_a?(BookTicker) ? book_ticker : nil end
-
-    def ticker; @data.as(Ticker) end
-    def ticker?; @data.is_a?(Ticker) ? ticker : nil end
-
-    def mini_ticker; @data.as(MiniTicker) end
-    def mini_ticker?; @data.is_a?(MiniTicker) ? mini_ticker : nil end
-
-    def trade; @data.as(Trade) end
-    def trade?; @data.is_a?(Trade) ? trade : nil end
+    stream kline, Kline
+    stream trade, Trade
+    stream aggregate_trade, AggregateTrade
+    stream depth, Depth
+    stream partial_depth, PartialDepth
+    stream book_ticker, BookTicker
+    stream ticker, Ticker
+    stream mini_ticker, MiniTicker
   end
 end
