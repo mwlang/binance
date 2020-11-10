@@ -56,16 +56,8 @@ module Binance
       Binance::Listener.new markets, stream_name, handler, timeout
     end
 
-    # def depth(markets, handler) : Listener
-    #   depth markets, handler, "", 0.seconds
-    # end
-
-    # def depth(markets, handler, timeout : Time::Span) : Listener
-    #   depth markets, handler, "", timeout
-    # end
-
-    # def combo(markets, streams, handler, timeout = 0.seconds) : Listener
-    #   Binance::Listener.new markets, streams, handler, timeout
-    # end
+    def combo(markets, streams, handler, timeout = 0.seconds) : Listener
+      Binance::Listener.new markets, streams, handler, timeout
+    end
   end
 end
