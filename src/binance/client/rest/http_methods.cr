@@ -1,5 +1,5 @@
 module Binance::HttpMethods
-  BASE_URL = "https://api.binance.com/api"
+  BASE_URL = "https://api.binance.com"
 
   {% for method in %w(get post delete) %}
 
