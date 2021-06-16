@@ -66,6 +66,7 @@ module Binance::Endpoints
     account:          "api/v3/account",
     my_trades:        "api/v3/myTrades",
     user_data_stream: "api/v1/userDataStream",
+    new_oco_order:    "api/v3/order/oco",
 
     # Withdraw API Endpoints
     withdraw:         "api/v3/withdraw.html",
@@ -299,6 +300,37 @@ module Binance::Endpoints
     optional_param params, "newOrderRespType", response_type
 
     fetch :post, :signed, :new_order, OrderResponse, params
+  end
+
+  def new_oco_order(
+    symbol : String,
+    side : String,
+    quantity : (Float64 | String),
+    price : Float64,
+    stop_price : Float64,
+    stop_limit_price : Float64? = nil,
+    stop_limit_time_in_force : String? = nil,
+    response_type : String? = nil,
+    limit_iceberg_quantity : Float64? = nil,
+    list_client_order_id : String? = nil,
+    limit_client_order_id : String? = nil,
+    stop_client_order_id : String? = nil
+  )
+    params = HTTP::Params.new
+    symbol_param params, symbol
+    params["side"] = side.upcase
+    params["quantity"] = quantity.to_s
+    params["price"] = price.to_s
+    params["stopPrice"] = stop_price.to_s
+    params["stopLimitPrice"] = stop_limit_price.to_s
+    optional_param params, "stopLimitTimeInForce", stop_limit_time_in_force
+    optional_param params, "limitIcebergQty", iceberg_quantity
+    optional_param params, "newOrderRespType", response_type
+    optional_param params, "listClientOrderId", list_client_order_id
+    optional_param params, "limitClientOrderId", limit_client_order_id
+    optional_param params, "stopClientOrderId", stop_client_order_id
+
+    fetch :post, :signed, :new_oco_order, OcoOrderResponse, params
   end
 
   def new_test_order(

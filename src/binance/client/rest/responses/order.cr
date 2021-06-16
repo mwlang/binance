@@ -51,6 +51,9 @@ module Binance::Responses
     @[JSON::Field(key: "clientOrderId")]
     getter client_order_id : String = ""
 
+    @[JSON::Field(key: "orderListId")]
+    getter order_list_id : Int64 = -1
+
     @[JSON::Field(key: "transactTime", converter: Binance::Converters::ToTime)]
     getter transaction_time : Time = Time.utc
 
