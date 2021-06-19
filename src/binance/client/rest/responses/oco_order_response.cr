@@ -18,7 +18,7 @@ module Binance::Responses
   #       }
   #     ]
   class OcoOrderResponse < Responses::ServerResponse
-    property orders : Array(Order) = [] of OcoOrder
+    property oco_orders : Array(OcoOrder) = [] of OcoOrder
 
     def self.from_json(json)
       pull = JSON::PullParser.new(json)

@@ -324,7 +324,7 @@ module Binance::Endpoints
     params["stopPrice"] = stop_price.to_s
     params["stopLimitPrice"] = stop_limit_price.to_s
     optional_param params, "stopLimitTimeInForce", stop_limit_time_in_force
-    optional_param params, "limitIcebergQty", iceberg_quantity
+    optional_param params, "limitIcebergQty", limit_iceberg_quantity
     optional_param params, "newOrderRespType", response_type
     optional_param params, "listClientOrderId", list_client_order_id
     optional_param params, "limitClientOrderId", limit_client_order_id
