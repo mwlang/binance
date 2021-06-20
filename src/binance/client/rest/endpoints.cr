@@ -67,6 +67,8 @@ module Binance::Endpoints
     my_trades:        "api/v3/myTrades",
     user_data_stream: "api/v1/userDataStream",
     new_oco_order:    "api/v3/order/oco",
+    get_oco_order:    "api/v3/orderList",
+    cancel_oco_order: "api/v3/orderList",
 
     # Withdraw API Endpoints
     withdraw:         "api/v3/withdraw.html",
@@ -386,6 +388,18 @@ module Binance::Endpoints
     fetch :get, :signed, :get_order, OrderResponse, params
   end
 
+  def get_oco_order(
+    order_list_id : (Int32 | Int64)? = nil,
+    list_client_order_id : String? = nil
+  )
+    params = HTTP::Params.new
+
+    optional_param params, "orderListId", order_list_id
+    optional_param params, "listClientOrderId", list_client_order_id
+
+    fetch :get, :signed, :get_oco_order, OcoOrderResponse, params
+  end
+
   # Cancel an active order
   #
   #   Name              Type    Mandatory Description
@@ -409,6 +423,22 @@ module Binance::Endpoints
     optional_param params, "origClientOrderId", client_order_id
 
     fetch :delete, :signed, :cancel_order, OrderResponse, params
+  end
+
+  def cancel_oco_order(
+    symbol : String,
+    order_list_id : (Int32 | Int64)? = nil,
+    list_client_order_id : String? = nil,
+    client_order_id : String? = nil
+  )
+    params = HTTP::Params.new
+    symbol_param params, symbol
+
+    optional_param params, "orderListId", order_list_id
+    optional_param params, "listClientOrderId", list_client_order_id
+    optional_param params, "newClientOrderId", client_order_id
+
+    fetch :delete, :signed, :cancel_oco_order, OcoOrderResponse, params
   end
 
   def open_orders(symbol : String)

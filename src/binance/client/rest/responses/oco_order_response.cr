@@ -1,22 +1,4 @@
 module Binance::Responses
-  # Typical Server Response:
-  #     {
-  #       "symbol": "LTCBTC",
-  #       "price": "4.00000200"
-  #     }
-  #
-  # OR
-  #
-  #     [
-  #       {
-  #         "symbol": "LTCBTC",
-  #         "price": "4.00000200"
-  #       },
-  #       {
-  #         "symbol": "ETHBTC",
-  #         "price": "0.07946600"
-  #       }
-  #     ]
   class OcoOrderResponse < Responses::ServerResponse
     property oco_orders : Array(OcoOrder) = [] of OcoOrder
 
