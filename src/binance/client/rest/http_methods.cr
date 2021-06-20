@@ -1,5 +1,5 @@
 module Binance::HttpMethods
-  BASE_URL = "https://api.binance.com/api"
+  BASE_URL = "https://api.binance.com"
 
   {% for method in %w(get post delete) %}
 
@@ -34,6 +34,7 @@ module Binance::HttpMethods
       params["timestamp"] = Time.utc.to_unix_ms.to_s
       params["signature"] = hmac params.to_s
 
+      Log.for("api-calls").info { "#{BASE_URL}/#{url}?#{params}" }
       HTTP::Client.{{method.id}}("#{BASE_URL}/#{url}?#{params}", headers)
     end
 

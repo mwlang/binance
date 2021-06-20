@@ -46,5 +46,11 @@ module Binance::Responses
 
     @[JSON::Field(key: "isBestMatch")]
     getter is_best_match : Bool
+
+    @[JSON::Field(key: "commission", converter: Binance::Converters::ToFloat)]
+    getter commission : Float64
+
+    @[JSON::Field(key: "commissionAsset")]
+    getter commission_asset : String?
   end
 end

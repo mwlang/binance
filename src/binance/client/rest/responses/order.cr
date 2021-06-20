@@ -51,6 +51,9 @@ module Binance::Responses
     @[JSON::Field(key: "clientOrderId")]
     getter client_order_id : String = ""
 
+    @[JSON::Field(key: "orderListId")]
+    getter order_list_id : Int64 = -1
+
     @[JSON::Field(key: "transactTime", converter: Binance::Converters::ToTime)]
     getter transaction_time : Time = Time.utc
 
@@ -84,6 +87,12 @@ module Binance::Responses
     @[JSON::Field(key: "fills")]
     getter fills : Array(OrderFill) = [] of Binance::Responses::OrderFill
 
+    @[JSON::Field(key: "time", converter: Binance::Converters::ToTime)]
+    getter time : Time = Time.utc
+
+    @[JSON::Field(key: "updateTime", converter: Binance::Converters::ToTime)]
+    getter update_time : Time = Time.utc
+
     def average_price
       return price if price > 0.0
       return 0.0 if cummulative_quote_quantity < 0.0 || executed_quantity == 0.0
@@ -94,8 +103,8 @@ module Binance::Responses
     def effective_fill_price
       return price if price > 0.0 || fills.empty?
 
-      total_fill_price = fills.reduce(0.0){|sum, fill| sum + (fill.price * fill.quantity)}
-      total_fill_quantity = fills.reduce(0.0){|sum, fill| sum + fill.quantity}
+      total_fill_price = fills.reduce(0.0) { |sum, fill| sum + (fill.price * fill.quantity) }
+      total_fill_quantity = fills.reduce(0.0) { |sum, fill| sum + fill.quantity }
       total_fill_price / total_fill_quantity
     end
   end
