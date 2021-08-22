@@ -19,6 +19,7 @@ module Binance
     getter websocket : HTTP::WebSocket
     property messages : Int32 = 0
     property stopped : Bool = false
+    property service : Service
 
     record ChannelMessage, json : String
     record ChannelError, error : Exception
@@ -50,7 +51,8 @@ module Binance
       @symbols : Array(String),
       streams : Array(String),
       handler : Binance::Handler,
-      @timeout : Time::Span = 0.seconds
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
     )
       @stream_names = build_stream_names(streams)
       @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
@@ -63,7 +65,8 @@ module Binance
       symbol : String,
       streams : Array(String),
       handler : Binance::Handler,
-      @timeout : Time::Span = 0.seconds
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
     )
       @symbols = [symbol]
       @stream_names = build_stream_names(streams)
@@ -81,7 +84,8 @@ module Binance
       @symbols : Array(String),
       stream : String,
       handler_class,
-      @timeout : Time::Span = 0.seconds
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
     )
       @stream_names = build_stream_names(stream)
       @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
@@ -97,7 +101,8 @@ module Binance
       symbol : String,
       stream : String,
       handler_class,
-      @timeout : Time::Span = 0.seconds
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
     )
       @symbols = [symbol]
       @stream_names = build_stream_names(stream)
@@ -110,11 +115,19 @@ module Binance
       @websocket = open_connection
     end
 
+    def service_host
+      case service
+      when Binance::Service::Com then "stream.binance.com"
+      when Binance::Service::Us then "stream.binance.us"
+      else raise "Unknown service #{service.inspect}"
+      end
+    end
+
     def open_connection
-      host = "stream.binance.com"
+      host = service_host
       path = "/stream?streams=#{stream_names}"
       port = 9443
-      puts "opening #{symbols_param}"
+      puts "opening #{symbols_param} on #{host}"
       HTTP::WebSocket.new(host, path, port, tls: true).tap{ |ws| attach_events(ws) }
     end
 

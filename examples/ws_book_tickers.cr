@@ -94,7 +94,7 @@ end
 # loop forever -- CTRL-C to break out in terminal
 loop do
   puts "starting book ticker listener"
-  client = Binance::Websocket.new
+  client = Binance::Websocket.new("", "", Binance::Service::Us)
   listener = client.book_ticker(["BTCUSDT"], BookTickerHandler, 30.seconds)
 
   # Whenever the websocket stream is closed or errors out, we

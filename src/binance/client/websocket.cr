@@ -9,15 +9,18 @@ module Binance
 
     property api_key : String
     property secret_key : String
+    property service : Service
 
-    def initialize(api_key = "", secret_key = "")
-      @api_key = api_key
-      @secret_key = secret_key
+    def initialize(
+        @api_key = "",
+        @secret_key = "",
+        @service = Binance::Service::Com
+      )
     end
 
     macro stream(method_name, stream_name)
       def {{method_name}}(markets : (Array(String) | String), handler : (Binance::Handler | Binance::Handler.class), timeout : Time::Span = 0.seconds)
-        Binance::Listener.new markets, {{stream_name}}, handler, timeout
+        Binance::Listener.new markets, {{stream_name}}, handler, timeout, service
       end
     end
 
@@ -53,11 +56,11 @@ module Binance
     # 9. Receiving an event that removes a price level that is not in your local order book can happen and is normal.
     def depth(markets, handler, speed="", timeout = 0.seconds) : Listener
       stream_name = speed == "" ? "depth" : "depth@#{speed}"
-      Binance::Listener.new markets, stream_name, handler, timeout
+      Binance::Listener.new markets, stream_name, handler, timeout, service
     end
 
     def combo(markets, streams, handler, timeout = 0.seconds) : Listener
-      Binance::Listener.new markets, streams, handler, timeout
+      Binance::Listener.new markets, streams, handler, timeout, service
     end
   end
 end

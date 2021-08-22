@@ -295,9 +295,17 @@ client = Binance::Websocket.new
 listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
 # ...
 ```
-
 This will cause the listener to close the websocket stream after 30 seconds of no updates, thus breaking the `#run`
 blocking call.
+
+To connect to `binance.us` websocket, then specify the `service` when intializing:
+
+```crystal
+# ...
+client = Binance::Websocket.new("", "", Binance::Service::us)
+listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
+# ...
+```
 
 #### One Handler, Multiple Streams
 
