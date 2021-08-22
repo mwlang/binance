@@ -8,6 +8,11 @@ require "openssl/hmac"
 # * `quote asset` refers to the asset that is the `price` of a symbol.
 #
 module Binance
+  enum Service
+    Com
+    Us
+  end
+
   # **Symbol status (status):**
   #
   # * PRE_TRADING

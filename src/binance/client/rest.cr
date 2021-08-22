@@ -3,11 +3,6 @@ require "./rest/http_methods"
 require "./rest/responses/*"
 
 module Binance
-  enum Service
-    Com
-    Us
-  end
-
   class REST
     include Binance::Endpoints
     include Binance::HttpMethods
