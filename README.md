@@ -75,6 +75,7 @@ That's all folks!
 
 Current:
   * Basic implementation of REST API
+    * Both binance.com and binance.us supported
     * Easy to use authentication
     * Methods return `Binance::Responses::ServerResponse` objects with JSON already deserialized
     * No need to generate signatures
@@ -88,6 +89,26 @@ Current:
     * WebSocket Live subscribe/unsubscribe and sending commands
 
 ## REST Endpoints
+
+By default, the client is connected to `binance.com`, but `binance.us` is also fully supported.  When instantiating the client, the third parameter sets the service endpoint and is one of:
+  * `Binance::Service::Com`
+  * `Binance::Service::Us`
+
+```crystal
+puts "binance.com..."
+client = Binance::REST.new("", "", Binance::Service::Com)
+
+puts client.time.body
+puts client.time.server_time.inspect
+puts client.time.used_weight.inspect
+
+puts "binance.us..."
+client = Binance::REST.new("", "", Binance::Service::Us)
+
+puts client.time.body
+puts client.time.server_time.inspect
+puts client.time.used_weight.inspect
+```
 
 ### PUBLIC (NONE)
 - [x] `ping` [ping](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-connectivity) Test connectivity to the Rest API.
