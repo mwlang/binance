@@ -1,7 +1,7 @@
 ---
 request:
   method: GET
-  uri: https://api.binance.com/api/v1/ticker/24hr
+  uri: https://api.binance.com/api/v3/ticker/24hr
   body: ""
   query_params: ""
   headers:

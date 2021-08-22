@@ -1,27 +1,39 @@
-def cassette_filepath(name : String)
-  File.expand_path("./spec/fixtures/vcr_cassettes/#{name}.yml")
+def cassette_filepath(service, name : String)
+  File.expand_path("./spec/fixtures/vcr_cassettes/#{service_folder(service)}/#{name}.yml")
 end
 
-def cassette_exists?(name : String)
-  File.exists? cassette_filepath(name)
+def cassette_exists?(service, name : String)
+  File.exists? cassette_filepath(service, name)
 end
 
-def with_vcr_cassette(name : String, &block)
+def with_vcr_cassette(service : Binance::Service, name : String, &block)
   WebMock.wrap do
-    if cassette_exists? name
-      ts = playback_cassette name
+    if cassette_exists? service, name
+      ts = playback_cassette service, name
       Timecop.freeze(ts) { block.call }
     else
       Timecop.freeze(Time.utc) do
-        record_cassette name
+        record_cassette service, name
         block.call
       end
     end
   end
 end
 
-def playback_cassette(name : String)
-  cassette = YAML.parse(File.read(cassette_filepath(name)))
+def with_vcr_cassette(name : String, &block)
+  with_vcr_cassette(Binance::Service::Com, name, &block)
+end
+
+def service_folder(service : Binance::Service)
+  case service
+  when Binance::Service::Com then "binance.com"
+  when Binance::Service::Us then "binance.us"
+  else raise "Unknown service #{service.inspect}"
+  end
+end
+
+def playback_cassette(service, name : String)
+  cassette = YAML.parse(File.read(cassette_filepath(service, name)))
 
   full_uri = if cassette["request"]["query_params"]?
                "#{cassette["request"]["uri"]}?#{cassette["request"]["query_params"]}"
@@ -37,10 +49,13 @@ def playback_cassette(name : String)
   cassette["request"]["timestamp"]? ? Time.unix_ms(cassette["request"]["timestamp"].as_i64) : Time.utc
 end
 
-def record_cassette(name : String)
+def record_cassette(service, name : String)
   WebMock.callbacks.add do
     after_live_request do |request, response|
       uri = "#{request.scheme}://#{request.headers["Host"]}#{request.resource.split("?")[0]}"
+      if io = response.body_io?
+        response.consume_body_io
+      end
       data = {
         request: {
           method:       request.method,
@@ -55,8 +70,11 @@ def record_cassette(name : String)
           body:   response.body,
         },
       }
-
-      File.open(cassette_filepath(name), "w") { |f| YAML.dump(data, f) }
+      pp! response
+      puts "*" * 80
+      pp! response.body
+      puts "*" * 80
+      File.open(cassette_filepath(service, name), "w") { |f| YAML.dump(data, f) }
     end
   end
   WebMock.allow_net_connect = true

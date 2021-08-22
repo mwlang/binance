@@ -1,9 +1,9 @@
 ---
 request:
   method: GET
-  uri: https://api.binance.com/api/v1/aggTrades
+  uri: https://api.binance.com/api/v3/klines
   body: ""
-  query_params: symbol=BOGUS&limit=500
+  query_params: symbol=BOGUS&limit=2&interval=1h
   headers:
     User-Agent:
     - Cossack v0.1.4

@@ -1,0 +1,16 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.us/api/v3/ticker/24hr
+  body: ""
+  query_params: symbol=BNBUSDT
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Connection: close
+    Host: api.binance.us
+    User-agent: Crystal
+  timestamp: 1629605782969
+response:
+  status: 200
+  body: '{"symbol":"BNBUSDT","priceChange":"-4.14000000","priceChangePercent":"-0.911","weightedAvgPrice":"452.48521835","prevClosePrice":"454.42980000","lastPrice":"450.31510000","lastQty":"1.35000000","bidPrice":"450.24030000","bidQty":"3.36000000","askPrice":"450.29340000","askQty":"0.50000000","openPrice":"454.45510000","highPrice":"460.12010000","lowPrice":"444.70310000","volume":"13114.85000000","quoteVolume":"5934275.76590700","openTime":1629519383110,"closeTime":1629605783110,"firstId":2810418,"lastId":2822564,"count":12147}'

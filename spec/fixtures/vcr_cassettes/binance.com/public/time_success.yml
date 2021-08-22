@@ -1,0 +1,16 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v3/time
+  body: ""
+  query_params: ""
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Connection: close
+    Host: api.binance.com
+    User-agent: Crystal
+  timestamp: 1629602921144
+response:
+  status: 200
+  body: '{"serverTime":1629602921386}'

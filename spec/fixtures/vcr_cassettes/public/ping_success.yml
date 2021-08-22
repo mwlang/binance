@@ -1,9 +1,0 @@
----
-request:
-  method: get
-  uri: https://api.binance.com/api/v1/ping
-  body: ""
-response:
-  status: 200
-  body:
-    "{}"

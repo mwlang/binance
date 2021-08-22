@@ -47,7 +47,18 @@ module Binance::Responses
 
     # The unparsed body of the HTTP response
     def body
-      @response.nil? ? "" : @response.as(HTTP::Client::Response).body
+      @response.nil? ? "" : consume_body(@response.as(HTTP::Client::Response))
+    end
+
+    def self.consume_body(response)
+      if response.body_io?
+        response.consume_body_io
+      end
+      response.body
+    end
+
+    def consume_body(response)
+      ServerResponse.consume_body(response)
     end
 
     def used_weight
@@ -61,13 +72,14 @@ module Binance::Responses
       self.new.tap do |r|
         r.success = false
         r.response = response
+        response_body = consume_body(response)
         begin
-          json = JSON.parse response.body
+          json = JSON.parse response_body
           r.error_message = json["msg"].to_s
           r.error_code = json["code"].as_i
         rescue
           r.error_code = -1
-          r.error_message = response.body
+          r.error_message = response_body
           r.response = response
         end
       end
@@ -77,7 +89,7 @@ module Binance::Responses
     def self.from_failure(response)
       self.new.tap do |r|
         r.success = false
-        r.error_message = response.body
+        r.error_message = consume_body(response)
         r.response = response
       end
     end

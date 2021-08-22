@@ -43,15 +43,15 @@ module Binance::Endpoints
 
   ENDPOINTS = {
     # Public API Endpoints
-    ping:              "v1/ping",
-    time:              "v1/time",
+    ping:              "v3/ping",
+    time:              "v3/time",
     exchange_info:     "v3/exchangeInfo",
     depth:             "v3/depth",
-    trades:            "v1/trades",
-    historical_trades: "v1/historicalTrades",
-    agg_trades:        "v1/aggTrades",
+    trades:            "v3/trades",
+    historical_trades: "v3/historicalTrades",
+    agg_trades:        "v3/aggTrades",
     klines:            "v3/klines",
-    twenty_four_hour:  "v1/ticker/24hr",
+    twenty_four_hour:  "v3/ticker/24hr",
     price:             "v3/ticker/price",
     avg_price:         "v3/avgPrice",
     book_ticker:       "v3/ticker/bookTicker",
