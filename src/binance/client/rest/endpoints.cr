@@ -65,7 +65,9 @@ module Binance::Endpoints
     all_orders:       "v3/allOrders",
     account:          "v3/account",
     my_trades:        "v3/myTrades",
-    user_data_stream: "v1/userDataStream",
+
+    # User Data Stream API Endpoints
+    user_data_stream: "v3/userDataStream",
 
     # Withdraw API Endpoints
     withdraw:         "v3/withdraw.html",
@@ -384,6 +386,10 @@ module Binance::Endpoints
 
   def account
     fetch :get, :signed, :account, AccountResponse
+  end
+
+  def user_data_stream
+    fetch :post, :verified, :user_data_stream, UserDataStreamResponse
   end
 
   # Get trades for a specific account and symbol.
