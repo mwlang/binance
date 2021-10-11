@@ -24,6 +24,12 @@ module Binance
       end
     end
 
+    macro stream_all(method_name, stream_name)
+      def all_{{method_name}}s(handler : (Binance::Handler | Binance::Handler.class), timeout : Time::Span = 0.seconds)
+        Binance::Listener.new({{stream_name}}, handler) #, timeout, service
+      end
+    end
+
     # The Aggregate Trade Streams push trade information that is aggregated for a single taker order.
     stream aggregate_trade, "aggTrade"
 
@@ -33,9 +39,17 @@ module Binance
     # 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics
     # of the UTC day, but a 24hr rolling window for the previous 24hrs.
     stream ticker, "ticker"
+    stream_all ticker, "!ticker@arr"
+
+    # 24hr rolling window mini-ticker statistics for all symbols that changed in an array.
+    # These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+    # Note that only tickers that have changed will be present in the array.
+    stream mini_ticker, "miniTicker"
+    stream_all mini_ticker, "!miniTicker@arr"
 
     # Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
     stream book_ticker, "bookTicker"
+    stream_all book_ticker, "!bookTicker"
 
     # Diff. Depth Stream
     # Order book price and quantity depth updates used to locally manage an order book.

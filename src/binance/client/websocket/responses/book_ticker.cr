@@ -24,5 +24,11 @@ module Binance::Responses::Websocket
 
     @[JSON::Field(key: "A", converter: Binance::Converters::ToFloat)]
     getter ask_quantity : Float64 = 0.0
+
+    def self.from_data(data : Data)
+      from_json(data.json_unmapped.to_json).tap do |ticker|
+        ticker.symbol = data.symbol
+      end
+    end
   end
 end

@@ -27,7 +27,7 @@ module Binance::Responses::Websocket
   class Ticker < MiniTicker
     include JSON::Serializable
 
-     @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
+    @[JSON::Field(key: "p", converter: Binance::Converters::ToFloat)]
     getter price_change : Float64 = 0.0
 
     @[JSON::Field(key: "P", converter: Binance::Converters::ToFloat)]
@@ -68,6 +68,12 @@ module Binance::Responses::Websocket
 
     @[JSON::Field(key: "n")]
     getter trades : Int64 = 0
+
+    def self.from_data(data : Data)
+      from_json(data.json_unmapped.to_json).tap do |ticker|
+        ticker.symbol = data.symbol
+      end
+    end
 
     def open_time
       @event_time - 24.hours - 1.second

@@ -144,11 +144,11 @@ puts client.time.used_weight.inspect
 - [x] [Trade Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#trade-streams)
 - [x] [Kline/Candlestick Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams)
 - [x] [Individual Symbol Mini Ticker Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#individual-symbol-mini-ticker-stream)
-- [ ] [All Market Mini Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-market-mini-tickers-stream)
+- [x] [All Market Mini Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-market-mini-tickers-stream)
 - [x] [Individual Symbol Ticker Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#individual-symbol-ticker-streams)
-- [ ] [All Market Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream)
+- [x] [All Market Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream)
 - [x] [Individual Symbol Book Ticker Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#individual-symbol-book-ticker-streams)
-- [ ] [All Book Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
+- [x] [All Book Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
 - [x] [Partial Book Depth Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
 - [x] [Diff Depth Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
 
@@ -310,6 +310,17 @@ listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
 # ...
 ```
 
+The following streams are for all symbols so do not take a list of symbols like the usual streams.
+* `all_book_tickers` - Opens the book ticker stream for all symbols
+* `all_tickers` - Opens the ticker stream for all symbols
+* `all_mini_tickers` - Opens the ticker stream for all mini_tickers
+
+```crystal
+# ...
+client = Binance::Websocket.new("", "", Binance::Service::Us)
+listener = client.all_book_tickers(BookTickerHandler, 30.seconds)
+# ...
+```
 #### One Handler, Multiple Streams
 
 The above examples are passing an uninstantiated `Binance::Handler+` class.  When the class is passed, a handler is

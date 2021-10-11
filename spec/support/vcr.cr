@@ -70,10 +70,6 @@ def record_cassette(service, name : String)
           body:   response.body,
         },
       }
-      pp! response
-      puts "*" * 80
-      pp! response.body
-      puts "*" * 80
       File.open(cassette_filepath(service, name), "w") { |f| YAML.dump(data, f) }
     end
   end

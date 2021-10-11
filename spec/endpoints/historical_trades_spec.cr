@@ -19,7 +19,6 @@ describe Binance do
       client = Binance::REST.new(api_key, api_secret, Binance::Service::Com)
       with_vcr_cassette(Binance::Service::Com, "signed/historical_trades_bnbusdt_5") do
         response = client.historical_trades("BNBUSDT", 5)
-        pp! response
         response.should be_a Binance::Responses::TradesResponse
         response.success.should eq true
         response.trades.size.should eq 5

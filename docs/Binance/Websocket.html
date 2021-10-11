@@ -481,6 +481,21 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#all_book_tickers(handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method" class="signature"><strong>#all_book_tickers</strong>(handler : Binance::Handler | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#all_mini_tickers(handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method" class="signature"><strong>#all_mini_tickers</strong>(handler : Binance::Handler | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#all_tickers(handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method" class="signature"><strong>#all_tickers</strong>(handler : Binance::Handler | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#api_key:String-instance-method" class="signature"><strong>#api_key</strong> : String</a>
         
       </li>
@@ -506,6 +521,13 @@
         <a href="#depth(markets,handler,speed=%22%22,timeout=0.seconds):Listener-instance-method" class="signature"><strong>#depth</strong>(markets, handler, speed = <span class="s">&quot;&quot;</span>, timeout = <span class="n">0</span>.seconds) : Listener</a>
         
           <div class="summary"><p>Diff.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mini_ticker(markets:Array(String)%7CString,handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method" class="signature"><strong>#mini_ticker</strong>(markets : Array(String) | String, handler : Binance::Handler | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)</a>
+        
+          <div class="summary"><p>24hr rolling window mini-ticker statistics for all symbols that changed in an array.</p></div>
         
       </li>
     
@@ -559,6 +581,11 @@
     
       <li class="entry-summary">
         <a href="#stream(method_name,stream_name)-macro" class="signature"><strong>stream</strong>(method_name, stream_name)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#stream_all(method_name,stream_name)-macro" class="signature"><strong>stream_all</strong>(method_name, stream_name)</a>
         
       </li>
     
@@ -647,6 +674,48 @@
       </div>
     </div>
   
+    <div class="entry-detail" id="all_book_tickers(handler:Binance::Handler|Binance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">
+      <div class="signature">
+        
+        def <strong>all_book_tickers</strong>(handler : <a href="../Binance/Handler.html">Binance::Handler</a> | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)
+
+        <a class="method-permalink" href="#all_book_tickers(handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="all_mini_tickers(handler:Binance::Handler|Binance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">
+      <div class="signature">
+        
+        def <strong>all_mini_tickers</strong>(handler : <a href="../Binance/Handler.html">Binance::Handler</a> | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)
+
+        <a class="method-permalink" href="#all_mini_tickers(handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="all_tickers(handler:Binance::Handler|Binance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">
+      <div class="signature">
+        
+        def <strong>all_tickers</strong>(handler : <a href="../Binance/Handler.html">Binance::Handler</a> | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)
+
+        <a class="method-permalink" href="#all_tickers(handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="api_key:String-instance-method">
       <div class="signature">
         
@@ -728,6 +797,27 @@ Order book price and quantity depth updates used to locally manage an order book
 <p>How to manage a local order book correctly</p>
 
 <ol><li>Open a stream to wss://stream.binance.com:9443/ws/bnbbtc@depth.</li><li>Buffer the events you receive from the stream.</li><li>Get a depth snapshot from https://api.binance.com/api/v3/depth?symbol=BNBBTC&limit=1000 .</li><li>Drop any event where u is &lt;= lastUpdateId in the snapshot.</li><li>The first processed event should have U &lt;= lastUpdateId+1 AND u >= lastUpdateId+1.</li><li>While listening to the stream, each new event's U should be equal to the previous event's u+1.</li><li>The data in each event is the absolute quantity for a price level.</li><li>If the quantity is 0, remove the price level.</li><li>Receiving an event that removes a price level that is not in your local order book can happen and is normal.</li></ol>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mini_ticker(markets:Array(String)|String,handler:Binance::Handler|Binance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">
+      <div class="signature">
+        
+        def <strong>mini_ticker</strong>(markets : Array(String) | String, handler : <a href="../Binance/Handler.html">Binance::Handler</a> | <span class="t">Binance</span><span class="t">::</span><span class="t">Handler</span>.<span class="k">class</span>, timeout : Time::Span = <span class="n">0</span>.seconds)
+
+        <a class="method-permalink" href="#mini_ticker(markets:Array(String)%7CString,handler:Binance::Handler%7CBinance::Handler.class,timeout:Time::Span=0.seconds)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>24hr rolling window mini-ticker statistics for all symbols that changed in an array.
+These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+Note that only tickers that have changed will be present in the array.</p>
         </div>
       
       <br/>
@@ -849,6 +939,20 @@ of the UTC day, but a 24hr rolling window for the previous 24hrs.</p>
         macro <strong>stream</strong>(method_name, stream_name)
 
         <a class="method-permalink" href="#stream(method_name,stream_name)-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="stream_all(method_name,stream_name)-macro">
+      <div class="signature">
+        
+        macro <strong>stream_all</strong>(method_name, stream_name)
+
+        <a class="method-permalink" href="#stream_all(method_name,stream_name)-macro">#</a>
       </div>
       
       <br/>

@@ -12,5 +12,9 @@ module Binance::Responses::Websocket
     @[JSON::Field(key: "s")]
     property symbol : String = ""
 
+    def to_time(value : Int32)
+      t = Time.unix_ms(value)
+      t.year <= 2015 ? Time.unix(value) : t
+    end
   end
 end

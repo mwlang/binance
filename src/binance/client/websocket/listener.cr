@@ -16,6 +16,7 @@ module Binance
     getter timeout : Time::Span
     getter last_seen : Time = Time.utc
     getter handlers : Hash(String, Binance::Handler)
+    getter handler_class : Binance::Handler.class
     getter websocket : HTTP::WebSocket
     property messages : Int32 = 0
     property stopped : Bool = false
@@ -59,6 +60,7 @@ module Binance
       @handlers = {} of String => Binance::Handler
       @handlers[SENTINEL] = handler
       @websocket = open_connection
+      @handler_class = handler.class
     end
 
     def initialize(
@@ -68,12 +70,7 @@ module Binance
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      @symbols = [symbol]
-      @stream_names = build_stream_names(streams)
-      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
-      @handlers = {} of String => Binance::Handler
-      @handlers[SENTINEL] = handler
-      @websocket = open_connection
+      initialize([symbol], streams, handler, @timeout, @service)
     end
 
     # One handler for each market/symbol is instantiated.
@@ -83,7 +80,7 @@ module Binance
     def initialize(
       @symbols : Array(String),
       stream : String,
-      handler_class,
+      @handler_class,
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
@@ -91,7 +88,7 @@ module Binance
       @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
       @handlers = {} of String => Binance::Handler
       @symbols.each do |symbol|
-        @handlers[symbol.upcase] = handler_class.new(symbol)
+        @handlers[symbol.upcase] = @handler_class.new(symbol)
       end
 
       @websocket = open_connection
@@ -100,19 +97,20 @@ module Binance
     def initialize(
       symbol : String,
       stream : String,
-      handler_class,
+      @handler_class,
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      @symbols = [symbol]
-      @stream_names = build_stream_names(stream)
-      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
-      @handlers = {} of String => Binance::Handler
-      @symbols.each do |symbol|
-        @handlers[symbol.upcase] = handler_class.new(symbol)
-      end
+      initialize([symbol], stream, @handler_class, @timeout, @service)
+    end
 
-      @websocket = open_connection
+    def initialize(
+      stream : String,
+      @handler_class,
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
+    )
+      initialize(Array(String).new, stream, @handler_class, @timeout, @service)
     end
 
     def service_host
@@ -154,13 +152,21 @@ module Binance
     end
 
     def build_stream_names(stream_name : String)
-      @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+      if @symbols.empty?
+        stream_name
+      else
+        @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+      end
     end
 
     def build_stream_names(stream_names : Array(String))
-      stream_names.map do |stream_name|
-        @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
-      end.join("/")
+      if @symbols.empty?
+        stream_names.join("/")
+      else
+        stream_names.map do |stream_name|
+          @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+        end.join("/")
+      end
     end
 
     def symbols_param
@@ -184,6 +190,13 @@ module Binance
       Binance::Responses::Websocket::Stream.from_json(message.json)
     end
 
+    def handler_for_stream(stream)
+      return @handlers[stream.symbol] unless stream.symbol.starts_with?("!")
+
+      symbol = stream.data.symbol
+      @handlers.fetch(symbol, @handlers[symbol] = @handler_class.new(symbol))
+    end
+
     def run
       listen
 
@@ -192,7 +205,7 @@ module Binance
 
         when ChannelMessage
           stream = message_stream(message)
-          handler = @handlers[SENTINEL]? || @handlers[stream.symbol]
+          handler = @handlers[SENTINEL]? || handler_for_stream(stream)
           handler.messages += 1
           handler.update stream
 
