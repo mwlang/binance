@@ -10,6 +10,9 @@ module Binance::Responses::Websocket
   class BookTicker < Data
     include JSON::Serializable
 
+    @[JSON::Field(key: "u")]
+    getter update_id : Int64 = 0
+
     @[JSON::Field(key: "b", converter: Binance::Converters::ToFloat)]
     getter bid_price : Float64 = 0.0
 

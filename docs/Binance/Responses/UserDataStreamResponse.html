@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="binance">
-  <title>Binance::Responses::AccountResponse - binance master-dev</title>
+  <title>Binance::Responses::UserDataStreamResponse - binance master-dev</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -106,7 +106,7 @@
       
         <ul>
   
-  <li class=" current" data-id="binance/Binance/Responses/AccountResponse" data-name="binance::responses::accountresponse">
+  <li class=" " data-id="binance/Binance/Responses/AccountResponse" data-name="binance::responses::accountresponse">
       <a href="../../Binance/Responses/AccountResponse.html">AccountResponse</a>
       
     </li>
@@ -291,7 +291,7 @@
       
     </li>
   
-  <li class=" " data-id="binance/Binance/Responses/UserDataStreamResponse" data-name="binance::responses::userdatastreamresponse">
+  <li class=" current" data-id="binance/Binance/Responses/UserDataStreamResponse" data-name="binance::responses::userdatastreamresponse">
       <a href="../../Binance/Responses/UserDataStreamResponse.html">UserDataStreamResponse</a>
       
     </li>
@@ -400,12 +400,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Binance::Responses::AccountResponse
+  <span class="kind">class</span> Binance::Responses::UserDataStreamResponse
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/AccountResponse.html">Binance::Responses::AccountResponse</a></li><li class="superclass"><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Binance/Responses/UserDataStreamResponse.html">Binance::Responses::UserDataStreamResponse</a></li><li class="superclass"><a href="../../Binance/Responses/ServerResponse.html">Binance::Responses::ServerResponse</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -422,26 +422,7 @@
   <p>Typical Server Response:</p>
 
 <pre><code class="language-crystal">{
-  <span class="s">&quot;makerCommission&quot;</span>: <span class="n">15</span>,
-  <span class="s">&quot;takerCommission&quot;</span>: <span class="n">15</span>,
-  <span class="s">&quot;buyerCommission&quot;</span>: <span class="n">0</span>,
-  <span class="s">&quot;sellerCommission&quot;</span>: <span class="n">0</span>,
-  <span class="s">&quot;canTrade&quot;</span>: <span class="n">true</span>,
-  <span class="s">&quot;canWithdraw&quot;</span>: <span class="n">true</span>,
-  <span class="s">&quot;canDeposit&quot;</span>: <span class="n">true</span>,
-  <span class="s">&quot;updateTime&quot;</span>: <span class="n">123456789</span>,
-  <span class="s">&quot;balances&quot;</span>: [
-    {
-      <span class="s">&quot;asset&quot;</span>: <span class="s">&quot;BTC&quot;</span>,
-      <span class="s">&quot;free&quot;</span>: <span class="s">&quot;4723846.89208129&quot;</span>,
-      <span class="s">&quot;locked&quot;</span>: <span class="s">&quot;0.00000000&quot;</span>
-    },
-    {
-      <span class="s">&quot;asset&quot;</span>: <span class="s">&quot;LTC&quot;</span>,
-      <span class="s">&quot;free&quot;</span>: <span class="s">&quot;4763368.68006011&quot;</span>,
-      <span class="s">&quot;locked&quot;</span>: <span class="s">&quot;0.00000000&quot;</span>
-    }
-  ]
+  <span class="s">&quot;listenKey&quot;</span>: <span class="s">&quot;pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1&quot;</span>
 }</code></pre>
 
 
@@ -467,7 +448,7 @@
   </h2>
   
     
-      binance/client/rest/responses/account_response.cr
+      binance/client/rest/responses/user_data_stream_response.cr
     
     <br/>
   
@@ -489,7 +470,7 @@
       <li class="entry-summary">
         <a href="#new(pull:JSON::PullParser)-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
         
-          <div class="summary"><p>Typical Server Response:     {       "makerCommission": 15,       "takerCommission": 15,       "buyerCommission": 0,       "sellerCommission": 0,       "canTrade": true,       "canWithdraw": true,       "canDeposit": true,       "updateTime": 123456789,       "balances": [         {           "asset": "BTC",           "free": "4723846.89208129",           "locked": "0.00000000"         },         {           "asset": "LTC",           "free": "4763368.68006011",           "locked": "0.00000000"         }       ]     }</p></div>
+          <div class="summary"><p>Typical Server Response:     {       "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"     }</p></div>
         
       </li>
     
@@ -510,57 +491,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#account_type:String-instance-method" class="signature"><strong>#account_type</strong> : String</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#balances:Array(BalanceEntry)-instance-method" class="signature"><strong>#balances</strong> : Array(BalanceEntry)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#balances=(balances:Array(BalanceEntry))-instance-method" class="signature"><strong>#balances=</strong>(balances : Array(BalanceEntry))</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#buyer_commission:Int32-instance-method" class="signature"><strong>#buyer_commission</strong> : Int32</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#can_deposit:Bool-instance-method" class="signature"><strong>#can_deposit</strong> : Bool</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#can_trade:Bool-instance-method" class="signature"><strong>#can_trade</strong> : Bool</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#can_withdraw:Bool-instance-method" class="signature"><strong>#can_withdraw</strong> : Bool</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#maker_commission:Int32-instance-method" class="signature"><strong>#maker_commission</strong> : Int32</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#seller_commission:Int32-instance-method" class="signature"><strong>#seller_commission</strong> : Int32</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#taker_commission:Int32-instance-method" class="signature"><strong>#taker_commission</strong> : Int32</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#update_time:Time?-instance-method" class="signature"><strong>#update_time</strong> : Time?</a>
+        <a href="#listen_key:String-instance-method" class="signature"><strong>#listen_key</strong> : String</a>
         
       </li>
     
@@ -724,26 +655,7 @@
           <p>Typical Server Response:</p>
 
 <pre><code class="language-crystal">{
-  <span class="s">&quot;makerCommission&quot;</span>: <span class="n">15</span>,
-  <span class="s">&quot;takerCommission&quot;</span>: <span class="n">15</span>,
-  <span class="s">&quot;buyerCommission&quot;</span>: <span class="n">0</span>,
-  <span class="s">&quot;sellerCommission&quot;</span>: <span class="n">0</span>,
-  <span class="s">&quot;canTrade&quot;</span>: <span class="n">true</span>,
-  <span class="s">&quot;canWithdraw&quot;</span>: <span class="n">true</span>,
-  <span class="s">&quot;canDeposit&quot;</span>: <span class="n">true</span>,
-  <span class="s">&quot;updateTime&quot;</span>: <span class="n">123456789</span>,
-  <span class="s">&quot;balances&quot;</span>: [
-    {
-      <span class="s">&quot;asset&quot;</span>: <span class="s">&quot;BTC&quot;</span>,
-      <span class="s">&quot;free&quot;</span>: <span class="s">&quot;4723846.89208129&quot;</span>,
-      <span class="s">&quot;locked&quot;</span>: <span class="s">&quot;0.00000000&quot;</span>
-    },
-    {
-      <span class="s">&quot;asset&quot;</span>: <span class="s">&quot;LTC&quot;</span>,
-      <span class="s">&quot;free&quot;</span>: <span class="s">&quot;4763368.68006011&quot;</span>,
-      <span class="s">&quot;locked&quot;</span>: <span class="s">&quot;0.00000000&quot;</span>
-    }
-  ]
+  <span class="s">&quot;listenKey&quot;</span>: <span class="s">&quot;pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1&quot;</span>
 }</code></pre>
         </div>
       
@@ -767,152 +679,12 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="account_type:String-instance-method">
+    <div class="entry-detail" id="listen_key:String-instance-method">
       <div class="signature">
         
-        def <strong>account_type</strong> : String
+        def <strong>listen_key</strong> : String
 
-        <a class="method-permalink" href="#account_type:String-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="balances:Array(BalanceEntry)-instance-method">
-      <div class="signature">
-        
-        def <strong>balances</strong> : Array(<a href="../../Binance/Responses/BalanceEntry.html">BalanceEntry</a>)
-
-        <a class="method-permalink" href="#balances:Array(BalanceEntry)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="balances=(balances:Array(BalanceEntry))-instance-method">
-      <div class="signature">
-        
-        def <strong>balances=</strong>(balances : Array(<a href="../../Binance/Responses/BalanceEntry.html">BalanceEntry</a>))
-
-        <a class="method-permalink" href="#balances=(balances:Array(BalanceEntry))-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="buyer_commission:Int32-instance-method">
-      <div class="signature">
-        
-        def <strong>buyer_commission</strong> : Int32
-
-        <a class="method-permalink" href="#buyer_commission:Int32-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="can_deposit:Bool-instance-method">
-      <div class="signature">
-        
-        def <strong>can_deposit</strong> : Bool
-
-        <a class="method-permalink" href="#can_deposit:Bool-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="can_trade:Bool-instance-method">
-      <div class="signature">
-        
-        def <strong>can_trade</strong> : Bool
-
-        <a class="method-permalink" href="#can_trade:Bool-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="can_withdraw:Bool-instance-method">
-      <div class="signature">
-        
-        def <strong>can_withdraw</strong> : Bool
-
-        <a class="method-permalink" href="#can_withdraw:Bool-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="maker_commission:Int32-instance-method">
-      <div class="signature">
-        
-        def <strong>maker_commission</strong> : Int32
-
-        <a class="method-permalink" href="#maker_commission:Int32-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="seller_commission:Int32-instance-method">
-      <div class="signature">
-        
-        def <strong>seller_commission</strong> : Int32
-
-        <a class="method-permalink" href="#seller_commission:Int32-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="taker_commission:Int32-instance-method">
-      <div class="signature">
-        
-        def <strong>taker_commission</strong> : Int32
-
-        <a class="method-permalink" href="#taker_commission:Int32-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="update_time:Time?-instance-method">
-      <div class="signature">
-        
-        def <strong>update_time</strong> : Time?
-
-        <a class="method-permalink" href="#update_time:Time?-instance-method">#</a>
+        <a class="method-permalink" href="#listen_key:String-instance-method">#</a>
       </div>
       
       <br/>
