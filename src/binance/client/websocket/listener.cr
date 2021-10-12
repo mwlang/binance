@@ -113,6 +113,25 @@ module Binance
       initialize(Array(String).new, stream, @handler_class, @timeout, @service)
     end
 
+    def initialize(
+      stream : String,
+      handler : Binance::Handler,
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
+    )
+      initialize(Array(String).new, stream, handler, @timeout, @service)
+    end
+
+    def initialize(
+      symbol : String,
+      streams : Array(String),
+      handler : Binance::Handler,
+      @timeout : Time::Span = 0.seconds,
+      @service = Binance::Service::Com
+    )
+      initialize([symbol], streams, handler, @timeout, @service)
+    end
+
     def service_host
       case service
       when Binance::Service::Com then "stream.binance.com"
