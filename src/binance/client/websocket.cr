@@ -26,7 +26,7 @@ module Binance
 
     macro stream_all(method_name, stream_name)
       def all_{{method_name}}s(handler : (Binance::Handler | Binance::Handler.class), timeout : Time::Span = 0.seconds)
-        Binance::Listener.new({{stream_name}}, handler) #, timeout, service
+        Binance::Listener.new({{stream_name}}, handler, timeout, service)
       end
     end
 
