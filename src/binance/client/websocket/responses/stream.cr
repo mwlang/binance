@@ -32,15 +32,14 @@ module Binance::Responses::Websocket
       pull.read_next
       symbol, a, name = stream.partition('@')
       data = case name
-      when "ticker"     then  Ticker.new(pull)
-      when "miniTicker" then  MiniTicker.new(pull)
-      when "trade"      then  Trade.new(pull)
-      when "aggTrade"   then  AggregateTrade.new(pull)
-      when "bookTicker" then  BookTicker.new(pull)
-      when "!bookTicker" then  BookTicker.new(pull)
-      when /^depth\d+$/ then  PartialDepth.new(pull).tap{|pd| pd.symbol = symbol.upcase}
-      when /^depth/     then  Depth.new(pull)
-      when /^kline/     then  Kline.new(pull)
+      when "ticker"      then  Ticker.new(pull)
+      when "miniTicker"  then  MiniTicker.new(pull)
+      when "trade"       then  Trade.new(pull)
+      when "aggTrade"    then  AggregateTrade.new(pull)
+      when "bookTicker"  then  BookTicker.new(pull)
+      when /^depth\d+$/  then  PartialDepth.new(pull).tap{|pd| pd.symbol = symbol.upcase}
+      when /^depth/      then  Depth.new(pull)
+      when /^kline/      then  Kline.new(pull)
       else extract_all_stream(stream, pull)
       end
 
