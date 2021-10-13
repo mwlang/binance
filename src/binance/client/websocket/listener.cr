@@ -80,8 +80,9 @@ module Binance
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      @stream_names = build_stream_names array_wrap(symbols), array_wrap(streams)
-      @handlers = build_handlers array_wrap(symbols), handler_class
+      symbols = array_wrap(symbols)
+      @stream_names = build_stream_names symbols, array_wrap(streams)
+      @handlers = build_handlers symbols, handler_class
       @websocket = open_connection
     end
 
@@ -96,8 +97,9 @@ module Binance
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      @stream_names = build_stream_names array_wrap(symbols), array_wrap(streams)
-      @handlers = build_handlers array_wrap(symbols), handler
+      symbols = array_wrap(symbols)
+      @stream_names = build_stream_names symbols, array_wrap(streams)
+      @handlers = build_handlers symbols, handler
 
       @websocket = open_connection
     end
@@ -110,7 +112,11 @@ module Binance
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      initialize(Array(String).new, streams, handler_class, timeout, service)
+      symbols = Array(String).new
+      @stream_names = build_stream_names symbols, array_wrap(streams)
+      @handlers = build_handlers symbols, handler_class
+
+      @websocket = open_connection
     end
 
     def initialize(
@@ -119,7 +125,11 @@ module Binance
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      initialize(Array(String).new, handler, timeout, service)
+      symbols = Array(String).new
+      @stream_names = build_stream_names symbols, array_wrap(streams)
+      @handlers = build_handlers symbols, handler
+
+      @websocket = open_connection
     end
 
     def service_host
