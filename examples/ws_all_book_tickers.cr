@@ -4,6 +4,7 @@ require "../src/binance"
 class BookTickerHandler < Binance::Handler
 
   def initialize(@symbol : String)
+    puts "*" * 80
     super(@symbol)
     @channel = Channel(Binance::Responses::Websocket::BookTicker).new
     @mutex = Mutex.new

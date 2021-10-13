@@ -11,20 +11,23 @@ module Binance
   # property to see if the `Listener`'s websocket stream has closed.
   #
   class Listener
-    getter symbols : Array(String)
+    record ChannelMessage, json : String
+    record ChannelError, error : Exception
+    record ChannelClose, message : String
+
+    alias ListenerChannel = Channel(ChannelMessage | ChannelClose | ChannelError)
+    alias Strings = (Array(String) | String)
+
+    getter channel : ListenerChannel = ListenerChannel.new
     getter stream_names : String
     getter timeout : Time::Span
     getter last_seen : Time = Time.utc
     getter handlers : Hash(String, Binance::Handler)
-    getter handler_class : Binance::Handler.class
     getter websocket : HTTP::WebSocket
+
     property messages : Int32 = 0
     property stopped : Bool = false
     property service : Service
-
-    record ChannelMessage, json : String
-    record ChannelError, error : Exception
-    record ChannelClose, message : String
 
     # If the listener is started with a timeout > 0, then the
     # watcher will close the websocket connection if no messages
@@ -42,35 +45,44 @@ module Binance
       end
     end
 
-    SENTINEL = "SENTINEL"
+    SHARED = "_SHARED_"
+
+    def array_wrap(value : Strings)
+      value.is_a?(Array(String)) ? value : [value]
+    end
+
+    def new_handler_hash(handler_class)
+      proc = -> (hash : Hash(String, Binance::Handler), key : String) { hash[key] = handler_class.new(key).as(Binance::Handler) }
+      Hash(String, Binance::Handler).new(proc)
+    end
+
+    def build_handlers(symbols : Array(String), handler_class)
+      new_handler_hash(handler_class).tap do |handlers|
+        symbols.each{ |symbol| handlers[symbol.upcase] = handler_class.new(symbol) }
+      end
+    end
+
+    def build_handlers(symbols : Array(String), handler : Binance::Handler)
+      Hash(String, Binance::Handler).new.tap do |handlers|
+        symbols.each{ |symbol| handlers[symbol.upcase] = handler }
+        handlers[SHARED] = handler if symbols.empty?
+      end
+    end
 
     # Uses one handler for all market/symbols when an instantiated handler is passed
     # If a timeout > 0.seconds is given, then a watcher loop is
     # started and will force close the websocket stream if data
     # stops flowing for longer than the given timeout span.
     def initialize(
-      @symbols : Array(String),
-      streams : Array(String),
-      handler : Binance::Handler,
+      symbols : Strings,
+      streams : Strings,
+      handler_class : Binance::Handler.class,
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      @stream_names = build_stream_names(streams)
-      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
-      @handlers = {} of String => Binance::Handler
-      @handlers[SENTINEL] = handler
+      @stream_names = build_stream_names array_wrap(symbols), array_wrap(streams)
+      @handlers = build_handlers array_wrap(symbols), handler_class
       @websocket = open_connection
-      @handler_class = handler.class
-    end
-
-    def initialize(
-      symbol : String,
-      streams : Array(String),
-      handler : Binance::Handler,
-      @timeout : Time::Span = 0.seconds,
-      @service = Binance::Service::Com
-    )
-      initialize([symbol], streams, handler, @timeout, @service)
     end
 
     # One handler for each market/symbol is instantiated.
@@ -78,58 +90,36 @@ module Binance
     # started and will force close the websocket stream if data
     # stops flowing for longer than the given timeout span.
     def initialize(
-      @symbols : Array(String),
-      stream : String,
-      @handler_class,
+      symbols : Strings,
+      streams : Strings,
+      handler : Binance::Handler,
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      @stream_names = build_stream_names(stream)
-      @channel = Channel(ChannelMessage | ChannelClose | ChannelError).new
-      @handlers = {} of String => Binance::Handler
-      @symbols.each do |symbol|
-        @handlers[symbol.upcase] = @handler_class.new(symbol)
-      end
+      @stream_names = build_stream_names array_wrap(symbols), array_wrap(streams)
+      @handlers = build_handlers array_wrap(symbols), handler
 
       @websocket = open_connection
     end
 
+    # No symbols provided for Listeners that are listening on all
+    # markets.
     def initialize(
-      symbol : String,
-      stream : String,
-      @handler_class,
+      streams : Strings,
+      handler_class : Binance::Handler.class,
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      initialize([symbol], stream, @handler_class, @timeout, @service)
+      initialize(Array(String).new, streams, handler_class, timeout, service)
     end
 
     def initialize(
-      stream : String,
-      @handler_class,
-      @timeout : Time::Span = 0.seconds,
-      @service = Binance::Service::Com
-    )
-      initialize(Array(String).new, stream, @handler_class, @timeout, @service)
-    end
-
-    def initialize(
-      stream : String,
+      streams : Strings,
       handler : Binance::Handler,
       @timeout : Time::Span = 0.seconds,
       @service = Binance::Service::Com
     )
-      initialize(Array(String).new, stream, handler, @timeout, @service)
-    end
-
-    def initialize(
-      symbol : String,
-      streams : Array(String),
-      handler : Binance::Handler,
-      @timeout : Time::Span = 0.seconds,
-      @service = Binance::Service::Com
-    )
-      initialize([symbol], streams, handler, @timeout, @service)
+      initialize(Array(String).new, handler, timeout, service)
     end
 
     def service_host
@@ -170,26 +160,27 @@ module Binance
       return ws
     end
 
-    def build_stream_names(stream_name : String)
-      if @symbols.empty?
+    def build_stream_names(symbols, stream_name : String)
+      if symbols.empty?
         stream_name
       else
-        @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+        symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
       end
     end
 
-    def build_stream_names(stream_names : Array(String))
-      if @symbols.empty?
+    def build_stream_names(symbols, stream_names : Array(String))
+      if symbols.empty?
         stream_names.join("/")
       else
         stream_names.map do |stream_name|
-          @symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
+          symbols.map{|s| "#{s.downcase}@#{stream_name}"}.join("/")
         end.join("/")
       end
     end
 
     def symbols_param
-      @symbols.join(",").downcase
+      symbols = @handlers.keys.reject{|r| r == SHARED}
+      symbols.empty? ? "all" : symbols.join(",").downcase
     end
 
     def listen
@@ -209,11 +200,14 @@ module Binance
       Binance::Responses::Websocket::Stream.from_json(message.json)
     end
 
-    def handler_for_stream(stream)
-      return @handlers[stream.symbol] unless stream.symbol.starts_with?("!")
-
+    def all_handler(stream)
       symbol = stream.data.symbol
-      @handlers.fetch(symbol, @handlers[symbol] = @handler_class.new(symbol))
+      @handlers[symbol]
+    end
+
+    def handler_for_stream(stream)
+      return all_handler(stream) if stream.name.starts_with?("!")
+      @handlers[SHARED]? || @handlers[stream.symbol]
     end
 
     def run
@@ -224,7 +218,7 @@ module Binance
 
         when ChannelMessage
           stream = message_stream(message)
-          handler = @handlers[SENTINEL]? || handler_for_stream(stream)
+          handler = @handlers[SHARED]? || handler_for_stream(stream)
           handler.messages += 1
           handler.update stream
 
