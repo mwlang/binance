@@ -9,15 +9,24 @@ module Binance
 
     property api_key : String
     property secret_key : String
+    property service : Service
 
-    def initialize(api_key = "", secret_key = "")
-      @api_key = api_key
-      @secret_key = secret_key
+    def initialize(
+        @api_key = "",
+        @secret_key = "",
+        @service = Binance::Service::Com
+      )
     end
 
     macro stream(method_name, stream_name)
       def {{method_name}}(markets : (Array(String) | String), handler : (Binance::Handler | Binance::Handler.class), timeout : Time::Span = 0.seconds)
-        Binance::Listener.new markets, {{stream_name}}, handler, timeout
+        Binance::Listener.new markets, {{stream_name}}, handler, timeout, service
+      end
+    end
+
+    macro stream_all(method_name, stream_name)
+      def all_{{method_name}}s(handler : (Binance::Handler | Binance::Handler.class), timeout : Time::Span = 0.seconds)
+        Binance::Listener.new({{stream_name}}, handler, timeout, service)
       end
     end
 
@@ -30,9 +39,17 @@ module Binance
     # 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics
     # of the UTC day, but a 24hr rolling window for the previous 24hrs.
     stream ticker, "ticker"
+    stream_all ticker, "!ticker@arr"
+
+    # 24hr rolling window mini-ticker statistics for all symbols that changed in an array.
+    # These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+    # Note that only tickers that have changed will be present in the array.
+    stream mini_ticker, "miniTicker"
+    stream_all mini_ticker, "!miniTicker@arr"
 
     # Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
     stream book_ticker, "bookTicker"
+    stream_all book_ticker, "!bookTicker"
 
     # Diff. Depth Stream
     # Order book price and quantity depth updates used to locally manage an order book.
@@ -53,11 +70,11 @@ module Binance
     # 9. Receiving an event that removes a price level that is not in your local order book can happen and is normal.
     def depth(markets, handler, speed="", timeout = 0.seconds) : Listener
       stream_name = speed == "" ? "depth" : "depth@#{speed}"
-      Binance::Listener.new markets, stream_name, handler, timeout
+      Binance::Listener.new markets, stream_name, handler, timeout, service
     end
 
     def combo(markets, streams, handler, timeout = 0.seconds) : Listener
-      Binance::Listener.new markets, streams, handler, timeout
+      Binance::Listener.new markets, streams, handler, timeout, service
     end
   end
 end

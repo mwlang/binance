@@ -1,6 +1,4 @@
 module Binance::HttpMethods
-  BASE_URL = "https://api.binance.com"
-
   {% for method in %w(get post delete) %}
 
     def public_{{method.id}}(url, params : HTTP::Params)
@@ -8,7 +6,7 @@ module Binance::HttpMethods
       headers["Content-Type"] = "application/json"
       headers["Accept"] = "application/json"
 
-      HTTP::Client.{{method.id}}("#{BASE_URL}/#{url}?#{params}", headers)
+      HTTP::Client.{{method.id}}("#{base_url}/#{url}?#{params}", headers)
     end
 
     def verified_{{method.id}}(url, params : HTTP::Params)
@@ -19,7 +17,7 @@ module Binance::HttpMethods
       headers["Accept"] = "application/json"
       headers["X-MBX-APIKEY"] = api_key
 
-      HTTP::Client.{{method.id}}("#{BASE_URL}/#{url}?#{params}", headers)
+      HTTP::Client.{{method.id}}("#{base_url}/#{url}?#{params}", headers)
     end
 
     def signed_{{method.id}}(url, params : HTTP::Params)
@@ -34,8 +32,8 @@ module Binance::HttpMethods
       params["timestamp"] = Time.utc.to_unix_ms.to_s
       params["signature"] = hmac params.to_s
 
-      Log.for("api-calls").info { "#{BASE_URL}/#{url}?#{params}" }
-      HTTP::Client.{{method.id}}("#{BASE_URL}/#{url}?#{params}", headers)
+      Log.for("api-calls").info { "#{base_url}/#{url}?#{params}" }
+      HTTP::Client.{{method.id}}("#{base_url}/#{url}?#{params}", headers)
     end
 
   {% end %}

@@ -1,0 +1,19 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v3/ticker/bookTicker
+  body: ""
+  query_params: symbol=BNBUSDT
+  headers:
+    User-Agent:
+    - Cossack v0.1.4
+    Content-Type:
+    - application/json
+    Accept:
+    - application/json
+    Host:
+    - api.binance.com
+  timestamp: 1562017456544
+response:
+  status: 200
+  body: '{"symbol":"BNBUSDT","bidPrice":"32.97780000","bidQty":"16.79000000","askPrice":"32.99540000","askQty":"0.99000000"}'

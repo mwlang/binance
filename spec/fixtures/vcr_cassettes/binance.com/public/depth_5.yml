@@ -1,0 +1,16 @@
+---
+request:
+  method: GET
+  uri: https://api.binance.com/api/v3/depth
+  body: ""
+  query_params: symbol=BNBUSDT&limit=5
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Connection: close
+    Host: api.binance.com
+    User-agent: Crystal
+  timestamp: 1604444544411
+response:
+  status: 200
+  body: '{"lastUpdateId":1778177272,"bids":[["26.94600000","37.64800000"],["26.94580000","5.10000000"],["26.94530000","3.77400000"],["26.94240000","5.02100000"],["26.94160000","93.80200000"]],"asks":[["26.95000000","318.41800000"],["26.95140000","10.00000000"],["26.95160000","2.06900000"],["26.95240000","10.00000000"],["26.95250000","19.16900000"]]}'

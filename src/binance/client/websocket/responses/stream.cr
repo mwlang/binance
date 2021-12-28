@@ -14,23 +14,33 @@ module Binance::Responses::Websocket
       @data = data
     end
 
+    def self.extract_all_stream(stream, pull)
+      data = Data.new(pull)
+
+      case stream
+      when "!bookTicker"      then BookTicker.from_data(data)
+      when "!miniTicker@arr"  then MiniTicker.from_data(data)
+      when "!ticker@arr"      then Ticker.from_data(data)
+      else data
+      end
+    end
+
     def self.new(pull : JSON::PullParser)
       pull.read_begin_object
       pull.read_next
       stream = pull.read_string
       pull.read_next
-      symbol, _, name = stream.partition('@')
-
+      symbol, a, name = stream.partition('@')
       data = case name
-      when "ticker"     then  Ticker.new(pull)
-      when "miniTicker" then  MiniTicker.new(pull)
-      when "trade"      then  Trade.new(pull)
-      when "aggTrade"   then  AggregateTrade.new(pull)
-      when "bookTicker" then  BookTicker.new(pull)
-      when /^depth\d+$/ then  PartialDepth.new(pull).tap{|pd| pd.symbol = symbol.upcase}
-      when /^depth/     then  Depth.new(pull)
-      when /^kline/     then  Kline.new(pull)
-      else                    Data.new(pull)
+      when "ticker"      then  Ticker.new(pull)
+      when "miniTicker"  then  MiniTicker.new(pull)
+      when "trade"       then  Trade.new(pull)
+      when "aggTrade"    then  AggregateTrade.new(pull)
+      when "bookTicker"  then  BookTicker.new(pull)
+      when /^depth\d+$/  then  PartialDepth.new(pull).tap{|pd| pd.symbol = symbol.upcase}
+      when /^depth/      then  Depth.new(pull)
+      when /^kline/      then  Kline.new(pull)
+      else extract_all_stream(stream, pull)
       end
 
       new stream, symbol.upcase, name, data

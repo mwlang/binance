@@ -14,7 +14,7 @@ describe Binance do
     # * ensure you have enough USDC free to buy BNB
     # * execute an order that fills against BNBUSDC
     # * **change** the bnbusdc_order_id of the spec to match!
-    order_id = 86525339
+    order_id = 86773376
     it "#new_order(\"BNBUSDC\", side: \"BUY\", order_type: \"MARKET\", quantity: 1.0, response_type: \"FULL\")" do
       with_vcr_cassette "signed/new_order_bnbusdc_buy_market_full_response" do
         response = client.new_order("BNBUSDC", side: "BUY", order_type: "MARKET", quantity: 1.0, response_type: "FULL")
@@ -24,8 +24,8 @@ describe Binance do
         order.status.should eq "FILLED"
         order.order_id.should eq order_id
         order.price.should eq 0.0
-        order.effective_fill_price.should eq 26.9145
-        order.average_price.should eq 26.9145
+        order.effective_fill_price.should eq 27.4858
+        order.average_price.should eq 27.4858
         order.original_quantity.should eq 1.0
         order.executed_quantity.should eq order.original_quantity
       end

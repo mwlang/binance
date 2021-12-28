@@ -1,10 +1,10 @@
 name: binance
-version: 0.6.6
+version: 0.7.7
 
 authors:
   - mwlang <mwlang@cybrains.net>
 
-crystal: 0.35.1
+crystal: '>=1.0.0, < 2.0.0'
 
 license: MIT
 
@@ -13,5 +13,5 @@ development_dependencies:
     github: crystal-community/timecop.cr
 
   webmock:
-    github: manastech/webmock.cr
+    github: mwlang/webmock.cr
     branch: master

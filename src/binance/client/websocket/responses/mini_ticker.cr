@@ -31,6 +31,12 @@ module Binance::Responses::Websocket
     @[JSON::Field(key: "q", converter: Binance::Converters::ToFloat)]
     getter quote_volume : Float64 = 0.0
 
+    def self.from_data(data : Data)
+      from_json(data.json_unmapped.to_json).tap do |ticker|
+        ticker.symbol = data.symbol
+      end
+    end
+
     def open_time
       @event_time - 24.hours - 1.second
     end

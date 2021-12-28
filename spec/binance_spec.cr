@@ -47,18 +47,18 @@ describe Binance do
     end
 
     it "#time" do
-      with_vcr_cassette("public/time_success") do
+      with_vcr_cassette Binance::Service::Us, "public/time_success" do
         response = client.time
         response.success.should be_truthy
         response.error_message.to_s.should eq ""
-        response.server_time.year.should eq 2017
+        response.server_time.year.should eq 2021
       end
     end
   end
 
   context "error response" do
     it "#ping" do
-      with_vcr_cassette("public/ping_error") do
+      with_vcr_cassette Binance::Service::Com, "public/ping_error" do
         response = client.ping
         response.body.should eq "{\"code\": -3121, \"msg\": \"Strange Error.\"}"
         response.error_code.should eq -3121

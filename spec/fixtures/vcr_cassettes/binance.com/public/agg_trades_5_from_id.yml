@@ -1,7 +1,7 @@
 ---
 request:
   method: GET
-  uri: https://api.binance.com/api/v1/aggTrades
+  uri: https://api.binance.com/api/v3/aggTrades
   body: ""
   query_params: symbol=BNBUSDT&fromId=28432387&limit=5
   headers:

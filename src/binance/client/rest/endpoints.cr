@@ -43,15 +43,15 @@ module Binance::Endpoints
 
   ENDPOINTS = {
     # Public API Endpoints
-    ping:              "api/v1/ping",
-    time:              "api/v1/time",
+    ping:              "api/v3/ping",
+    time:              "api/v3/time",
     exchange_info:     "api/v3/exchangeInfo",
     depth:             "api/v3/depth",
-    trades:            "api/v1/trades",
-    historical_trades: "api/v1/historicalTrades",
-    agg_trades:        "api/v1/aggTrades",
+    trades:            "api/v3/trades",
+    historical_trades: "api/v3/historicalTrades",
+    agg_trades:        "api/v3/aggTrades",
     klines:            "api/v3/klines",
-    twenty_four_hour:  "api/v1/ticker/24hr",
+    twenty_four_hour:  "api/v3/ticker/24hr",
     price:             "api/v3/ticker/price",
     avg_price:         "api/v3/avgPrice",
     book_ticker:       "api/v3/ticker/bookTicker",
@@ -65,10 +65,12 @@ module Binance::Endpoints
     all_orders:       "api/v3/allOrders",
     account:          "api/v3/account",
     my_trades:        "api/v3/myTrades",
-    user_data_stream: "api/v1/userDataStream",
     new_oco_order:    "api/v3/order/oco",
     get_oco_order:    "api/v3/orderList",
     cancel_oco_order: "api/v3/orderList",
+
+    # User Data Stream API Endpoints
+    user_data_stream: "api/v3/userDataStream",
 
     # Withdraw API Endpoints
     withdraw:         "api/v3/withdraw.html",
@@ -450,6 +452,10 @@ module Binance::Endpoints
 
   def account
     fetch :get, :signed, :account, AccountResponse
+  end
+
+  def user_data_stream
+    fetch :post, :verified, :user_data_stream, UserDataStreamResponse
   end
 
   # Get trades for a specific account and symbol.

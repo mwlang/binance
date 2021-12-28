@@ -9,10 +9,21 @@ module Binance
 
     property api_key : String
     property secret_key : String
+    property service : Service
 
-    def initialize(api_key = "", secret_key = "")
-      @api_key = api_key
-      @secret_key = secret_key
+    def initialize(
+      @api_key = "",
+      @secret_key = "",
+      @service = Binance::Service::Com
+    )
+    end
+
+    def base_url
+      case service
+      when Binance::Service::Com then "https://api.binance.com"
+      when Binance::Service::Us  then "https://api.binance.us"
+      else                            raise "Unknown service #{service.inspect}"
+      end
     end
 
     def hmac(data : String)

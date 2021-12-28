@@ -6,7 +6,7 @@ Requires Crystal >= 0.35.1
 
 * [Source Documentation](https://mwlang.github.io/binance/)
 * [Examples](https://github.com/mwlang/binance/tree/master/examples)
-* [Official Binance API Documentation](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md)
+* [Official Binance API Documentation](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
 
 ## TL;DR
 
@@ -75,6 +75,7 @@ That's all folks!
 
 Current:
   * Basic implementation of REST API
+    * Both binance.com and binance.us supported
     * Easy to use authentication
     * Methods return `Binance::Responses::ServerResponse` objects with JSON already deserialized
     * No need to generate signatures
@@ -89,44 +90,67 @@ Current:
 
 ## REST Endpoints
 
+By default, the client is connected to `binance.com`, but `binance.us` is also fully supported.  When instantiating the client, the third parameter sets the service endpoint and is one of:
+  * `Binance::Service::Com`
+  * `Binance::Service::Us`
+
+```crystal
+puts "binance.com..."
+client = Binance::REST.new("", "", Binance::Service::Com)
+
+puts client.time.body
+puts client.time.server_time.inspect
+puts client.time.used_weight.inspect
+
+puts "binance.us..."
+client = Binance::REST.new("", "", Binance::Service::Us)
+
+puts client.time.body
+puts client.time.server_time.inspect
+puts client.time.used_weight.inspect
+```
+
 ### PUBLIC (NONE)
-- [x] `ping` [ping](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-connectivity) Test connectivity to the Rest API.
-- [x] `time` [time](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time) Test connectivity to the Rest API and get the current server time.
-- [x] `exchange_info` [exchangeInfo](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#exchange-information) Current exchange trading rules and symbol information
-- [x] `depth` [depth (order book)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#order-book) Get Order book depth info.
-- [x] `trades` [trades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#recent-trades-list) Get recent trades (up to last 500).
-- [x] `agg_trades` [aggTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#compressedaggregate-trades-list) Get compressed, aggregate trades.
-- [x] `klines` [klines](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#klinecandlestick-data) Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
-- [x] `avg_price` [avgPrice](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#current-average-price) Current average price for a symbol.
-- [x] `twenty_four_hour` [ticker/24hr](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#24hr-ticker-price-change-statistics) 24 hour rolling window price change statistics.
-- [x] `price` [ticker/price](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#symbol-price-ticker) Latest price for a symbol or symbols.
-- [x] `book_ticker` [ticker/bookTicker](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#symbol-order-book-ticker) Best price/qty on the order book for a symbol or symbols.
+- [x] `ping` [ping](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#test-connectivity) Test connectivity to the Rest API.
+- [x] `time` [time](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#check-server-time) Test connectivity to the Rest API and get the current server time.
+- [x] `exchange_info` [exchangeInfo](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#exchange-information) Current exchange trading rules and symbol information
+- [x] `depth` [depth (order book)](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#order-book) Get Order book depth info.
+- [x] `trades` [trades](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#recent-trades-list) Get recent trades (up to last 500).
+- [x] `agg_trades` [aggTrades](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#compressedaggregate-trades-list) Get compressed, aggregate trades.
+- [x] `klines` [klines](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#klinecandlestick-data) Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
+- [x] `avg_price` [avgPrice](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#current-average-price) Current average price for a symbol.
+- [x] `twenty_four_hour` [ticker/24hr](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#24hr-ticker-price-change-statistics) 24 hour rolling window price change statistics.
+- [x] `price` [ticker/price](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#symbol-price-ticker) Latest price for a symbol or symbols.
+- [x] `book_ticker` [ticker/bookTicker](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#symbol-order-book-ticker) Best price/qty on the order book for a symbol or symbols.
 
 ### MARKET_DATA (API_KEY required)
-- [x] `historical_trades` [historicalTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#old-trade-lookup-market_data) Get older trades.
+- [x] `historical_trades` [historicalTrades](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#old-trade-lookup-market_data) Get older trades.
+
+### USER_DATA_STREAM (API_KEY required)
+- [x] `user_data_stream` [userDataStream](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#start-user-data-stream-user_stream) Start a new user data stream.
 
 ### SIGNED (API_KEY and signed with SECRET_KEY required)
-- [x] `account` [account](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-information-user_data) Get current account information.
-- [x] `get_order` [GET order (query)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#query-order-user_data) Check an order's status.
-- [x] `open_orders` [GET openOrders](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#current-open-orders-user_data) Get all open orders on a symbol.
-- [x] `all_orders` [GET allOrders](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#all-orders-user_data) Get all account orders; active, canceled, or filled.
-- [x] `new_order` [POST order (new order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#new-order--trade) Send in a new order.
-- [x] `new_test_order` [POST order/test (test new order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-new-order-trade) Creates and validates a new order but does not send it into the matching engine.
-- [x] `cancel_order` [DELETE order (cancel order)](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#cancel-order-trade) Cancel an active order.
-- [x] `my_trades` [myTrades](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-trade-list-user_data) Get trades for a specific account and symbol.
+- [x] `account` [account](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#account-information-user_data) Get current account information.
+- [x] `get_order` [GET order (query)](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#query-order-user_data) Check an order's status.
+- [x] `open_orders` [GET openOrders](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#current-open-orders-user_data) Get all open orders on a symbol.
+- [x] `all_orders` [GET allOrders](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#all-orders-user_data) Get all account orders; active, canceled, or filled.
+- [x] `new_order` [POST order (new order)](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#new-order--trade) Send in a new order.
+- [x] `new_test_order` [POST order/test (test new order)](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#test-new-order-trade) Creates and validates a new order but does not send it into the matching engine.
+- [x] `cancel_order` [DELETE order (cancel order)](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#cancel-order-trade) Cancel an active order.
+- [x] `my_trades` [myTrades](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#account-trade-list-user_data) Get trades for a specific account and symbol.
 
 ## Websocket Streams
-- [x] [Aggregate Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams)
-- [x] [Trade Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#trade-streams)
-- [x] [Kline/Candlestick Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams)
-- [x] [Individual Symbol Mini Ticker Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-mini-ticker-stream)
-- [ ] [All Market Mini Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-market-mini-tickers-stream)
-- [x] [Individual Symbol Ticker Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-ticker-streams)
-- [ ] [All Market Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream)
-- [x] [Individual Symbol Book Ticker Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#individual-symbol-book-ticker-streams)
-- [ ] [All Book Tickers Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
-- [x] [Partial Book Depth Streams](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
-- [x] [Diff Depth Stream](https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
+- [x] [Aggregate Trade Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams)
+- [x] [Trade Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#trade-streams)
+- [x] [Kline/Candlestick Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams)
+- [x] [Individual Symbol Mini Ticker Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#individual-symbol-mini-ticker-stream)
+- [x] [All Market Mini Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-market-mini-tickers-stream)
+- [x] [Individual Symbol Ticker Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#individual-symbol-ticker-streams)
+- [x] [All Market Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-market-tickers-stream)
+- [x] [Individual Symbol Book Ticker Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#individual-symbol-book-ticker-streams)
+- [x] [All Book Tickers Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#all-book-tickers-stream)
+- [x] [Partial Book Depth Streams](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#partial-book-depth-streams)
+- [x] [Diff Depth Stream](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#diff-depth-stream)
 
 ## Installation
 
@@ -274,10 +298,29 @@ client = Binance::Websocket.new
 listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
 # ...
 ```
-
 This will cause the listener to close the websocket stream after 30 seconds of no updates, thus breaking the `#run`
 blocking call.
 
+To connect to `binance.us` websocket, then specify the `service` when intializing:
+
+```crystal
+# ...
+client = Binance::Websocket.new("", "", Binance::Service::us)
+listener = client.depth SYMBOLS, OrderBookHandler, 30.seconds
+# ...
+```
+
+The following streams are for all symbols so do not take a list of symbols like the usual streams.
+* `all_book_tickers` - Opens the book ticker stream for all symbols
+* `all_tickers` - Opens the ticker stream for all symbols
+* `all_mini_tickers` - Opens the ticker stream for all mini_tickers
+
+```crystal
+# ...
+client = Binance::Websocket.new("", "", Binance::Service::Us)
+listener = client.all_book_tickers(BookTickerHandler, 30.seconds)
+# ...
+```
 #### One Handler, Multiple Streams
 
 The above examples are passing an uninstantiated `Binance::Handler+` class.  When the class is passed, a handler is
@@ -426,7 +469,7 @@ QTUMETH bid: 0.017040 ask: 0.017126 change: -0.719 high: 0.017617 low: 0.016782
 
 NOTE: used_weight is cumulative
 Each endpoint has it's own Response object derived from the ServerResponse object and, consequentially, the specific properties that are mapped to the JSON.  For example,
-the [time](https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time) endpoint returns a `TimeResponse` with one additional property value, the "serverTime", accessible as follows:
+the [time](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#check-server-time) endpoint returns a `TimeResponse` with one additional property value, the "serverTime", accessible as follows:
 
 ```crystal
 require "binance"

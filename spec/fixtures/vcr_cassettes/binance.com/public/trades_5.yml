@@ -1,7 +1,7 @@
 ---
 request:
   method: GET
-  uri: https://api.binance.com/api/v1/trades
+  uri: https://api.binance.com/api/v3/trades
   body: ""
   query_params: symbol=BNBUSDT&limit=5
   headers:
