@@ -32,6 +32,7 @@ module Binance::HttpMethods
       params["timestamp"] = Time.utc.to_unix_ms.to_s
       params["signature"] = hmac params.to_s
 
+      Log.for("api-calls").info { "#{base_url}/#{url}?#{params}" }
       HTTP::Client.{{method.id}}("#{base_url}/#{url}?#{params}", headers)
     end
 

@@ -12,17 +12,17 @@ module Binance
     property service : Service
 
     def initialize(
-        @api_key = "",
-        @secret_key = "",
-        @service = Binance::Service::Com
-      )
+      @api_key = "",
+      @secret_key = "",
+      @service = Binance::Service::Com
+    )
     end
 
     def base_url
       case service
-      when Binance::Service::Com then "https://api.binance.com/api"
-      when Binance::Service::Us then "https://api.binance.us/api"
-      else raise "Unknown service #{service.inspect}"
+      when Binance::Service::Com then "https://api.binance.com"
+      when Binance::Service::Us  then "https://api.binance.us"
+      else                            raise "Unknown service #{service.inspect}"
       end
     end
 

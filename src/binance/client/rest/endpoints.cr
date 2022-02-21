@@ -43,41 +43,48 @@ module Binance::Endpoints
 
   ENDPOINTS = {
     # Public API Endpoints
-    ping:              "v3/ping",
-    time:              "v3/time",
-    exchange_info:     "v3/exchangeInfo",
-    depth:             "v3/depth",
-    trades:            "v3/trades",
-    historical_trades: "v3/historicalTrades",
-    agg_trades:        "v3/aggTrades",
-    klines:            "v3/klines",
-    twenty_four_hour:  "v3/ticker/24hr",
-    price:             "v3/ticker/price",
-    avg_price:         "v3/avgPrice",
-    book_ticker:       "v3/ticker/bookTicker",
+    ping:              "api/v3/ping",
+    time:              "api/v3/time",
+    exchange_info:     "api/v3/exchangeInfo",
+    depth:             "api/v3/depth",
+    trades:            "api/v3/trades",
+    historical_trades: "api/v3/historicalTrades",
+    agg_trades:        "api/v3/aggTrades",
+    klines:            "api/v3/klines",
+    twenty_four_hour:  "api/v3/ticker/24hr",
+    price:             "api/v3/ticker/price",
+    avg_price:         "api/v3/avgPrice",
+    book_ticker:       "api/v3/ticker/bookTicker",
 
     # Account API Endpoints
-    new_order:        "v3/order",
-    get_order:        "v3/order",
-    cancel_order:     "v3/order",
-    new_test_order:   "v3/order/test",
-    open_orders:      "v3/openOrders",
-    all_orders:       "v3/allOrders",
-    account:          "v3/account",
-    my_trades:        "v3/myTrades",
+    new_order:        "api/v3/order",
+    get_order:        "api/v3/order",
+    cancel_order:     "api/v3/order",
+    new_test_order:   "api/v3/order/test",
+    open_orders:      "api/v3/openOrders",
+    all_orders:       "api/v3/allOrders",
+    account:          "api/v3/account",
+    my_trades:        "api/v3/myTrades",
+    new_oco_order:    "api/v3/order/oco",
+    get_oco_order:    "api/v3/orderList",
+    cancel_oco_order: "api/v3/orderList",
 
     # User Data Stream API Endpoints
-    user_data_stream: "v3/userDataStream",
+    user_data_stream: "api/v3/userDataStream",
 
     # Withdraw API Endpoints
-    withdraw:         "v3/withdraw.html",
-    deposit_history:  "v3/depositHistory.html",
-    withdraw_history: "v3/withdrawHistory.html",
-    deposit_address:  "v3/depositAddress.html",
-    account_status:   "v3/accountStatus.html",
-    system_status:    "v3/systemStatus.html",
-    withdraw_fee:     "v3/withdrawFee.html",
-    dust_log:         "v3/userAssetDribbletLog.html",
+    withdraw:         "api/v3/withdraw.html",
+    deposit_history:  "api/v3/depositHistory.html",
+    withdraw_history: "api/v3/withdrawHistory.html",
+    deposit_address:  "api/v3/depositAddress.html",
+    account_status:   "api/v3/accountStatus.html",
+    system_status:    "api/v3/systemStatus.html",
+    withdraw_fee:     "api/v3/withdrawFee.html",
+    dust_log:         "api/v3/userAssetDribbletLog.html",
+
+    # Margin API Endpoints
+    margin_new_order:    "sapi/v1/margin/order",
+    margin_cancel_order: "sapi/v1/margin/order",
   }
 
   def ping
@@ -299,6 +306,37 @@ module Binance::Endpoints
     fetch :post, :signed, :new_order, OrderResponse, params
   end
 
+  def new_oco_order(
+    symbol : String,
+    side : String,
+    quantity : (Float64 | String),
+    price : Float64,
+    stop_price : Float64,
+    stop_limit_price : Float64? = nil,
+    stop_limit_time_in_force : String? = nil,
+    response_type : String? = nil,
+    limit_iceberg_quantity : Float64? = nil,
+    list_client_order_id : String? = nil,
+    limit_client_order_id : String? = nil,
+    stop_client_order_id : String? = nil
+  )
+    params = HTTP::Params.new
+    symbol_param params, symbol
+    params["side"] = side.upcase
+    params["quantity"] = quantity.to_s
+    params["price"] = price.to_s
+    params["stopPrice"] = stop_price.to_s
+    params["stopLimitPrice"] = stop_limit_price.to_s
+    optional_param params, "stopLimitTimeInForce", stop_limit_time_in_force
+    optional_param params, "limitIcebergQty", limit_iceberg_quantity
+    optional_param params, "newOrderRespType", response_type
+    optional_param params, "listClientOrderId", list_client_order_id
+    optional_param params, "limitClientOrderId", limit_client_order_id
+    optional_param params, "stopClientOrderId", stop_client_order_id
+
+    fetch :post, :signed, :new_oco_order, OcoOrderResponse, params
+  end
+
   def new_test_order(
     symbol : String,
     side : String,
@@ -352,6 +390,18 @@ module Binance::Endpoints
     fetch :get, :signed, :get_order, OrderResponse, params
   end
 
+  def get_oco_order(
+    order_list_id : (Int32 | Int64)? = nil,
+    list_client_order_id : String? = nil
+  )
+    params = HTTP::Params.new
+
+    optional_param params, "orderListId", order_list_id
+    optional_param params, "listClientOrderId", list_client_order_id
+
+    fetch :get, :signed, :get_oco_order, OcoOrderResponse, params
+  end
+
   # Cancel an active order
   #
   #   Name              Type    Mandatory Description
@@ -375,6 +425,22 @@ module Binance::Endpoints
     optional_param params, "origClientOrderId", client_order_id
 
     fetch :delete, :signed, :cancel_order, OrderResponse, params
+  end
+
+  def cancel_oco_order(
+    symbol : String,
+    order_list_id : (Int32 | Int64)? = nil,
+    list_client_order_id : String? = nil,
+    client_order_id : String? = nil
+  )
+    params = HTTP::Params.new
+    symbol_param params, symbol
+
+    optional_param params, "orderListId", order_list_id
+    optional_param params, "listClientOrderId", list_client_order_id
+    optional_param params, "newClientOrderId", client_order_id
+
+    fetch :delete, :signed, :cancel_oco_order, OcoOrderResponse, params
   end
 
   def open_orders(symbol : String)
@@ -422,5 +488,52 @@ module Binance::Endpoints
     optional_param params, "endTime", end_time
 
     fetch :get, :signed, :my_trades, MyTradesResponse, params
+  end
+
+  def margin_new_order(
+    symbol : String,
+    side : String,
+    order_type : String,
+    quantity : (Float64 | String),
+    time_in_force : String? = nil,
+    price : Float64? = nil,
+    client_order_id : String? = nil,
+    stop_price : Float64? = nil,
+    iceberg_quantity : Float64? = nil,
+    response_type : String? = nil,
+    is_isolated : String? = nil,
+    side_effect_type : String? = nil
+  )
+    params = HTTP::Params.new
+    symbol_param params, symbol
+    params["side"] = side.upcase
+    params["type"] = order_type.upcase
+    params["quantity"] = quantity.to_s
+    optional_param params, "timeInForce", time_in_force
+    optional_param params, "price", price
+    optional_param params, "newClientOrderId", client_order_id
+    optional_param params, "stopPrice", stop_price
+    optional_param params, "icebergQty", iceberg_quantity
+    optional_param params, "newOrderRespType", response_type
+    optional_param params, "sideEffectType", side_effect_type
+    optional_param params, "isIsolated", is_isolated
+
+    fetch :post, :signed, :margin_new_order, MarginOrderResponse, params
+  end
+
+  def margin_cancel_order(
+    symbol : String,
+    order_id : (Int32 | Int64)? = nil,
+    client_order_id : String? = nil,
+    is_isolated : String? = nil
+  )
+    params = HTTP::Params.new
+    symbol_param params, symbol
+
+    optional_param params, "orderId", order_id
+    optional_param params, "origClientOrderId", client_order_id
+    optional_param params, "isIsolated", is_isolated
+
+    fetch :delete, :signed, :margin_cancel_order, MarginOrderResponse, params
   end
 end
